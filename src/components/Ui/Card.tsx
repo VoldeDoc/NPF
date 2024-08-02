@@ -9,6 +9,7 @@ interface CardProps {
   bodyClass?: string;
   noborder?: boolean;
   titleClass?: string;
+  headerslotClass?: string;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -20,6 +21,7 @@ const Card: React.FC<CardProps> = ({
   bodyClass = "p-6",
   noborder,
   titleClass = "custom-class ",
+  headerslotClass = "",
 }) => {
   return (
     <div
@@ -34,7 +36,7 @@ const Card: React.FC<CardProps> = ({
             {title && <div className={`card-title ${titleClass}`}>{title}</div>}
             {subtitle && <div className="card-subtitle">{subtitle}</div>}
           </div>
-          {headerslot && <div className="card-header-slot">{headerslot}</div>}
+          {headerslot && <div className={`card-header-slot ${headerslotClass}`}>{headerslot}</div>}
           
         </header>
       )}

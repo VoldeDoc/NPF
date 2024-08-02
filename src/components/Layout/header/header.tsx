@@ -51,7 +51,7 @@ export const Header = ({ showNav, setShowNav }: Props) => {
               className="h-8 w-8 cursor-pointer text-gray-700 hover:text-orange-500 transition-colors ease-in-out duration-[900ms]"
               onClick={() => setShowNav((prev) => !prev)}
             >
-              <TbSquareArrowRightFilled />
+              <TbSquareArrowRightFilled size={24}  />
             </button>
           )}
           <div className="hidden font-bold text-4xl">Dashboard</div>

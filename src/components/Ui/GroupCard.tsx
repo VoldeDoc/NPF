@@ -1,4 +1,4 @@
-import { ArrowRightCircleIcon } from "@heroicons/react/24/solid";
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 const statistics = [
   {
@@ -27,19 +27,19 @@ const GroupCard = () => {
       {statistics.map((item, i) => (
         <div
           key={i}
-          className={`${item.bg} flex justify-between items-center text-white rounded-md p-4 `}
+          className={`${item.bg} flex w-full justify-between gap-5 items-center text-white  p-4 `}
         >
-          <span className="block mb-6 text-sm text-slate-900 dark:text-white font-medium">
-            {item.title}
-          </span>
-          <span className="block mb- text-2xl text-slate-900 dark:text-white font-medium mb-6">
-            {item.count}
-          </span>
-          <div className="flex space-x-2 rtl:space-x-reverse">
-            <div className={` flex-none text-xl  ${item.text} `}>
-              <ArrowRightCircleIcon />
+            <span className="block mb-6 text-4xl   text-slate-900 dark:text-white font-medium">
+              {item.count}
+            </span>
+          <div className=" flex justify-between gap-5">
+            <span className="block mb- text-xs shrink-0  text-slate-900 dark:text-white font-medium mb-6">
+              {item.title}
+            </span>
+
+            <div className={`  text-xl text-white  `}>
+              <MdKeyboardArrowRight />
             </div>
-            <div className="flex-1 text-sm"></div>
           </div>
         </div>
       ))}

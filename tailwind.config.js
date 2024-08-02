@@ -11,6 +11,8 @@ export default {
         primary: {
           50: "#F6F8FF",
           100: "#EDF0FF",
+          2: " #7B61FF",
+          3: " #FFB836",
           DEFAULT: "#0C21C1",
         },
         secondary: {
@@ -18,6 +20,8 @@ export default {
           100: "#F4F5F7",
           DEFAULT: "#97060B",
         },
+
+       
 
         danger: {
           50: "#FFF7F7",

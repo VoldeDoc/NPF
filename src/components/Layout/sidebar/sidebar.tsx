@@ -56,22 +56,24 @@ const HOVER_STYLING = "hover:bg-orange-50 hover:text-orange-600 font-medium";
 // eslint-disable-next-line react/display-name
 export const Sidebar = forwardRef<HTMLElement, Props>(
   ({ showNav, setShowNav }, ref) => {
+  
     return (
       <aside
         ref={ref}
-        className={`fixed h-full z-[9999] md:flex md:flex-col  bg-white shadow-sm transition-all duration-1000 md:px-5 ${
-          showNav ? "w-[100%] px-5 md:px-none md:w-[18%]" : "md:w-20 w-0"
+        className={`fixed overflow-y-auto overflow-hidden  h-full z-[9999] md:flex md:flex-col  bg-white shadow-sm transition-all duration-1000 md:px-5 ${
+          showNav ? "w-[100%] px-5 md:px-none md:w-[20%]" : "md:w-20 w-0"
         }`}
       >
         <div className="pt-5 pl-5">
           {/* Close button visible only on mobile screens */}
           <div className="block md:hidden">
             {showNav ? (
-              <GrClose
-                size={30}
+              <button
                 className="cursor-pointer text-gray-700 hover:text-primary transition-colors ease-in-out duration-300"
                 onClick={() => setShowNav((prev) => !prev)}
-              />
+              >
+                <GrClose size={30} />
+              </button>
             ) : (
               <div className="text-center hidden text-gray-700 font-bold text-xl">
                 PS
@@ -89,12 +91,13 @@ export const Sidebar = forwardRef<HTMLElement, Props>(
           )}
         </div>
 
-        <ul className="flex item-center justify-center flex-col gap-5 mx-auto">
+        <ul className="flex item-center justify-center flex-col h-fit gap-5 mx-auto">
           {MENU_ITEMS.map(({ name, icon: Icon, path }) => (
             <li key={name.toLowerCase().replace(" ", "-")}>
               <NavLink
                 to={path}
                 key={name}
+                onClick={()=> setShowNav(false)}
                 className={({ isActive }) =>
                   `${
                     showNav ? "ml-5 px-3 " : "pl-2"
@@ -114,7 +117,7 @@ export const Sidebar = forwardRef<HTMLElement, Props>(
 
         {/* Card component at the bottom */}
         <div
-          className={` relative t-auto items-end mx-5 mb-[10%] p-4 rounded-xl shadow-2xl shadow-black-400 drop-shadow-2xl space-y-5 ${
+          className={` relative  w-full items-end mt-10 mb-[10%] mx-auto p-4 rounded-xl shadow-2xl shadow-black-400 drop-shadow-2xl space-y-3 ${
             showNav ? "" : "hidden"
           }`}
         >
@@ -131,8 +134,8 @@ export const Sidebar = forwardRef<HTMLElement, Props>(
               src={medal}
               alt={"Ferox"}
               className="object-contain"
-              width={50}
-              height={50}
+              width={30}
+              height={30}
             />
           </div>
           <p className="mt-2 text-gray-600">
