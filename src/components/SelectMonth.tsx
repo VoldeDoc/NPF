@@ -1,5 +1,5 @@
 import { Menu } from "@headlessui/react";
-import { BsDot, BsThreeDots } from "react-icons/bs";
+import { BsThreeDots } from "react-icons/bs";
 import Dropdown from "./Ui/Dropdown";
 const actions = [
   {
