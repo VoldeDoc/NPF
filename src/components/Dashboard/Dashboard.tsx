@@ -180,7 +180,7 @@ const Dashboard = () => {
                     headerslot={<IoEyeOutline />}
                   >
                     <div className="flex flex-col justify-start items-start">
-                      <div className=" font-bold text-2xl">2,342</div>
+                      <div className=" font-bold text-2xl">0</div>
                       <div className=" flex items-center gap-3">
                         <span className="text-base">This Week </span>
                         <div className=" flex items-center gap-1 text-green-500">
@@ -200,7 +200,7 @@ const Dashboard = () => {
                     headerslot={<FaRegCalendarCheck />}
                   >
                     <div className="flex flex-col justify-start items-start">
-                      <div className=" font-bold text-2xl">654</div>
+                      <div className=" font-bold text-2xl">0</div>
                       <div className=" flex items-center gap-3">
                         <span className="text-base">This Week </span>
                         <div className=" flex items-center gap-1 text-red-500">
@@ -219,14 +219,14 @@ const Dashboard = () => {
           <div className="lg:col-span-4 col-span-12 space-y-5">
             <Card title="Corner Statistic">
               <div className="flex items-end">
-                <span className="text-7xl font-bold">12</span>
+                <span className="text-7xl font-bold">0</span>
                 <span className="text-lg text-gray-500">Arsenal</span>
               </div>
             </Card>
             <Card title="Past Results">
               <div>
                 <div className="flex items-end">
-                  <span className="text-6xl font-bold">67</span>
+                  <span className="text-6xl font-bold">0</span>
                   <span className="text-lg text-gray-500">Matches</span>
                 </div>
                 <PastResultChat />
