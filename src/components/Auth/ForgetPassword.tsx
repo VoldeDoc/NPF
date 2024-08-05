@@ -24,7 +24,6 @@ const ForgetPassword = () => {
 
   const {
     register,
-    handleSubmit,
     formState: { errors, touchedFields },
   } = useForm<FormValues>({
     resolver: yupResolver(schema),
@@ -32,9 +31,9 @@ const ForgetPassword = () => {
   });
 
   // Handler for form submission
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
-  };
+  // const onSubmit: SubmitHandler<FormValues> = (data) => {
+  //   console.log(data);
+  // };
   return (
     <div className=" w-[100%] bg-white  flex justify-start md:items-start items-center">
       <div className=" md:w-1/2 w-full h-[100vh] justify-center md:justify-start flex flex-col items-start md:px-[10%] px-[7%]   gap-5  pt-[2%] ">

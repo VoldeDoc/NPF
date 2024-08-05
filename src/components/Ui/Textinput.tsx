@@ -19,7 +19,7 @@ interface TextinputProps {
   disabled?: boolean;
   id?: string;
   horizontal?: boolean;
-  validate?: boolean | string; // Updated to boolean or string
+  validate?: boolean | string;
   isMask?: boolean;
   msgTooltip?: boolean;
   description?: string;

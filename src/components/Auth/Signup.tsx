@@ -30,7 +30,7 @@ const schema = yup.object().shape({
 
   password_confirmation: yup
     .string()
-    .oneOf([yup.ref("password"), null], "Passwords must match")
+    .oneOf([yup.ref("password"), ""], "Passwords must match")
     .required("Password confirmation is required"),
 
   email: yup

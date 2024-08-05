@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import { Fragment, useState } from "react";
 import { Dialog, Transition, Combobox } from "@headlessui/react";
 import { BiSearch } from "react-icons/bi";
 import Button from "@/components/Ui/Button";
@@ -123,6 +123,7 @@ const SearchModal = () => {
                         )}
 
                         {filteredsearchList.map((item, i) => (
+                          // @ts-ignore
                           <Combobox.Option key={i}>
                             {({ active }) => (
                               <div
