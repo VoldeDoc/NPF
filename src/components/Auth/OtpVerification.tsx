@@ -16,7 +16,7 @@ const OtpVerification = () => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const [isInvalid, setIsInvalid] = useState(false);
   const [fadeOut, setFadeOut] = useState([false, false, false, false]);
-  const [timeLeft, setTimeLeft] = useState(10); // 3 minutes countdown
+  const [timeLeft, setTimeLeft] = useState(180); // 3 minutes countdown
   const [canResend, setCanResend] = useState(false);
   const inputsRef = useRef<HTMLInputElement[]>([]);
 
@@ -90,8 +90,12 @@ const OtpVerification = () => {
         toast.success(`OTP resent successfully! = > ${otp}`);
         setTimeLeft(180);
         setCanResend(false);
-      } catch (error) {
-        toast.error("Failed to resend OTP. Please try again.");
+      } catch (error:any) {
+        if (error.response?.data?.data) {
+          toast.error( error.response?.data?.data);
+        } else {
+          toast.error("An unexpected error occurred. Please try again.");
+        }
       }
     }
   };
