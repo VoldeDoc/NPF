@@ -5,7 +5,6 @@ import { logo, signup_img } from "../../../public";
 import Textinput from "../Ui/Textinput";
 import Checkbox from "../Ui/CheckBox";
 import { useState } from "react";
-import { MdOutlineLocalPhone } from "react-icons/md";
 import Button from "../Ui/Button";
 import { Link, useNavigate } from "react-router-dom";
 import axiosClient from "@/services/axios-client";
@@ -192,12 +191,12 @@ const SignupComponent = () => {
       </div>
 
       <div className=" relative hidden md:flex w-1/2  bg-primary h-[90vh] m-5 rounded-xl px-10 flex-col justify-center items-center">
-        <div className=" absolute top-[3%] right-[3%] text-white flex items-center gap-2">
+        {/* <div className=" absolute top-[3%] right-[3%] text-white flex items-center gap-2">
           <span>
             <MdOutlineLocalPhone />
           </span>
           <span>+94 0116 789 754</span>
-        </div>
+        </div> */}
         <div className=" object-cover">
           <img src={signup_img} width={500} height={500} alt="side image" />
         </div>
