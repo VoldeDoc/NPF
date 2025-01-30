@@ -1,9 +1,13 @@
 import { MdArrowOutward } from "react-icons/md";
 import OurPartners from "./Tools/OurPartners";
+import { Layout } from "../Layout/layout";
 export default function Home() {
     return (
         <>
-            <div className="container">
+        
+     <Layout>
+     <>
+            <div className="container py-10">
                 <div className="px-8 sm:px-16 py-10">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
@@ -351,7 +355,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className="relative bg-gradient-to-b from-white via-blue-200 to-green-200 py-20 my-10">
+            <div className="relative bg-gradient-to-b from-white via-blue-200 to-green-200 py-28 ">
                 <div className="px-8 sm:px-16 relative">
                     <img className="absolute top-0 left-20 w-10 h-10 rounded-full" src="/assets/images/car-being-taking-care-workshop 1.png" alt="" />
 
@@ -369,6 +373,8 @@ export default function Home() {
                 </div>
             </div>
 
+        </>
+     </Layout>
         </>
     )
 }
