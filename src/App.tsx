@@ -3,6 +3,7 @@ import "./App.css";
 import ButtonT from "@/pages/Ui/button";
 import ExampleForm from "./pages/Ui/textinput";
 import Home_page from './pages/home/home_page';
+import Insurance_quote from "./pages/Insurance_quote/Insurance_quote";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
               {/* Ui */}
               <Route path="/ui/button" element={<ButtonT />} />
               <Route path="/ui/textinput" element={<ExampleForm />} />
+              <Route path="/insurance-quote" element={<Insurance_quote />} />
             </Routes>
           </>
       </main>
