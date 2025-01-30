@@ -20,7 +20,7 @@ export default function InsuranceQuote() {
             <div className="w-full">
                 <img src={heroImg} alt="Hero img" className="w-full max-h-[500px] md:max-h-[700px]" />    
             </div>
-            <main className="bg-[#1F834008] py-8 md:py-12 px-5 md:px-10 lg:px-20 xl:px-28" >                
+            <main className="bg-[#1F834008] py-8 md:py-12 px-7 md:px-20 lg:px-[160px] xl:px-[200px]" >                
                 {currentStep === 1 && <PersonalDetails currentStep={currentStep} setCurrentStep={setCurrentStep} />}
                 {currentStep === 2 && <VehicleDetails currentStep={currentStep} setCurrentStep={setCurrentStep} />}
                 {currentStep === 3 && <UploadDetails currentStep={currentStep} setCurrentStep={setCurrentStep} />}     
