@@ -8,6 +8,19 @@
   width: 5px;
 }
 
+
+html{
+  scroll-behavior: smooth;
+}
+
+@Layer base {
+    @font-face{
+        font-family: 'Poppins';
+        src: local('Poppins'), url(./fonts/Poppins-Medium.ttf) format('truetype');
+      }
+}
+
+
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey;
   border-radius: 10px;

@@ -1,6 +1,6 @@
 import Button from '@/components/Ui/Button';
 
-import { FaBeer, FaCoffee, } from 'react-icons/fa';
+// import { FaBeer, FaCoffee, } from 'react-icons/fa';
 
 const ButtonT: React.FC = () => {
   return (

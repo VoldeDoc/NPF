@@ -1,11 +1,20 @@
 {
-  "files": [],
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["DOM", "ESNext"],
+    "allowJs": true,       // Allows importing .js and .jsx files
+    "checkJs": false,      // Avoids type checking JS files
+    "jsx": "react-jsx",    // Enables React JSX syntax support
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "strict": true,        // Enables strict type checking
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"],
   "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.node.json"
-    }
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
   ]
 }
