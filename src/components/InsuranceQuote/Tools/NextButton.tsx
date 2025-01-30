@@ -4,13 +4,17 @@ interface NextButtonProps {
     onClick?: () => void;
 }
 
-const NextButton = ({ currentStep, setCurrentStep }: NextButtonProps) => {
+const NextButton = ({ currentStep, setCurrentStep, onClick }: NextButtonProps) => {
   return (
-      <button className="bg-[#1F8340] text-sm font-semibold text-white py-2.5 px-[52px] ml-auto block"
+      <button type="submit" className="bg-[#1F8340] text-sm font-semibold text-white py-2.5 px-[52px] ml-auto block"
           disabled={currentStep === 4}
-        onClick={(e) => {
-            e.preventDefault();
-            
+          onClick={(e) => {            
+              e.preventDefault();
+              // return if there's an onClick function
+              if (onClick) {
+                  onClick();    
+                  return;                  
+              }            
             if (currentStep === 4) {
                 return;
             }
