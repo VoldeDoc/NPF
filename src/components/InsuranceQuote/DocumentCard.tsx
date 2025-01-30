@@ -10,11 +10,10 @@ interface DocumentCardProps {
 const DocumentCard: React.FC<DocumentCardProps> = ({ title, description, icon, isActive = false }) => {
   return (
     <div
-      className={`p-4 lg:p-6 md:h-[240px] lg:h-[250px] max-w-[280px] rounded-2xl shadow-md flex flex-col items-center text-center transition-all duration-300 
+      className={`cursor-pointer p-4 lg:p-6 md:h-[240px] lg:h-[250px] max-w-[280px] rounded-2xl shadow-md flex flex-col items-center text-center transition-all duration-300 
         ${isActive ? "bg-[#1F8340] text-white" : "bg-white text-[#00000080]"}
       `}
-    >
-    
+    >    
           {icon && <img src={String(icon)} className="w-16 h-16" />}
           {!icon && <div className="w-16 h-16" />}
         <h3 className={`font-semibold text-lg lg:text-xl ${isActive ? "text-white" : "text-[#000000]"}`}>{title}</h3>

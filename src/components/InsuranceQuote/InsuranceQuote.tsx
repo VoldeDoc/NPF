@@ -8,10 +8,61 @@ import fireIcon from "../../assets/insurance/fire-02.svg"
 import carIcon from "../../assets/insurance/car-02.png"
 import trafficIcon from "../../assets/insurance/traffic-incident.svg"
 import successIllustration from "../../assets/insurance/success-illustration.png"
+import { toast } from "react-toastify";
+
 
 export default function InsuranceQuote() {
 
-    const [currentStep, setCurrentStep] = useState(1);
+    const [formValues, setFormValues] = useState<IFormValues>({
+        category: "",
+        title: "",
+        firstName: "",
+        surname: "",
+        email: "",
+        phone: "",
+        driverLicenceNumber: "",
+        driverLicenceExpiryDate: "",
+        yearsOfDriving: "",
+        vehicleRegistrationNumber: "",
+        valueAmount: "",
+        vehicleUse: "",
+        make: "",
+        model: "",
+        bodyColor: "",
+        carYear: "",
+        carType: "",
+        chassisNumber: "",
+        engineNumber: "",
+        effectFrom: "",
+        validId: null,
+        vehicleLicense: null,
+        utilityBill: null
+    })
+
+    //Handle both cases of type file and others
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+
+        if (e.target.type === "file") {
+            const file = e.target.files?.[0];
+            if (!file) {
+                return;
+            }
+
+            setFormValues((prev) => ({
+                ...prev,
+                [name]: file
+            }));
+            return;
+        }
+        
+        setFormValues((prev) => ({
+            ...prev,
+            [name]: value
+        }));
+    }
+
+    const [currentStep, setCurrentStep] = useState(4);
     return (
         <>
             {/* <!-- Header --> */}
@@ -21,16 +72,16 @@ export default function InsuranceQuote() {
                 <img src={heroImg} alt="Hero img" className="w-full max-h-[500px] md:max-h-[700px]" />    
             </div>
             <main className="bg-[#1F834008] py-8 md:py-12 px-7 md:px-20 lg:px-[160px] xl:px-[200px]" >                
-                {currentStep === 1 && <PersonalDetails currentStep={currentStep} setCurrentStep={setCurrentStep} />}
-                {currentStep === 2 && <VehicleDetails currentStep={currentStep} setCurrentStep={setCurrentStep} />}
-                {currentStep === 3 && <UploadDetails currentStep={currentStep} setCurrentStep={setCurrentStep} />}     
+                {currentStep === 1 && <PersonalDetails currentStep={currentStep} setCurrentStep={setCurrentStep} formValues = {formValues} handleInputChange={handleInputChange} />}
+                {currentStep === 2 && <VehicleDetails currentStep={currentStep} setCurrentStep={setCurrentStep} formValues = {formValues} handleInputChange={handleInputChange} />}
+                {currentStep === 3 && <UploadDetails currentStep={currentStep} setCurrentStep={setCurrentStep} formValues = {formValues} handleInputChange={handleInputChange} />}     
                 {currentStep === 4 && <SuccessfulPayment currentStep={currentStep} setCurrentStep={setCurrentStep} />}     
             </main>
         </>
     )
 }
 
-const PersonalDetails = ({currentStep, setCurrentStep}:{currentStep:number, setCurrentStep:React.Dispatch<React.SetStateAction<number>>}) => {
+const PersonalDetails = ({ currentStep, setCurrentStep, formValues, handleInputChange  }: { currentStep: number, setCurrentStep: React.Dispatch<React.SetStateAction<number>>, formValues:IFormValues, handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void }) => {   
     return (
         <>
             <section className="" >
@@ -51,15 +102,22 @@ const PersonalDetails = ({currentStep, setCurrentStep}:{currentStep:number, setC
 
                 </div>
 
-                <form id="personal-details" className="mt-8 lg:mt-14 py-5 space-y-6 md:space-y-12 text-[#00000080] font-medium text-sm md:text-base">
+                <form
+                    onSubmit={(e) => {
+                        handleValidation(e, currentStep, setCurrentStep);
+                    }}
+                    id="personal-details" className="mt-8 lg:mt-14 py-5 space-y-6 md:space-y-12 text-[#00000080] font-medium text-sm md:text-base">
                     <div className="flex flex-col gap-3 md:gap-4 w-full">
                         <label htmlFor="category">CATEGORY *</label>
                         <div className="relative">
                             <select name="category" id="category"
+                                required
+                                onChange={handleInputChange}
+                                defaultValue={formValues.category}
                                 className="bg-[#F4F4F4] border border-[#BBBFBD] py-3 px-3.5 outline-none w-full appearance-none text-[#7A7575]"
                             >
-                                <option value="individual">Individual</option>
-                                <option value=""></option>
+                                <option value="">Select Category</option>
+                                <option value="individual">Individual</option>                                
                             </select>
                             <img src={downArrow} alt="down-arrow" className="w-10 h-10 absolute transform right-2 top-1/2 -translate-y-1/2" />
                         </div>
@@ -69,8 +127,12 @@ const PersonalDetails = ({currentStep, setCurrentStep}:{currentStep:number, setC
                         <label htmlFor="title">TITLE *</label>
                         <div className="relative">
                             <select name="title" id="title"
+                                required
+                                onChange={handleInputChange}
+                                defaultValue={formValues.title}
                                 className="bg-inherit border border-[#BBBFBD] py-3 px-3.5 outline-none w-full appearance-none text-[#7A7575]"
                             >
+                                <option value="">Select Title</option>
                                 <option value="mr">Mr</option>
                                 <option value="mrs">Mrs</option>
                                 <option value="miss">Miss</option>
@@ -85,12 +147,18 @@ const PersonalDetails = ({currentStep, setCurrentStep}:{currentStep:number, setC
                             <label htmlFor="firstName">FIRST NAME *</label>
                             <input name="firstName" id="firstName"
                                 placeholder="FIRST NAME"
+                                required
+                                onChange={handleInputChange}
+                                defaultValue={formValues.firstName}
                                 className="bg-inherit border border-[#BBBFBD] py-3 px-3.5 outline-none w-full text-black"
                             />                                        
                         </div>
                         <div className="flex flex-col gap-3 md:gap-4 w-full">
                             <label htmlFor="surname">SURNAME *</label>
                             <input name="surname" id="surname" placeholder="SURNAME"
+                                required
+                                onChange={handleInputChange}
+                                defaultValue={formValues.surname}
                                 className="bg-inherit border border-[#BBBFBD] py-3 px-3.5 outline-none w-full text-black" />
                         </div>
                     </div>
@@ -99,33 +167,49 @@ const PersonalDetails = ({currentStep, setCurrentStep}:{currentStep:number, setC
                         <div className="flex flex-col gap-3 md:gap-4 w-full">
                             <label htmlFor="email">EMAIL *</label>
                             <input name="email" id="email" placeholder="EMAIL" type="email"
+                                required
+                                onChange={handleInputChange}
+                                defaultValue={formValues.email}
                                 className="bg-inherit border border-[#BBBFBD] py-3 px-3.5 outline-none w-full text-black" />
                         </div>
                         <div className="flex flex-col gap-3 md:gap-4 w-full">
                             <label htmlFor="phone">PHONE NO *</label>
                             <input name="phone" id="phone" placeholder="PHONE NO" type="tel"
+                                required
+                                onChange={handleInputChange}
+                                defaultValue={formValues.phone}
                                 className="bg-inherit border border-[#BBBFBD] py-3 px-3.5 outline-none w-full text-black" />
                         </div>            
                     </div>
 
                     <div className="flex flex-col md:flex-row gap-6 md:gap-12">
                         <div className="flex flex-col gap-3 md:gap-4 w-full">
-                            <label htmlFor="driver-licence-number">Driver licence Number*</label>
-                            <input name="driver-licence-number" id="driver-licence-number" placeholder="Driver licence Number" type="number"
+                            <label htmlFor="driverLicenceNumber">Driver licence Number*</label>
+                            <input name="driverLicenceNumber" id="driverLicenceNumber" placeholder="Driver licence Number" type="number"
+                                required
+                                onChange={handleInputChange}
+                                defaultValue={formValues.driverLicenceNumber}
                                 className="bg-inherit border border-[#BBBFBD] py-3 px-3.5 outline-none w-full text-black" />
                         </div>
                         <div className="flex flex-col gap-3 md:gap-4 w-full">
-                            <label htmlFor="driver-licence-expiry-date">Driver Licence Expired. Date *</label>
-                            <input name="driver-licence-expiry-date" id="driver-licence-expiry-date" placeholder="" type="date"
+                            <label htmlFor="driverLicenceExpiryDate">Driver Licence Expired. Date *</label>
+                            <input name="driverLicenceExpiryDate" id="driverLicenceExpiryDate" placeholder="" type="date"
+                                required
+                                onChange={handleInputChange}
+                                defaultValue={formValues.driverLicenceExpiryDate}
                                 className="bg-inherit border border-[#BBBFBD] py-3 px-3.5 outline-none w-full text-black" />
                         </div>
                     </div>
 
                     <div className="flex flex-col gap-3 md:gap-4 w-full">
-                        <label htmlFor="years-of-driving">Year of Driving*</label>
+                        <label htmlFor="yearsOfDriving">Year of Driving*</label>
                         <div className="relative">
-                            <select name="years-of-driving" id="years-of-driving"
+                            <select name="yearsOfDriving" id="yearsOfDriving"
+                                required
+                                onChange={handleInputChange}
+                                defaultValue={formValues.yearsOfDriving}
                                 className="bg-inherit border border-[#BBBFBD] py-3 px-3.5 outline-none w-full appearance-none text-[#7A7575]">
+                                <option value="">Select Year</option>
                                 <option value="1-year">1 year</option>
                                 <option value="2-year">2 years</option>
                                 <option value="3-year-plus">3 years plus</option>
@@ -134,15 +218,18 @@ const PersonalDetails = ({currentStep, setCurrentStep}:{currentStep:number, setC
                                 className="w-10 h-10 absolute transform right-2 top-1/2 -translate-y-1/2" />
                         </div>
                     </div>
-
-                    <NextButton currentStep={currentStep} setCurrentStep={setCurrentStep} />
+                    
+                    {/* <NextButton currentStep={currentStep} setCurrentStep={setCurrentStep} /> */}
+                    <button type="submit" className="bg-[#1F8340] text-sm font-semibold text-white py-2.5 px-[52px] ml-auto block">
+                        Next
+                    </button>
                 </form>
             </section>
         </>
     )
 }
 
-const VehicleDetails = ({currentStep, setCurrentStep}:{currentStep:number, setCurrentStep:React.Dispatch<React.SetStateAction<number>>}) => {
+const VehicleDetails = ({currentStep, setCurrentStep, formValues, handleInputChange}:{currentStep:number, setCurrentStep:React.Dispatch<React.SetStateAction<number>>, formValues:IFormValues, handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void }) => {   
     return (
         <section className="">
             <div className="mx-auto text-center space-y-3 md:space-y-5">
@@ -156,17 +243,27 @@ const VehicleDetails = ({currentStep, setCurrentStep}:{currentStep:number, setCu
 
             <ProgressBar currentStep={currentStep} totalSteps={4} />            
 
-            <form id="vehicle-details"
+            <form
+                onSubmit={(e) => {
+                    handleValidation(e, currentStep, setCurrentStep);
+                }}
+                id="vehicle-details"
                 className="mt-8 lg:mt-14 py-5 space-y-6 md:space-y-12 text-[#00000080] font-medium text-sm md:text-base">
                 <div className="flex flex-col md:flex-row gap-6 md:gap-12">
                     <div className="flex flex-col gap-3 md:gap-4 w-full">
-                        <label htmlFor="vehicle-registration-number">Vehicle Registration Number</label>
-                        <input name="vehicle-registration-number" id="vehicle-registration-number"
+                        <label htmlFor="vehicleRegistrationNumber">Vehicle Registration Number *</label>
+                        <input name="vehicleRegistrationNumber" id="vehicleRegistrationNumber"
+                            required
+                            onChange={handleInputChange}
+                            defaultValue={formValues.vehicleRegistrationNumber}
                             className="bg-inherit border border-[#BBBFBD] py-3 px-3.5 outline-none w-full text-black" />
                     </div>
                     <div className="flex flex-col gap-3 md:gap-4 w-full">
-                        <label htmlFor="value-amount">Value Amount</label>
-                        <input name="value-amount" id="value-amount" placeholder="Between ₦1,000,000-₦10,000,000"
+                        <label htmlFor="valueAmount">Value Amount *</label>
+                        <input name="valueAmount" id="valueAmount" placeholder="Between ₦1,000,000-₦10,000,000"
+                            required
+                            onChange={handleInputChange}
+                            defaultValue={formValues.valueAmount}
                             className="bg-inherit border border-[#BBBFBD] py-3 px-3.5 outline-none w-full text-black" />
                     </div>
                 </div>
@@ -174,12 +271,19 @@ const VehicleDetails = ({currentStep, setCurrentStep}:{currentStep:number, setCu
                     <p>How do you want to use this vehicle *</p>
                     <div className="flex gap-6 sm:gap-12">
                         <label htmlFor="private-use" className="flex items-center gap-1 md:gap-2 text-sm md:text-base">
-                            <input name="vehicle-use" type="radio" id="private-use" value="private-use"
+                            <input
+                                name="vehicleUse" type="radio" id="private-use" value="private-use"
+                                required
+                                onChange={handleInputChange}
+                                checked={formValues.vehicleUse === "private-use"}
                                 className="border border-[#BBBFBD] outline-none text-black" />
                                 <span>Private Motors</span>
                         </label>
                         <label htmlFor="commercial-use" className="flex items-center gap-1 md:gap-2 text-sm md:text-base">
-                            <input name="vehicle-use" type="radio" id="commercial-use" value="commercial-use"
+                            <input name="vehicleUse" type="radio" id="commercial-use" value="commercial-use"
+                                required
+                                onChange={handleInputChange}
+                                checked={formValues.vehicleUse === "commercial-use"}
                                 className="border border-[#BBBFBD] outline-none text-black" />
                             <span>Commercial Motors</span>
                         </label>
@@ -188,9 +292,12 @@ const VehicleDetails = ({currentStep, setCurrentStep}:{currentStep:number, setCu
 
                 <div className="grid grid-cols-1  md:grid-cols-3 gap-6 md:gap-12">
                     <div className="flex flex-col gap-3 md:gap-4 w-full">
-                        <label htmlFor="make">Make</label>
+                        <label htmlFor="make">Make *</label>
                         <div className="relative">
                             <select name="make" id="make"
+                                required
+                                onChange={handleInputChange}
+                                defaultValue={formValues.make}
                                 className="bg-inherit border border-[#BBBFBD] py-3 px-3.5 outline-none w-full appearance-none text-black">
                                 <option value="">                                
                                     Select Make
@@ -207,6 +314,9 @@ const VehicleDetails = ({currentStep, setCurrentStep}:{currentStep:number, setCu
                         <label htmlFor="model">Model *</label>
                         <div className="relative">
                             <select name="model" id="model"
+                                required
+                                onChange={handleInputChange}
+                                defaultValue={formValues.model}
                                 className="bg-inherit border border-[#BBBFBD] py-3 px-3.5 outline-none w-full appearance-none text-black">
                                 <option value="">
                                     Select Model
@@ -220,9 +330,12 @@ const VehicleDetails = ({currentStep, setCurrentStep}:{currentStep:number, setCu
                         </div>
                     </div>
                     <div className="flex flex-col gap-3 md:gap-4 w-full">
-                        <label htmlFor="body-color">Body Color *</label>
+                        <label htmlFor="bodyColor">Body Color *</label>
                         <div className="relative">
-                            <select name="body-color" id="body-color"
+                            <select name="bodyColor" id="bodyColor"
+                                required
+                                onChange={handleInputChange}
+                                defaultValue={formValues.bodyColor}
                                 className="bg-inherit border border-[#BBBFBD] py-3 px-3.5 outline-none w-full appearance-none text-black">
                                 <option value="">
                                     Select Color
@@ -236,9 +349,12 @@ const VehicleDetails = ({currentStep, setCurrentStep}:{currentStep:number, setCu
                         </div>
                     </div>
                     <div className="flex flex-col gap-3 md:gap-4 w-full">
-                        <label htmlFor="car-year">Select year *</label>
+                        <label htmlFor="carYear">Select year *</label>
                         <div className="relative">
-                            <select name="car-year" id="car-year"
+                            <select name="carYear" id="carYear"
+                                required
+                                onChange={handleInputChange}
+                                defaultValue={formValues.carYear}
                                 className="bg-inherit border border-[#BBBFBD] py-3 px-3.5 outline-none w-full appearance-none text-black">
                                 <option value="">
                                     Select Year
@@ -252,9 +368,12 @@ const VehicleDetails = ({currentStep, setCurrentStep}:{currentStep:number, setCu
                         </div>
                     </div>
                     <div className="flex flex-col gap-3 md:gap-4 w-full">
-                        <label htmlFor="car-type">Car Type *</label>
+                        <label htmlFor="carType">Car Type *</label>
                         <div className="relative">
-                            <select name="car-type" id="car-type"
+                            <select name="carType" id="carType"
+                                required
+                                onChange={handleInputChange}
+                                defaultValue={formValues.carType}
                                 className="bg-inherit border border-[#BBBFBD] py-3 px-3.5 outline-none w-full appearance-none text-black">
                                 <option value="">
                                     Select Type
@@ -268,33 +387,65 @@ const VehicleDetails = ({currentStep, setCurrentStep}:{currentStep:number, setCu
                         </div>
                     </div>
                     <div className="flex flex-col gap-3 md:gap-4 w-full">
-                        <label htmlFor="chassis-number">Chassis Number</label>
-                        <input name="chassis-number" id="chassis-number" placeholder="Chassis Number "
+                        <label htmlFor="chassisNumber">Chassis Number</label>
+                        <input name="chassisNumber" id="chassisNumber" placeholder="Chassis Number "
+                            required
+                            onChange={handleInputChange}
+                            defaultValue={formValues.chassisNumber}
                             className="bg-inherit border border-[#BBBFBD] py-3 px-3.5 outline-none w-full text-black" />
                     </div>
                     <div className="flex flex-col gap-3 md:gap-4 w-full">
-                        <label htmlFor="engine-number">Engine Number</label>
-                        <input name="engine-number" id="engine-number" placeholder="Engine Number"
+                        <label htmlFor="engineNumber">Engine Number</label>
+                        <input name="engineNumber" id="engineNumber" placeholder="Engine Number"
+                            required
+                            onChange={handleInputChange}
+                            defaultValue={formValues.engineNumber}
                             className="bg-inherit border border-[#BBBFBD] py-3 px-3.5 outline-none w-full text-black" />
                     </div>
                     <div className="flex flex-col gap-3 md:gap-4 w-full">
-                        <label htmlFor="effect-from">With Effect From *</label>
-                        <input name="effect-from" id="effect-from" type="date"
+                        <label htmlFor="effectFrom">With Effect From *</label>
+                        <input name="effectFrom" id="effectFrom" type="date"
+                            required
+                            onChange={handleInputChange}
+                            defaultValue={formValues.effectFrom}
                             className="bg-inherit border border-[#BBBFBD] py-3 px-3.5 outline-none w-full text-black" />
                     </div>
                 </div>
                 <div className="flex justify-between items-center mt-5">
                     <BackButton currentStep={currentStep} setCurrentStep={setCurrentStep} />
-                    <NextButton currentStep={currentStep} setCurrentStep={setCurrentStep} />
+                    {/* <NextButton currentStep={currentStep} setCurrentStep={setCurrentStep} /> */}
+                    <button type="submit" className="bg-[#1F8340] text-sm font-semibold text-white py-2.5 px-[52px] ml-auto block">
+                        Next
+                    </button>
                 </div>
             </form>
         </section>
     )
 }
 
-const UploadDetails = ({ currentStep, setCurrentStep }: { currentStep: number, setCurrentStep: React.Dispatch<React.SetStateAction<number>> }) => {
+
+const UploadDetails = ({ currentStep, setCurrentStep, formValues, handleInputChange }: { currentStep: number, setCurrentStep: React.Dispatch<React.SetStateAction<number>>, formValues:IFormValues, handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void }) => {   
     
     const [display, setDisplay] = useState("uploadDocuments");
+    /* const [selectedDocument, setSelectedDocument] = useState({
+        validId: null,
+        vehicleLicense: null,
+        utility_bill: null
+    });
+
+    const handleDocumentUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) {
+            return;
+        }
+
+        const { name } = e.target;
+        setSelectedDocument((prev) => ({
+            ...prev,
+            [name]: file
+        }));
+    } */
+
     const handleProceed = () => {
         console.log("Proceed to payment clicked");
     };
@@ -324,26 +475,41 @@ const UploadDetails = ({ currentStep, setCurrentStep }: { currentStep: number, s
 
             <ProgressBar currentStep={currentStep} totalSteps={4} />            
 
-            <form id="upload-details"
+            <form id="upload-details"                
                 className="mt-8 lg:mt-14 py-5 font-medium text-sm md:text-base">
                 
                 { display === "uploadDocuments" &&
                     <div className="flex flex-col md:flex-row gap-6 justify-center items-center p-3 md:p-6">
-                        <DocumentCard
-                            title="VALID ID"
-                            description="Official documents issued by government, Driver licence, NIN, Voters Card, and International Passport"
-                            isActive={true} // First card is highlighted
-                            icon={trafficIcon}
+                        <label htmlFor="validId" className="">
+                            <DocumentCard
+                                title="VALID ID"
+                                description="Official documents issued by government, Driver licence, NIN, Voters Card, and International Passport"
+                                isActive={true} // First card is highlighted
+                                icon={trafficIcon}
+                            />
+                        </label>
+                        <input type="file" name="validId" id="validId" className="hidden"
+                            onChange={handleInputChange}
                         />
-                        <DocumentCard
-                            title="VEHICLE LICENSE"
-                            description="Document issued by government authority that allows vehicle to be legally driven on public roads."
-                            icon={fireIcon}
+                        <label htmlFor="vehicleLicense" className="">
+                            <DocumentCard
+                                title="VEHICLE LICENSE"
+                                description="Document issued by government authority that allows vehicle to be legally driven on public roads."
+                                icon={fireIcon}
+                            />
+                        </label>
+                        <input type="file" name="vehicleLicense" id="vehicleLicense" className="hidden"
+                            onChange={handleInputChange}
                         />
-                        <DocumentCard
-                            title="UTILITY BILL"
-                            description="A bill statement issued by service provider for essential services like electricity, water, or gas."
-                            icon={carIcon}
+                        <label htmlFor="utility_bill" >
+                            <DocumentCard
+                                title="UTILITY BILL"
+                                description="A bill statement issued by service provider for essential services like electricity, water, or gas."
+                                icon={carIcon}
+                            />
+                        </label>
+                        <input type="file" name="utility_bill" id="utility_bill" className="hidden"
+                            onChange={handleInputChange}
                         />
                     </div>
                 }
@@ -377,7 +543,7 @@ const UploadDetails = ({ currentStep, setCurrentStep }: { currentStep: number, s
 
                 <div className="flex justify-between items-center mt-5">
                     <BackButton currentStep={currentStep} setCurrentStep={setCurrentStep} />
-                    <NextButton
+                    {/* <NextButton
                         currentStep={currentStep}
                         setCurrentStep={setCurrentStep}
                         onClick={() => {
@@ -389,7 +555,26 @@ const UploadDetails = ({ currentStep, setCurrentStep }: { currentStep: number, s
                                 window.scrollTo(0, 600);
                             }                            
                         }}
-                    />
+                    /> */}
+
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            if (display === "uploadDocuments") {
+                                if(!formValues.validId || !formValues.vehicleLicense) {
+                                    console.log("Validation failed");
+                                    toast.error("Please click on the cards and upload all required documents");
+                                    return;
+                                }
+                                setDisplay("proceedToPayment");
+                            } else {
+                                setCurrentStep((prev) => prev + 1)
+                                window.scrollTo(0, 600);
+                            }                            
+                        }}
+                        type="submit" className="bg-[#1F8340] text-sm font-semibold text-white py-2.5 px-[52px] ml-auto block">
+                        Next
+                    </button>
                 </div>
             </form>
         </section>
@@ -416,13 +601,13 @@ const SuccessfulPayment = ({ currentStep, setCurrentStep }: { currentStep: numbe
             <ProgressBar currentStep={currentStep} totalSteps={4} />            
 
             <div id="successful-payment"
-                className="mt-8 lg:mt-14 text-center py-5 bg-white shadow-md p-5 md:p-8 lg:p-20 mx-auto min-h-[400px]"
+                className="mt-8 lg:mt-14 text-center bg-white shadow-md p-5 sm:p-10 md:p-12 lg:p-20 mx-auto min-h-[400px] h-fit"
             > 
                 <img src={successIllustration} alt="Success illustration" className="mx-auto max-w-[250px] md:max-w-none" />
                 <h3 className="text-2xl md:text-3xl lg:text-4xl mt-20 lg:mt-[100px]" >
                     Congratulations!
                 </h3>
-                <div className="w-full max-w-[60%] mx-auto mt-4">
+                <div className="w-full md:max-w-[60%] lg:max-w-[80%] mx-auto mt-4">
                     <p className="text-sm md:text-lg lg:text-xl" >
                         You're just one step away from receiving your Third Party Insurance
                         Details—congratulations!
@@ -441,3 +626,47 @@ const SuccessfulPayment = ({ currentStep, setCurrentStep }: { currentStep: numbe
     )
 }
 
+const handleValidation = (e: React.FormEvent<HTMLFormElement> | React.FormEvent<HTMLButtonElement>, currentStep: number, setCurrentStep: React.Dispatch<React.SetStateAction<number>>,) =>{
+    e.preventDefault();
+    console.log("Form submitted");
+    const form = e.currentTarget;
+    // Check form validity
+    if (!form.checkValidity()) {
+        form.reportValidity(); // Show validation messages
+        return;
+    }
+
+    if (currentStep === 4) {
+        return;
+    }
+    setCurrentStep((prev) => prev + 1)
+    window.scrollTo(0, 600);
+}
+
+
+
+interface IFormValues {
+    category: string;
+    title: string;
+    firstName: string;
+    surname: string;
+    email: string;
+    phone: string;
+    driverLicenceNumber: string;
+    driverLicenceExpiryDate: string;
+    yearsOfDriving: string;
+    vehicleRegistrationNumber: string;
+    valueAmount: string;
+    vehicleUse: string;
+    make: string;
+    model: string;
+    bodyColor: string;
+    carYear: string;
+    carType: string;
+    chassisNumber: string;
+    engineNumber: string;
+    effectFrom: string;
+    validId: File | null;
+    vehicleLicense: File | null;
+    utilityBill: File | null;
+}
