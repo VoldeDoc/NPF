@@ -1,7 +1,7 @@
-import { BiLogoFacebook, BiLogoTelegram } from "react-icons/bi";
+import { BiLogoFacebook} from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { SiInstagram } from "react-icons/si";
-import { TbBrandX, TbBrandYoutube } from "react-icons/tb";
+import { TbBrandX} from "react-icons/tb";
 export default function Footer() {
   return (
     <>
