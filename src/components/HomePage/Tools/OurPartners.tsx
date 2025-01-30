@@ -4,101 +4,109 @@ export default function OurPartners() {
         <div className="sliderC">
             <div className="slide-trackC">
                 <div className="slideC">
-                    <img src="/assets/images/GTB.svg" alt="" />
+                    <img src="/assets/images/nia.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/NICON INSURANCE.svg" alt="" />
+                    <img src="/assets/images/naicom.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/GTB.svg" alt="" />
+                    <img src="/assets/images/nia.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/NICON INSURANCE.svg" alt="" />
+                    <img src="/assets/images/naicom.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/GTB.svg" alt="" />
+                    <img src="/assets/images/nia.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/NICON INSURANCE.svg" alt="" />
+                    <img src="/assets/images/naicom.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/GTB.svg" alt="" />
+                    <img src="/assets/images/nia.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/NICON INSURANCE.svg" alt="" />
+                    <img src="/assets/images/naicom.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/GTB.svg" alt="" />
+                    <img src="/assets/images/nia.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/NICON INSURANCE.svg" alt="" />
+                    <img src="/assets/images/naicom.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/GTB.svg" alt="" />
+                    <img src="/assets/images/nia.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/NICON INSURANCE.svg" alt="" />
+                    <img src="/assets/images/naicom.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/GTB.svg" alt="" />
+                    <img src="/assets/images/nia.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/NICON INSURANCE.svg" alt="" />
+                    <img src="/assets/images/naicom.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/GTB.svg" alt="" />
+                    <img src="/assets/images/nia.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/NICON INSURANCE.svg" alt="" />
+                    <img src="/assets/images/naicom.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/GTB.svg" alt="" />
+                    <img src="/assets/images/nia.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/NICON INSURANCE.svg" alt="" />
+                    <img src="/assets/images/naicom.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/GTB.svg" alt="" />
+                    <img src="/assets/images/nia.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/NICON INSURANCE.svg" alt="" />
+                    <img src="/assets/images/naicom.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/GTB.svg" alt="" />
+                    <img src="/assets/images/nia.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/NICON INSURANCE.svg" alt="" />
+                    <img src="/assets/images/naicom.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/GTB.svg" alt="" />
+                    <img src="/assets/images/nia.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/NICON INSURANCE.svg" alt="" />
+                    <img src="/assets/images/naicom.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/GTB.svg" alt="" />
+                    <img src="/assets/images/nia.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/NICON INSURANCE.svg" alt="" />
+                    <img src="/assets/images/naicom.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/GTB.svg" alt="" />
+                    <img src="/assets/images/nia.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/NICON INSURANCE.svg" alt="" />
+                    <img src="/assets/images/naicom.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/GTB.svg" alt="" />
+                    <img src="/assets/images/nia.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/NICON INSURANCE.svg" alt="" />
+                    <img src="/assets/images/naicom.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/GTB.svg" alt="" />
+                    <img src="/assets/images/nia.png" alt="" />
                 </div>
                 <div className="slideC">
-                    <img src="/assets/images/NICON INSURANCE.svg" alt="" />
+                    <img src="/assets/images/naicom.png" alt="" />
                 </div>
+                <div className="slideC">
+                    <img src="/assets/images/nia.png" alt="" />
+                </div>
+                <div className="slideC">
+                    <img src="/assets/images/naicom.png" alt="" />
+                </div>
+                
+           
 
             </div>
         </div>

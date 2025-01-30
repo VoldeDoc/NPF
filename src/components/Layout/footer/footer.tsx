@@ -1,15 +1,15 @@
-import { BiLogoTelegram } from "react-icons/bi";
+import { BiLogoFacebook, BiLogoTelegram } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { SiInstagram } from "react-icons/si";
-import { TbBrandYoutube } from "react-icons/tb";
+import { TbBrandX, TbBrandYoutube } from "react-icons/tb";
 export default function Footer() {
   return (
     <>
-      <footer className="text-white bg-green-800 py-20">
+      <footer className="text-white bg-green-800 pt-20 ">
         <div className="px-8 sm:px-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div>
-              <h1 className="text-gray-100 pb-5">By the way</h1>
+            <img src="/public/assets/logo/footer.png" alt="" />
 
               <h1 className="text-5xl font-bold text-white">Subscribe for our </h1>
               <h1 className="text-5xl font-bold text-white">newsletter</h1>
@@ -44,14 +44,14 @@ export default function Footer() {
                 <div className="py-2">
                   <ul className="text-lg">
                     <li>
-                      <a href="tel:+">+234-905-411-0010</a>
+                      <a href="tel:+2349054110010">+234-905-411-0010</a>
                     </li>
                     <li>
-                      <a href="tel:+">+234-905-411-0011</a>
+                      <a href="tel:+2349054110011">+234-905-411-0011</a>
                     </li>
                     <li>
                       <a href="mailto:contact@npfinsurance.com">contact@npfinsurance.com</a>
-                    </li>
+                  </li>
                   </ul>
                 </div>
               </div>
@@ -62,14 +62,14 @@ export default function Footer() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 py-20">
             <div className="flex space-x-9">
-            <Link to={""}>
-              <BiLogoTelegram className="text-white text-lg"/>
+            <Link to={"https://www.facebook.com/profile.php?id=61569490243943"}>
+              <BiLogoFacebook className="text-white text-lg"/>
             </Link>
-            <Link to={""}>
+            <Link to={"https://www.instagram.com/npfinsurance?igsh=MXV4a280dDBvNzNw"}>
               <SiInstagram className="text-white text-lg"/>
             </Link>
-            <Link to={""}>
-              <TbBrandYoutube className="text-white text-lg"/>
+            <Link to={"https://x.com/npfInsurance?t=fr1lvo6fvgRCO37JhzPdHw&s=09"}>
+              <TbBrandX className="text-white text-lg"/>
             </Link>
             </div>
             <div>
