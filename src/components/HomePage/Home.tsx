@@ -1,7 +1,269 @@
+import { MdArrowOutward } from "react-icons/md";
 export default function Home() {
     return (
         <>
-        <h1>Hi this is home page</h1>
+            <div className="container">
+                <div className="px-8 sm:px-16 py-10">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <div className="text-3xl sm:text-5xl font-bold">
+                                <h1>Your <span className="text-green-800">Safety Net</span> for</h1>
+                                <h1>Life's Uncertainties</h1>
+                            </div>
+                            <div className="my-4 text-lg sm:text-xl py-4">
+                                <p className="text-gray-600">
+                                    Protecting you and your loved ones with reliable
+                                </p>
+                                <p className="text-gray-600">
+                                    coverage when you need it most.
+                                </p>
+                            </div>
+                            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-5 py-4">
+                                <button className="bg-green-800 rounded-full py-2 px-4 text-white hover:text-white hover:bg-green-800 transition duration-300">Get started</button>
+                                <button className="flex items-center justify-center bg-transparent border border-green-800 rounded-full py-2 px-4 text-green-800 hover:bg-green-800 hover:text-white transition duration-300">
+                                    Learn more
+                                    <MdArrowOutward className="ml-2" />
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="relative">
+                            <img src="/assets/images/full-shot-smiley-parents-with-babies 1.svg" alt="" className="relative w-full" />
+                            <img src="/assets/images/Frame 8.svg" alt="" className="absolute bottom-0 left-0 w-1/3" />
+                            <img src="/assets/images/Frame 20.svg" alt="" className="absolute top-20 right-0 w-1/3" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className=" bg-blue-50 sm:py-16 px-8">
+                <div className="text-center py-10">
+                    <p className="text-green-800 text-xl font-bold">Our Services</p>
+                    <h1 className="font-bold text-4xl py-5">Explore Our Services and Experience Protection</h1>
+                    <p className="text-gray-600 text-xl">From life to asset coverage, we offer tailored insurance solutions designed to secure what matters most to you.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-8 sm:px-16 py-10">
+
+                    <div className="text-center bg-white rounded-md p-5">
+                        <div className="text-center flex justify-center">
+                            <img src="/assets/images/car-02.svg" alt="" />
+                        </div >
+                        <div className="text-gray-600">
+                            <h1 className="text-black-500 text-xl font-bold py-2">Motor Insurance</h1>
+                            <p>Motor insurance  </p>
+                            <p>covers vehicle damage</p>
+                            <p>third-party claims, fire,</p>
+                            <p>and theft.</p>
+                        </div>
+                    </div>
+
+                    <div className="text-center bg-white rounded-md p-5">
+                        <div className="text-center flex justify-center">
+                            <img src="/assets/images/fire-02.png" alt="" />
+                        </div >
+
+                        <div className="text-gray-600">
+                            <h1 className="text-black-500 text-xl font-bold py-2">Fire and Special Perils</h1>
+                            <p>The Insurance Act 2003</p>
+                            <p>mandates fire and perils</p>
+                            <p>insurance for public</p>
+                            <p>  buildings.</p>
+                        </div>
+                    </div>
+
+                    <div className="text-center bg-white rounded-md p-5">
+                        <div className="text-center flex justify-center">
+                            <img src="/assets/images/traffic-incident.svg" alt="" />
+                        </div >
+
+                        <div className="text-gray-600">
+                            <h1 className="text-black-500 text-xl font-bold py-2">General Accident</h1>
+                            <p>General Accident </p>
+                            <p>Insurance covers</p>
+                            <p>unexpected injuries and</p>
+                            <p> damages.</p>
+                        </div>
+                    </div>
+
+                    <div className="text-center bg-white rounded-md p-5">
+                        <div className="text-center flex justify-center">
+                            <img src="/assets/images/gun.png" alt="" />
+                        </div >
+
+                        <div className="text-gray-600">
+                            <h1 className="text-black-500 text-xl font-bold py-2">Burglary Theft</h1>
+                            <p>Burgulary and Theft</p>
+                            <p>Insurance covers loss or</p>
+                            <p>damage from break-ins</p>
+                            <p>and theft.</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-8 sm:px-16 py-10">
+
+                    <div className="text-center bg-white rounded-md p-5">
+                        <div className="text-center flex justify-center">
+                            <img src="/assets/images/shopping-basket-secure-03.png" alt="" />
+                        </div >
+
+                        <div className="text-gray-600">
+                            <h1 className="text-black-500 text-xl font-bold py-2">Occupiers Liabilty</h1>
+                            <p>Occupiers Liability</p>
+                            <p>Insurance covers third -</p>
+                            <p>party damages</p>
+                            <p>as required by law.</p>
+                        </div>
+                    </div>
+
+                    <div className="text-center bg-white rounded-md p-5">
+                        <div className="text-center flex justify-center">
+                            <img src="/assets/images/plant-02.png" alt="" />
+                        </div >
+
+                        <div className="text-gray-600">
+                            <h1 className="text-black-500 text-xl font-bold py-2">Plant All Risks Insurance</h1>
+                            <p>This insurance </p>
+                            <p>plant and machinery</p>
+                            <p>against all risks,excluding</p>
+                            <p>certain damages.</p>
+                        </div>
+                    </div>
+
+                    <div className="text-center bg-white rounded-md p-5">
+                        <div className="text-center flex justify-center">
+                            <img src="/assets/images/user-shield-01.png" alt="" />
+                        </div >
+                        <div className="text-gray-600">
+                            <h1 className="text-black-500 text-xl font-bold py-2">Public Liability Insurance</h1>
+                            <p>Public Liability Insurance </p>
+                            <p>covers third-party harm</p>
+                            <p>or damage due to </p>
+                            <p>negligence</p>
+                        </div>
+                    </div>
+
+                    <div className="text-center bg-white rounded-md p-5">
+                        <div className="text-center flex justify-center">
+                            <img src="/assets/images/safe.png" alt="" />
+                        </div >
+
+                        <div className="text-gray-600">
+                            <h1 className="text-black-500 text-xl font-bold py-2">Schedule of Property Covered</h1>
+                            <p>Provide values for</p>
+                            <p>property adn items to set</p>
+                            <p>the coverage rate</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-8 sm:px-16 py-10">
+
+                    <div className="text-center bg-white rounded-md p-5">
+                        <div className="text-center flex justify-center">
+                            <img src="/assets/images/cash-02.png" alt="" />
+                        </div >
+
+                        <div className="text-gray-600">
+                            <h1 className="text-black-500 text-xl font-bold py-2">Money Insurance</h1>
+                            <p>Money Insurance  </p>
+                            <p>covers cash loss in transit</p>
+                            <p>sales and personal custody</p>
+                        </div>
+                    </div>
+
+                    <div className="text-center bg-white rounded-md p-5">
+                        <div className="text-center flex justify-center">
+                            <img src="/assets/images/tractor.png" alt="" />
+                        </div >
+
+                        <div className="text-gray-600">
+                            <h1 className="text-black-500 text-xl font-bold py-2">Machinary breakdown Insurance</h1>
+                            <p>Machinery breakdown </p>
+                            <p>Insurance covers</p>
+                            <p>damage from defects or</p>
+                            <p>external causes.</p>
+                        </div>
+                    </div>
+
+                    <div className="text-center bg-white rounded-md p-5">
+                        <div className="text-center flex justify-center">
+                            <img src="/assets/images/traffic-incident.svg" alt="" />
+                        </div >
+
+                        <div className="text-gray-600">
+                            <h1 className="text-black-500 text-xl font-bold py-2">Group personal Accident insurance</h1>
+                            <p>Employee Accident </p>
+                            <p>Insurance covers death </p>
+                            <p>and disablity benefits</p>
+                        </div>
+                    </div>
+
+                    <div className="text-center bg-white rounded-md p-5">
+                        <div className="text-center flex justify-center">
+                            <img src="/assets/images/agreement-02.png" alt="" />
+                        </div >
+                        <div className="text-gray-600">
+                            <h1 className="text-black-500 text-xl font-bold py-2">Our Claims management</h1>
+
+                            <p>Claims are processed  </p>
+                            <p>daily, with cheques issued</p>
+                            <p>within 48 hours of signing</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div className="py-14">
+                <div className="text-center">
+                    <h1 className="text-xl font-bold py-2">Have any question?</h1>
+                    <button className="bg-black-500 rounded-full px-4 py-2 text-white">Contact us</button>
+                </div>
+            </div>
+
+            <div className="bg-blue-50 py-20">
+                <div className="px-8 sm:px-16">
+                <div className="text-center space-y-2 pb-4">
+                    <h1 className="text-green-800 font-medium">HOW IT WORKS</h1>
+                    <h1 className="text-4xl font-bold">Our Insurance Process Easy </h1>
+                    <h1 className="text-4xl font-bold ">Steps To Get Covered </h1>
+                    <p className="text-gray-600 font-semibold">Our comprehensive insurance services are designed to provide you with peace of</p>
+                    <p className="text-gray-600 font-semibold"> mind, no matter your needs.</p>
+                </div>
+                </div>
+
+                <div className="px-8 sm:px-16">
+                    <div className="flex flex-col sm:flex-row sm:space-x-10 relative space-y-10 sm:space-y-0">
+                        <div className="text-center bg-white rounded-md p-5 w-full sm:w-72 relative">
+                            <div className="text-center flex justify-center">
+                                <img src="/assets/images/car-02.svg" alt="" />
+                            </div>
+                            <div className="text-gray-600">
+                                <h1 className="text-black-500 text-xl font-bold py-2">Tailored Situations</h1>
+                                <p>Our experts craft a</p>
+                                <p>personalized insurance plan</p>
+                                <p>that fits your lifestyle.</p>
+                            </div>
+                            <div className="bg-green-800 rounded-full w-8 h-8 px-2 py-2 text-center flex items-center justify-center text-white font-bold absolute bottom-[-20px] left-1/2 transform -translate-x-1/2 sm:left-[120px]">1</div>
+                        </div>
+
+                        <div className="text-center bg-white rounded-md px-5 py-10 w-full sm:w-72 relative sm:bottom-[-60px]">
+                            <div className="text-center flex justify-center">
+                                <img src="/assets/images/car-02.svg" alt="" />
+                            </div>
+                            <div className="text-gray-600">
+                                <h1 className="text-black-500 text-xl font-bold py-2">Tailored Situations</h1>
+                                <p>Our experts craft a</p>
+                                <p>personalized insurance plan</p>
+                                <p>that fits your lifestyle.</p>
+                            </div>
+                            <div className="bg-green-800 rounded-full w-8 h-8 px-2 py-2 text-center flex items-center justify-center text-white font-bold absolute top-[-10px] left-1/2 transform -translate-x-1/2 sm:top-[-20px] sm:left-[125px]">2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </>
     )
 }
