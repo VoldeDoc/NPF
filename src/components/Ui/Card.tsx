@@ -1,47 +1,26 @@
-import React, { ReactNode } from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-interface CardProps {
-  children: ReactNode;
-  title?: ReactNode;
-  subtitle?: ReactNode;
-  headerslot?: ReactNode;
-  className?: string;
-  bodyClass?: string;
-  noborder?: boolean;
-  titleClass?: string;
-  headerslotClass?: string;
-}
+type CardProps = {
+  imageSrc: string;
+  title: string;
+  descriptions: string[];
+  link: string;
+};
 
-const Card: React.FC<CardProps> = ({
-  children,
-  title,
-  subtitle,
-  headerslot,
-  className = "custom-class  bg-white ",
-  bodyClass = "p-6",
-  noborder,
-  titleClass = "custom-class ",
-  headerslotClass = "",
-}) => {
+const Card: React.FC<CardProps> = ({ imageSrc, title, descriptions, link }) => {
   return (
-    <div
-      className={`
-        card rounded-md   hadow-base
-    ${className}
-        `}
-    >
-      {(title || subtitle) && (
-        <header className={`card-header ${noborder ? "no-border" : ""}`}>
-          <div>
-            {title && <div className={`card-title ${titleClass}`}>{title}</div>}
-            {subtitle && <div className="card-subtitle">{subtitle}</div>}
-          </div>
-          {headerslot && <div className={`card-header-slot ${headerslotClass}`}>{headerslot}</div>}
-          
-        </header>
-      )}
-      <main className={`card-body ${bodyClass}`}>{children}</main>
-    </div>
+    <Link to={link} className={`text-center bg-white rounded-md p-5 hover:shadow-lg transition-shadow duration-300 ${link ? 'blink-effect' : ''}`}>
+      <div className="text-center flex justify-center">
+        <img src={imageSrc} alt={title} />
+      </div>
+      <div className="text-gray-600">
+        <h1 className="text-black-500 text-xl font-bold py-2">{title}</h1>
+        {descriptions.map((desc, index) => (
+          <p key={index}>{desc}</p>
+        ))}
+      </div>
+    </Link>
   );
 };
 

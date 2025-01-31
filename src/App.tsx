@@ -3,7 +3,10 @@ import "./App.css";
 import ButtonT from "@/pages/Ui/button";
 import ExampleForm from "./pages/Ui/textinput";
 import Home_page from './pages/home/home_page';
-import Insurance_quote from "./pages/Insurance_quote/Insurance_quote";
+//import Insurance_quote from "./pages/Motor_insurance_quote/Motor_insurance_quote";
+import Motor_insurance_quote from "./pages/Motor_insurance_quote/Motor_insurance_quote";
+import Motor_insurance_quote_landing from "./pages/Motor_insurance_quote/Motor_insurance_quote_landing";
+import About_page from "./pages/about/about_page";
 
 
 function App() {
@@ -27,7 +30,9 @@ function App() {
               {/* Ui */}
               <Route path="/ui/button" element={<ButtonT />} />
               <Route path="/ui/textinput" element={<ExampleForm />} />
-              <Route path="/insurance-quote" element={<Insurance_quote />} />
+              <Route path="/motor-insurance-quote" element={<Motor_insurance_quote_landing />} />
+              <Route path="/motor-insurance-quote-form" element={<Motor_insurance_quote />} />    
+              <Route path="/about" element={<About_page />} />
             </Routes>
           </>
       </main>
