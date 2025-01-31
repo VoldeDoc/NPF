@@ -1,12 +1,11 @@
 import heroImg from "../../assets/insurance/hero.png"
 //import downArrow from "../../assets/insurance/down-arrow.svg"
 import { useState } from "react";
-import { IFormValues } from "./Tools/handleFormValidations";
-import PersonalDetails from "./Tools/PersonalDetails";
-import VehicleDetails from "./Tools/VehicleDetails";
-import UploadDetails from "./Tools/UploadDetails";
-import SuccessfulPayment from "./Tools/SuccessfulPayment";
-
+import { IFormValues } from "../MotorInsuranceQuote/Tools/handleFormValidations";
+import PersonalDetails from "../MotorInsuranceQuote/Tools/PersonalDetails";
+import VehicleDetails from "../MotorInsuranceQuote/Tools/VehicleDetails";
+import UploadDetails from "../MotorInsuranceQuote/Tools/UploadDetails";
+import SuccessfulPayment from "../MotorInsuranceQuote/Tools/SuccessfulPayment";
 
 export default function InsuranceQuote() {
 
