@@ -20,9 +20,11 @@ export default function Home() {
 
                     <div className="sm:px-16 px-8 py-16">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-14 py-10">
-                            <div className="relative">
-                                <img src="assets/images/african-mother-little-girl-close-up 1 (1).png" alt="" className="relative rounded-lg h-[410px]" />
-                                <img src="/assets/images/Frame 20.svg" alt="" className="absolute top-20 right-32 w-1/3" />
+                            <div className="relative flex justify-center md:block">
+                                  <img src="/assets/images/Frame 20.svg" alt="" className="absolute top-20 right-10 w-1/3 hidden md:block" />
+
+                                <img src="assets/images/african-mother-little-girl-close-up 1 (1).png" alt="" className="relative rounded-lg h-[410px] w-[85%]" />
+                                <img src="/assets/images/Frame 20.svg" alt="" className="absolute top-20 right-10 w-1/3" />
                             </div>
                             <div>
                                 <div className="mb-8">
@@ -173,11 +175,11 @@ export default function Home() {
                             <img className="absolute top-40 right-96 w-10 h-10 rounded-full" src="/assets/images/medium-shot-man-posing-with-helmet 1.png" alt="" />
                             <img className="absolute bottom-0 left-64 w-10 h-10 rounded-full" src="/assets/images/portrait-female-mechanic-repair-garage 1.png" alt="" />
                             <img className="absolute bottom-10 right-10 w-10 h-10 rounded-full" src="/assets/images/medium-shot-man-posing-with-helmet 1.png" alt="" />
-                            <div className="text-center py-10 relative z-10">
+                            <div className="text-center py-10 relative ">
                                 <h1 className="text-4xl font-bold">Get Insured Today</h1>
                                 <p className="text-gray-600">Get the courage you need with personalized insurance plans.</p>
                             </div>
-                            <div className="text-center relative z-10">
+                            <div className="text-center relative">
                                 <button className="text-white rounded-full px-8 py-2 bg-green-700">Get started</button>
                             </div>
                         </div>
