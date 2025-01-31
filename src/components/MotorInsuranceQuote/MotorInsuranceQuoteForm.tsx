@@ -1,13 +1,14 @@
 import heroImg from "../../assets/insurance/hero.png"
 //import downArrow from "../../assets/insurance/down-arrow.svg"
 import { useState } from "react";
-import { IFormValues } from "../MotorInsuranceQuote/Tools/handleFormValidations";
-import PersonalDetails from "../MotorInsuranceQuote/Tools/PersonalDetails";
-import VehicleDetails from "../MotorInsuranceQuote/Tools/VehicleDetails";
-import UploadDetails from "../MotorInsuranceQuote/Tools/UploadDetails";
-import SuccessfulPayment from "../MotorInsuranceQuote/Tools/SuccessfulPayment";
+import { IFormValues } from "./Tools/handleFormValidations";
+import PersonalDetails from "./Tools/PersonalDetails";
+import VehicleDetails from "./Tools/VehicleDetails";
+import UploadDetails from "./Tools/UploadDetails";
+import SuccessfulPayment from "./Tools/SuccessfulPayment";
 
-export default function InsuranceQuote() {
+
+export default function MotorInsuranceQuote() {
 
     const [formValues, setFormValues] = useState<IFormValues>({
         category: "",
@@ -58,7 +59,7 @@ export default function InsuranceQuote() {
         }));
     }
 
-    const [currentStep, setCurrentStep] = useState(3);
+    const [currentStep, setCurrentStep] = useState(1);
     return (
         <>
             {/* <!-- Hero section --> */}
