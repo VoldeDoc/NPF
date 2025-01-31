@@ -21,8 +21,8 @@ export default function Home() {
                     <div className="sm:px-16 px-8 py-16">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-14 py-10">
                             <div className="relative">
-                                <img src="assets/images/african-mother-little-girl-close-up 1 (1).png" alt="" className="relative rounded-lg h-git[410px]" />
-                                <img src="/assets/images/Frame 20.svg" alt="" className="absolute top-20 right-32 w-1/3" />
+                                <img src="assets/images/african-mother-little-girl-close-up 1 (1).png" alt="" className="relative rounded-lg h-[410px] w-[85%]" />
+                                <img src="/assets/images/Frame 20.svg" alt="" className="absolute top-20 right-10 w-1/3" />
                             </div>
                             <div>
                                 <div className="mb-8">
