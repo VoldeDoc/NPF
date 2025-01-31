@@ -4,7 +4,7 @@ export const getCardDetails = () => {
         imageSrc: "/assets/images/car-02.svg",
         title: "Motor Insurance",
         descriptions: ["Motor insurance", "covers vehicle damage", "third-party claims, fire,", "and theft."],
-        link: "/motor-insurance-quote-form"
+        link: "/motor-insurance-quote"
       },
       {
         imageSrc: "/assets/images/fire-02.png",
