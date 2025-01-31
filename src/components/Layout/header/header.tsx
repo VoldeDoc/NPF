@@ -48,9 +48,9 @@ export default function Header() {
           </Link>
         </div>
       </aside>
-      <div className="pt-16">
+      {/* <div className="pt-1"> */}
         {/* This div adds padding to the top of the body to account for the fixed header */}
-      </div>
+      {/* </div> */}
     </>
   );
 }
