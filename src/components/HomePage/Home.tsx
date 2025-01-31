@@ -20,9 +20,10 @@ export default function Home() {
 
                     <div className="sm:px-16 px-8 py-16">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-14 py-10">
-                            <div className="relative">
-                                <img src="assets/images/african-mother-little-girl-close-up 1 (1).png" alt="" className="relative rounded-lg h-[410px] w-[85%]" />
-                                <img src="/assets/images/Frame 20.svg" alt="" className="absolute top-20 right-10 w-1/3" />
+                            <div className="relative flex justify-center items-center">
+                                <img src="/assets/images/Frame 20.svg" alt="" className="absolute top-20 right-10 w-1/3 h-auto" />
+                                <img src="assets/images/african-mother-little-girl-close-up 1 (1).png" alt="" className="relative rounded-lg h-[410px] w-96" />
+                                <img src="/assets/images/Frame 20.svg" alt="" className="absolute top-20 right-2 w-1/3 h-auto" />
                             </div>
                             <div>
                                 <div className="mb-8">
@@ -58,7 +59,7 @@ export default function Home() {
                                     </div>
 
                                 </div>
-                                <div className="py-8">
+                                <div className="py-8 text-center sm:text-left">
                                     <button className="bg-green-800 rounded-full py-2 px-4 text-white hover:text-white hover:bg-green-800 transition duration-300">More about</button>
                                 </div>
                             </div>
