@@ -6,7 +6,8 @@ import Home_page from './pages/home/home_page';
 //import Insurance_quote from "./pages/Motor_insurance_quote/Motor_insurance_quote";
 import Motor_insurance_quote from "./pages/Motor_insurance_quote/Motor_insurance_quote";
 import Motor_insurance_quote_landing from "./pages/Motor_insurance_quote/Motor_insurance_quote_landing";
-import About_page from "./pages/about/about_page";
+//import About_page from "./pages/about/about_page";
+import SuperBoard_page from "./pages/about/superboard_page";
 
 
 function App() {
@@ -32,7 +33,8 @@ function App() {
               <Route path="/ui/textinput" element={<ExampleForm />} />
               <Route path="/motor-insurance-quote" element={<Motor_insurance_quote_landing />} />
               <Route path="/motor-insurance-quote-form" element={<Motor_insurance_quote />} />    
-              <Route path="/about" element={<About_page />} />
+              {/* <Route path="/about" element={<About_page />} /> */}
+              <Route path="/about/superboard" element={<SuperBoard_page />} />
             </Routes>
           </>
       </main>
