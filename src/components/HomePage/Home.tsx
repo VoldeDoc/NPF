@@ -173,11 +173,11 @@ export default function Home() {
                             <img className="absolute top-40 right-96 w-10 h-10 rounded-full" src="/assets/images/medium-shot-man-posing-with-helmet 1.png" alt="" />
                             <img className="absolute bottom-0 left-64 w-10 h-10 rounded-full" src="/assets/images/portrait-female-mechanic-repair-garage 1.png" alt="" />
                             <img className="absolute bottom-10 right-10 w-10 h-10 rounded-full" src="/assets/images/medium-shot-man-posing-with-helmet 1.png" alt="" />
-                            <div className="text-center py-10 relative z-10">
+                            <div className="text-center py-10 relative ">
                                 <h1 className="text-4xl font-bold">Get Insured Today</h1>
                                 <p className="text-gray-600">Get the courage you need with personalized insurance plans.</p>
                             </div>
-                            <div className="text-center relative z-10">
+                            <div className="text-center relative">
                                 <button className="text-white rounded-full px-8 py-2 bg-green-700">Get started</button>
                             </div>
                         </div>
