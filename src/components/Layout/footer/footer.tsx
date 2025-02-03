@@ -2,7 +2,7 @@ import { BiLogoFacebook} from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { SiInstagram } from "react-icons/si";
 import { TbBrandX} from "react-icons/tb";
-import Logo from "../../../assets/Logo.png"
+//import Logo from "../../../assets/Logo.png"
 
 export default function Footer() {
   return (
@@ -13,13 +13,13 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             
               <div>
-                <div className="text-2xl font-bold md:w-[300px]">
+                {/* <div className="text-2xl font-bold md:w-[300px]">
                   <img src={Logo} alt="NPF Logo"  />
-                </div>
+                </div> */}
                 
 
-                  <h1 className=" text-4xl md:text-5xl font-bold pt-[-10px] text-white mt-6">Subscribe for our </h1>
-                  <h1 className="text-4xl md:text-5xl font-bold text-white">newsletter</h1>
+                  <h1 className=" text-2xl md:text-4xl font-bold pt-[-10px] text-white mt-6">Subscribe for our </h1>
+                  <h1 className="text-2xl md:text-4xl font-bold text-white">newsletter</h1>
                   <div className="mt-5 flex items-center max-w-md">
                     <input
                       type="email"

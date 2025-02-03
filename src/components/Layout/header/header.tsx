@@ -17,12 +17,12 @@ export default function Header() {
           {/* <img src={"/assets/logo/logo.svg"} alt="logo" className='' /> */}
           <img src={Logo} alt="logo" /* className='h-[40px] w-[200px] md:w-[300px] md:h-[50px]' */ />
         </div>
-        <div className="hidden md:flex justify-center flex-1 px-10">
+        <div className="hidden md:flex justify-center flex-1 px-3 lg:px-10">
           <NavLinks />
         </div>
         <div className="hidden md:flex">
           <Link to={'#'} /* to={'/motor-insurance-quote'} */>
-            <button className="bg-green-900 text-white px-4 py-2 rounded-full">
+            <button className="bg-green-900 text-white px-2 py-1 xl:px-4 xl:py-2 rounded-lg md:rounded-full text-sm lg:text-base w-fit">
               Get a Quote
             </button>
           </Link>
