@@ -23,7 +23,7 @@ export default function Home() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-14 py-10">
                             <div className="relative flex justify-center items-center">
                                 <img src="/assets/images/Frame 20.svg" alt="" className="absolute top-20 right-10 w-1/3 h-auto" />
-                                <img src="assets/images/african-mother-little-girl-close-up 1 (1).png" alt="" className="relative rounded-lg h-[410px] w-96" />
+                                <img src="assets/images/are-you-covered.png" alt="" className="relative rounded-lg h-[410px] w-96" />
                                 <img src="/assets/images/Frame 20.svg" alt="" className="absolute top-20 right-2 w-1/3 h-auto" />
                             </div>
                             <div>
@@ -31,7 +31,7 @@ export default function Home() {
                                     <h1 className="text-green-700 font-semibold">ABOUT US</h1>
                                     <p className="text-gray-600">
                                         NPF Insurance Company Limited is a general business insurance
-                                        company, licensed by the National Insurance Commission (NAICOM). As a privately-owned company, we are dedicated to contributing to Nigeria's GDP by providing comprehensive insurance and risk management solutions. Read more
+                                        company, licensed by the National Insurance Commission (NAICOM). As a privately-owned company, we are dedicated to contributing to Nigeria's GDP by providing comprehensive insurance and risk management solutions.
                                     </p>
                                 </div>
                                 <div className="flex flex-col md:flex-row gap-y-8 md:gap-x-16">
@@ -104,16 +104,16 @@ export default function Home() {
                         </div>
 
                         <div className="px-8 sm:px-16 py-12">
-                            <div className="flex flex-col sm:flex-row sm:space-x-10 relative space-y-10 sm:space-y-0">
+                            <div className="flex flex-col sm:flex-row sm:space-x-10 relative space-y-10 sm:space-y-0 justify-center">
                                 <div className="text-center bg-white rounded-md p-5 w-full sm:w-72 relative">
                                     <div className="text-center flex justify-center">
                                         <img src="/assets/images/tape-measure.png" alt="" />
                                     </div>
                                     <div className="text-gray-600">
-                                        <h1 className="text-black-500 text-xl font-bold py-2">Tailored Situations</h1>
-                                        <p>Our experts craft a</p>
-                                        <p>personalized insurance plan</p>
-                                        <p>that fits your lifestyle.</p>
+                                        <h1 className="text-black-500 text-xl font-bold py-2">Visit our website</h1>
+                                        <p>To choose the insurance</p>
+                                        <p>policy type that best fits you</p>
+                                        <p> or your business.</p>
                                     </div>
                                     <div className="bg-green-800 rounded-full w-8 h-8 px-2 py-2 text-center flex items-center justify-center text-white font-bold absolute bottom-[-20px] left-1/2 transform -translate-x-1/2 sm:left-[120px]">1</div>
                                     <div className="absolute bottom-[-100px] left-[140px] hidden lg:block">
@@ -127,10 +127,10 @@ export default function Home() {
                                         <img src="/assets/images/checkmark-badge-03.png" alt="" />
                                     </div>
                                     <div className="text-gray-600">
-                                        <h1 className="text-black-500 text-xl font-bold py-2">Easy Enrollment</h1>
-                                        <p>We guide you through the</p>
-                                        <p>simple,hassle-free process</p>
-                                        <p>of securing your coverage.</p>
+                                        <h1 className="text-black-500 text-xl font-bold py-2">Form Completion</h1>
+                                        <p>Fill out the required </p>
+                                        <p>information on the form,</p>
+                                        <p>and submit. </p>
                                     </div>
                                     <div className="bg-green-800 rounded-full w-8 h-8 px-2 py-2 text-center flex items-center justify-center text-white font-bold absolute top-[-10px] left-1/2 transform -translate-x-1/2 sm:top-[-20px] sm:left-[135px]">2</div>
                                     <div className="absolute top-[-100px] left-[120px] hidden lg:block">
@@ -143,10 +143,10 @@ export default function Home() {
                                         <img src="/assets/images/mentoring.png" alt="" />
                                     </div>
                                     <div className="text-gray-600">
-                                        <h1 className="text-black-500 text-xl font-bold py-2">Ongoing support</h1>
-                                        <p>Enjoy peace of mind with our</p>
-                                        <p>24/7 support and assistance</p>
-                                        <p>whenever you need it</p>
+                                        <h1 className="text-black-500 text-xl font-bold py-2">Make Premium Payment </h1>
+                                        <p>Complete your Premium</p>
+                                        <p>Payment effortlessly using </p>
+                                        <p>our user-friendly payment platform.</p>
                                     </div>
                                     <div className="bg-green-800 rounded-full w-8 h-8 px-2 py-2 text-center flex items-center justify-center text-white font-bold absolute bottom-[-20px] left-1/2 transform -translate-x-1/2 sm:left-[120px]">3</div>
                                     <div className="absolute bottom-[-100px] left-[140px] hidden lg:block">
@@ -159,10 +159,9 @@ export default function Home() {
                                         <img src="/assets/images/policy.png" alt="" />
                                     </div>
                                     <div className="text-gray-600">
-                                        <h1 className="text-black-500 text-xl font-bold py-2">Claims & Adjustments</h1>
-                                        <p>Quick efficeient claims</p>
-                                        <p>handling and flexible policy</p>
-                                        <p>Adjustments to ensure.</p>
+                                        <h1 className="text-black-500 text-xl font-bold py-2">Get Your Claimed</h1>
+                                        <p>Access Your Quick and</p>
+                                        <p>Streamlined Claims</p>
                                     </div>
                                     <div className="bg-green-800 rounded-full w-8 h-8 px-2 py-2 text-center flex items-center justify-center text-white font-bold absolute top-[-10px] left-1/2 transform -translate-x-1/2 sm:top-[-20px] sm:left-[135px]">4</div>
                                 </div>

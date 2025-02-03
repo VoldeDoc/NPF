@@ -47,7 +47,7 @@ export default function Contact() {
                         <img src={addressImg} alt="community img" className="" />
                         <div className="font-medium">
                             <span className="text-sm lg:text-base text-[#383C39] font-bold mb-2" >Address</span>
-                            <p className="text-sm lg:text-base " >
+                            <p className="text-sm lg:text-lg " >
                                 Insurance Building, Behind Louis Edet House
                                 Force Headquaters,Shehu Shagari Way, Abuja
                             </p>                            

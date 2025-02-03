@@ -1,9 +1,9 @@
-import heroImg from "../../assets/about/hero.png"
+import heroImg from "../../assets/about/hero2.png"
 //import missionImg from "../../assets/about/mission.png"
 import visionImg from "../../assets/about/vision2.png"
 import ahemenImg from "../../assets/about/ahemen.png";
-import temitayoImg from "../../assets/about/temitayo2.png";
-import blankImg from "../../assets/about/blank.png";
+import temitayoImg from "../../assets/about/temitayo.png";
+import juliusImg from "../../assets/about/julius.png"
 import ekechukwuImg from "../../assets/about/ekechukwu.png";
 import objectiveImg from "../../assets/about/objective.png";
 import regulatorImg from "../../assets/about/regulator.svg";
@@ -244,14 +244,13 @@ const teamMembers = [
     {
         name: "Julius Adedeji Esq",
         position: "Company Secretary",
-        img: blankImg,
-        border:false
+        img: juliusImg
     },
     {
         name: "Ahemen Rose Wende  MBA,PhRI",
         position: "Executive Director Admin &Corporate Services",
         img: ahemenImg,
-        border:false
+        border:true,
     }
 ]
 

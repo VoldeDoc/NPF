@@ -39,7 +39,7 @@ export default function NavLinks() {
             <NavLink
               to={link.url}
               className={({ isActive }) =>
-                `px-4 py-2 font-bold text-black ${
+                `px-4 py-2 font-bold text-black text-sm lg:text-base ${
                   isActive &&  link.url !== "#"  ? "text-green-500" : "" //Disable for hashed links
                 }`
               }
@@ -49,7 +49,7 @@ export default function NavLinks() {
 
             {/* Dropdown for "About" */}
             {link.submenu && dropdownOpen && (
-              <div className="absolute left-0 mt-0 w-48 bg-white shadow-md rounded-md">
+              <div className="absolute left-0 mt-0.5 w-48 bg-white shadow-md rounded-md">
                 {link.submenu.map((sub, subIndex) => (
                   <NavLink
                     key={subIndex}
