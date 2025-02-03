@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full bg-white text-black-500 px-16 flex justify-between items-center z-10">
+      <header className="fixed top-0 left-0 w-full bg-white text-black-500 px-6 md:px-16 flex justify-between gap-2 items-center z-10">
         <div className="text-2xl font-bold ">
           {/* <img src={"/assets/logo/logo.svg"} alt="logo" className='' /> */}
           <img src={Logo} alt="logo" /* className='h-[40px] w-[200px] md:w-[300px] md:h-[50px]' */ />
