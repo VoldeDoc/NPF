@@ -3,6 +3,7 @@ import { Layout } from "../Layout/layout";
 import { getCardDetails } from "../Ui/cardDetails";
 import Card from "../Ui/Card";
 import CarouselComponent from "../Ui/carousel";
+import { Link } from "react-router-dom";
 export default function Home() {
     const services = getCardDetails()
     return (
@@ -37,20 +38,20 @@ export default function Home() {
                                     <div className="space-y-2 py-2">
                                         <div className="flex space-x-5"></div>
                                         <div className="flex space-x-5">
-                                            <img src="/assets/images/setting-done-01.png" alt="" /> <span className="text-green-600">Customer-centric Approach</span>
+                                            <img src="/assets/images/check.svg" alt="check" className="w-6 h-6" /> <span className="text-green-600">We are customer centric and flexible</span>
                                         </div>
                                         <div className="flex space-x-5">
-                                            <img src="/assets/images/setting-done-01.png" alt="" /> <span className="text-green-600">Transparent communication</span>
+                                            <img src="/assets/images/check.svg" alt="check" className="w-6 h-6" /> <span className="text-green-600">We offer valued personalized services</span>
                                         </div>
                                         <div className="flex space-x-5">
-                                            <img src="/assets/images/setting-done-01.png" alt="" /> <span className="text-green-600">365 / 24x7 Quick Supports</span>
+                                            <img src="/assets/images/check.svg" alt="check" className="w-6 h-6" /> <span className="text-green-600">We give value for your money</span>
                                         </div>
                                         <div className=" flex space-x-5">
-                                            <img src="/assets/images/setting-done-01.png" alt="" /> <span className="text-green-600">Critical Illness Insurance</span>
+                                            <img src="/assets/images/check.svg" alt="check" className="w-6 h-6" /> <span className="text-green-600">We are committed to the ultimate security of our customers</span>
                                         </div>
                                     </div>
 
-                                    <div className="bg-gray-200 rounded-lg px-4 py-2 text-center " >
+                                    <div className="bg-gray-200 rounded-lg px-4 py-2 text-center h-fit " >
                                         <h1 className="text-green-600 text-2xl font-bold">100%</h1>
                                         <p className="text-gray-500">success rate</p>
                                         <hr className="border " />
@@ -60,7 +61,9 @@ export default function Home() {
 
                                 </div>
                                 <div className="py-8 text-center sm:text-left">
-                                    <button className="bg-green-800 rounded-full py-2 px-4 text-white hover:text-white hover:bg-green-800 transition duration-300">More about</button>
+                                    <Link to={"/about"} >
+                                        <button className="bg-green-800 rounded-full py-2 px-4 text-white hover:text-white hover:bg-green-800 transition duration-300">More about</button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +86,9 @@ export default function Home() {
                     <div className="py-14">
                         <div className="text-center">
                             <h1 className="text-xl font-bold py-2">Have any question?</h1>
-                            <button className="bg-black-500 rounded-full px-4 py-2 text-white">Contact us</button>
+                            <Link to="/contact">
+                                <button className="bg-black-500 rounded-full px-4 py-2 text-white">Contact us</button>
+                            </Link>
                         </div>
                     </div>
 

@@ -14,13 +14,14 @@ export default function Header() {
     <>
       <header className="fixed top-0 left-0 w-full bg-white text-black-500 px-16 flex justify-between items-center z-10">
         <div className="text-2xl font-bold ">
-          <img src={Logo} alt="logo" className=' h-[40px]  w-[200px] md:w-[300px] md:h-[50px]' />
+          {/* <img src={"/assets/logo/logo.svg"} alt="logo" className='' /> */}
+          <img src={Logo} alt="logo" /* className='h-[40px] w-[200px] md:w-[300px] md:h-[50px]' */ />
         </div>
         <div className="hidden md:flex justify-center flex-1 px-10">
           <NavLinks />
         </div>
         <div className="hidden md:flex">
-          <Link to={'/motor-insurance-quote'}>
+          <Link to={'#'} /* to={'/motor-insurance-quote'} */>
             <button className="bg-green-900 text-white px-4 py-2 rounded-full">
               Get a Quote
             </button>
@@ -41,8 +42,8 @@ export default function Header() {
           </nav>
         </div>
         <div className="absolute bottom-2 left-0 w-full px-4">
-          <Link to={'/motor-insurance-quote'}>
-            <button className="bg-green-900 text-white w-full px-2 rounded">
+          <Link to={'#'} /* to={'/motor-insurance-quote'} */>
+            <button className="bg-green-900 text-white w-full px-2 py-2 rounded">
               Get a Quote
             </button>
           </Link>

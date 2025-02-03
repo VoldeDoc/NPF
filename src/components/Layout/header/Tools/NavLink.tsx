@@ -13,7 +13,8 @@ const links = [
   },
   {
     title: "Services",
-    url: "/services",
+    //url: "/services",
+    url: "#",
   },
   {
     title: "Contact",
@@ -39,7 +40,7 @@ export default function NavLinks() {
               to={link.url}
               className={({ isActive }) =>
                 `px-4 py-2 font-bold text-black ${
-                  isActive ? "text-green-500" : ""
+                  isActive &&  link.url !== "#"  ? "text-green-500" : "" //Disable for hashed links
                 }`
               }
             >
@@ -76,18 +77,29 @@ export default function NavLinks() {
                 >
                   {link.title}
                 </button>
-                {dropdownOpen && (
-                  <div className="mt-1 space-y-1 bg-white shadow-md rounded-md">
-                    {link.submenu.map((sub, subIndex) => (
-                      <NavLink
-                        key={subIndex}
-                        to={sub.url}
-                        className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                      >
-                        {sub.title}
-                      </NavLink>
-                    ))}
-                  </div>
+                {dropdownOpen && (                  
+                  <>
+                    <div className="mt-1 space-y-1 bg-white shadow-md rounded-md">                      
+                        <NavLink
+                          key={index}
+                          to={link.url}
+                          className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                        >
+                          {link.title}
+                        </NavLink>
+                    </div>
+                    <div className="mt-1 space-y-1 bg-white shadow-md rounded-md">
+                      {link.submenu.map((sub, subIndex) => (
+                        <NavLink
+                          key={subIndex}
+                          to={sub.url}
+                          className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                        >
+                          {sub.title}
+                        </NavLink>
+                      ))}
+                    </div>
+                  </>
                 )}
               </div>
             ) : (
@@ -95,7 +107,7 @@ export default function NavLinks() {
                 to={link.url}
                 className={({ isActive }) =>
                   `block font-bold px-4 py-2 text-xl ${
-                    isActive
+                    isActive &&  link.url !== "#" 
                       ? "bg-green-600 text-white rounded-lg w-full"
                       : "text-gray-700"
                   }`

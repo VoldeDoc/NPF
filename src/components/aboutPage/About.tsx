@@ -26,7 +26,7 @@ export default function About() {
                 <img src={heroImg} alt="Hero img" className="w-full min-h-[250px] max-h-[500px] md:max-h-[700px] object-cover" />    
             </div>
 
-            <section className="bg-white py-10 md:pt-14 lg:pt-16 px-7 md:px-20 xl:px-[200px]" >
+            <section className="bg-white py-10 md:pt-14 lg:pt-16 px-7 md:px-20 xl:px-[140px] 2xl:px-[170px]" >
                 <div className="mb-7 flex gap-3 items-center" >
                     <div className="h-[29px] flex">
                         <div className="w-2 bg-[#141B34]" ></div>
@@ -54,12 +54,12 @@ export default function About() {
                             relationships.
                         </p>
                     </div>
-                    <div className="w-full md:w-2/5 md:min-w-[250px]" >
+                    <div className="w-full md:w-3/5 md:min-w-[250px]" >
                         <div className="bg-[#3C8725] p-5 flex gap-5 items-start mb-1">
                             <img src={visionImg} alt="" className="w-10 h-10 xl:w-12 xl:h-12" />
                             <div className="text-white" >
                                 <h3 className="font-semibold text-lg md:text-xl mb-1">Vision</h3>
-                                <p className="text-xs">
+                                <p className="text-sm">
                                     We envision becoming a leading insurance 
                                     provider known for our integrity, reliability 
                                     and superior customer experience.
@@ -70,7 +70,7 @@ export default function About() {
                             <img src={visionImg} alt="" className="w-10 h-10 xl:w-12 xl:h-12" />
                             <div className="text-white" >
                                 <h3 className="font-semibold text-lg md:text-xl mb-1">Our Mission</h3>
-                                <p className="text-xs">
+                                <p className="text-sm">
                                     To protect our customers’ financial wellbeing by offering innovative insurance products, exceptional customer service and a commitment to long term relationships
                                 </p>
                             </div>
@@ -79,7 +79,7 @@ export default function About() {
                             <img src={objectiveImg} alt="" className="w-10 h-10 xl:w-12 xl:h-12" />
                             <div className="text-[#000000]" >
                                 <h3 className="font-semibold text-lg md:text-xl mb-1">Objective</h3>
-                                <p className="text-xs">
+                                <p className="text-sm">
                                     Provide ultimate security for customers’ assets and welfare
                                 </p>
                             </div>
@@ -88,7 +88,7 @@ export default function About() {
                 </section>                
             </section>
 
-            <section className="bg-[#7AB58D0D] py-10 md:pt-14 lg:pt-16 px-7 md:px-20 xl:px-[200px]" >
+            <section className="bg-[#7AB58D0D] py-10 md:pt-14 lg:pt-16 px-7 md:px-20 xl:px-[140px] 2xl:px-[170px]" >
                 <h2 className="text-[#000000] font-semibold text-2xl md:text-3xl mb-[73px] text-center">
                     Our Priority is to exceed the <br className="hidden md:block" />
                     expectations of all our Stakeholders
@@ -104,7 +104,7 @@ export default function About() {
             </section>
 
 
-            <section className="bg-white py-10 md:py-14 lg:py-16 px-7 md:px-20 xl:px-[200px]" >
+            <section className="bg-white py-10 md:py-14 lg:py-16 px-7 md:px-20 xl:px-[140px] 2xl:px-[170px]" >
                 <div className="mb-10 lg:mb-16 flex gap-3 items-center" >
                     <div className="h-[29px] flex">
                         <div className="w-2 bg-[#141B34]" ></div>
@@ -199,7 +199,7 @@ export default function About() {
 
 
             {/* Our Team */}
-            <section className="bg-[#7AB58D0D] py-10 md:py-14 lg:py-20 px-7 md:px-20 xl:px-[200px]" >
+            <section className="bg-[#7AB58D0D] py-10 md:py-14 lg:py-20 px-7 md:px-20 xl:px-[140px] 2xl:px-[170px]" >
                 <h4 className="text-lg md:text-xl lg:text-3xl font-semibold text-center mb-12 lg:mb-16">Our Team</h4>
                 <div className="flex flex-col md:flex-row gap-10 justify-between items-center md:items-start">
                     {

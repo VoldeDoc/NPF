@@ -13,9 +13,9 @@ export default function CarouselComponent() {
                 <div key={index} className="relative w-full h-screen bg-cover bg-center mt-10" style={{ backgroundImage: `url(${image})` }}>
                     <div className="absolute inset-0 bg-black opacity-50"></div>
                     <div className="container mx-auto h-full flex items-center relative z-10 px-8 sm:px-16">
-                        <div className="text-left sm:text-center">
+                        <div className="text-left sm:text-center bg-white bg-opacity-85 p-5 md:px-8 rounded-2xl">
                             <div className="text-3xl sm:text-5xl font-bold">
-                                <h1>Your <span className="text-green-800">Safety Net</span> for</h1>
+                                <h1 >Your <span className="text-green-800">Safety Net</span> for</h1>
                                 <h1>Life's Uncertainties</h1>
                             </div>
                             <div className="my-4 text-lg sm:text-xl py-4">
