@@ -75,7 +75,7 @@ export default function Home() {
                             <h1 className="font-bold text-4xl py-5">Explore Our Services and Experience Protection</h1>
                             <p className="text-gray-600 text-xl">From life to asset coverage, we offer tailored insurance solutions designed to secure what matters most to you.</p>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-8 sm:px-16 py-10">
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-2 sm:px-16 py-10">
                             {services.map((service, index) => (
                                 <Card key={index} imageSrc={service.imageSrc} title={service.title} descriptions={service.descriptions} link={service.link} />
                             ))}

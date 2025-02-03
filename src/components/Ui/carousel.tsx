@@ -3,7 +3,8 @@ import { MdArrowOutward } from "react-icons/md";
 
 const images = [
     '/assets/images/help.jpg',
-    '/assets/images/family.png'
+    //'/assets/images/family.png',
+    '/assets/images/emergency-stop-sign.png'
 ];
 
 export default function CarouselComponent() {
