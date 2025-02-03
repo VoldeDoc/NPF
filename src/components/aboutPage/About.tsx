@@ -2,7 +2,7 @@ import heroImg from "../../assets/about/hero.png"
 //import missionImg from "../../assets/about/mission.png"
 import visionImg from "../../assets/about/vision2.png"
 import ahemenImg from "../../assets/about/ahemen.png";
-import temitayoImg from "../../assets/about/temitayo.png";
+import temitayoImg from "../../assets/about/temitayo2.png";
 import blankImg from "../../assets/about/blank.png";
 import ekechukwuImg from "../../assets/about/ekechukwu.png";
 import objectiveImg from "../../assets/about/objective.png";
