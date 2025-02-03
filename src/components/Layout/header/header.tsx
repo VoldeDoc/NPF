@@ -41,7 +41,7 @@ export default function Header() {
           </nav>
         </div>
         <div className="absolute bottom-2 left-0 w-full px-4">
-          <Link to={'/insurance-quote'}>
+          <Link to={'/motor-insurance-quote'}>
             <button className="bg-green-900 text-white w-full px-2 rounded">
               Get a Quote
             </button>

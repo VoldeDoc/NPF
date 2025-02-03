@@ -1,8 +1,11 @@
-import amehImg from "../../assets/about/ameh.png";
-import temitayoImg from "../../assets/about/temitayo.png";
-import suleimanImg from "../../assets/about/suleiman.png";
-import ekechukwuImg from "../../assets/about/ekechukwu.png";
-import React from "react";
+import amehImg from "../../assets/about/superboard/ameh.png";
+import sholaImg from "../../assets/about/superboard/shola.png";
+import olufemiImg from "../../assets/about/superboard/olufemi.png";
+import yinkaImg from "../../assets/about/superboard/yinka.png";
+import ibrahimImg from "../../assets/about/superboard/ibrahim.png";
+import tundeImg from "../../assets/about/superboard/tunde.png";
+import paulImg from "../../assets/about/superboard/paul.png";
+import blankImg from "../../assets/about/superboard/blank.png";
 
 export default function SuperBoard() {
     
@@ -22,11 +25,13 @@ export default function SuperBoard() {
             </div>
 
             <section className="py-10 md:py-14 lg:py-16 px-7 md:px-20 lg:px-[160px] xl:px-[200px]" >
-                <div className="flex flex-col md:flex-row gap-10 justify-between items-center md:items-start">
-                    <BoardImageCard img={amehImg} name="CSP Ameh Lydia" position="Director" />
-                    <BoardImageCard img={temitayoImg} name="Temitayo Oke ACIIN" position="Managing Director/ Chief Executive Officer" />
-                    <BoardImageCard img={suleimanImg} name="Ba’aba Suleiman ESQ" position="Director" />
-                    <BoardImageCard img={ekechukwuImg} name="Mac Ekechukwu FIIN PHd" position="Executive Director Operations" />
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 items-center">
+                    {/* flex flex-col md:flex-row gap-10 justify-between items-center md:items-start */}
+                    {
+                        BoardMembers.map((member, index) => (
+                            <BoardImageCard key={index} img={member.img} name={member.name} position={member.position} border={member.border} />
+                        ))
+                    }
                 </div>
             </section>
 
@@ -37,19 +42,21 @@ export default function SuperBoard() {
 interface BoardImageCardProps {
   img: string;
   name: string;
-  position: string;
+    position: string;
+    border?: boolean;
 }
 
-const BoardImageCard: React.FC<BoardImageCardProps> = ({ img, name, position }) => {
+const BoardImageCard: React.FC<BoardImageCardProps> = ({ img, name, position, border }) => {
   return (
     <div className="">
-        <div className="relative w-[230px] md:w-[200px] xl:w-[230px] text-center">
+          {/* <div className="relative w-[230px] md:w-[200px] xl:w-[230px] text-center"> */}
+        <div className="relative w-full max-w-[400px] text-center">
             <div className="absolute bottom-0 -right-2 w-2 h-[95%] bg-[#EFEB05]"></div>
             <div className="absolute -bottom-2 -right-2 h-2 w-[95%] bg-[#1F8340]"></div>
             <img
                 src={img}
                 alt={name}
-                className="w-full h-[250px] md:h-[200px] xl:h-[250px] object-cover"
+                className={`w-full max-h-[350px] lg:max-h-[400px] object-cover  ${border ? "border border-[#000000]": "" } `}
             />
         </div>
         <div className="mt-3 lg:mt-4">
@@ -59,3 +66,49 @@ const BoardImageCard: React.FC<BoardImageCardProps> = ({ img, name, position }) 
     </div>
   );
 };
+
+
+const BoardMembers:BoardImageCardProps[] = [
+    {
+        img: olufemiImg,
+        name: "Olufemi Adenaike",
+        position: "Chairman",
+        border:true
+    },
+    {
+        img: amehImg,
+        name: "CSP Ameh Lydia",
+        position: "Director",
+    },
+    {
+        img: sholaImg,
+        name: "Shola Amore BSc.CP Rtd",
+        position: "Director",
+    },
+    {
+        img: blankImg,
+        name: "AIG Suleiman .M. Abdu PhD,Mni",
+        position: "Director",
+    },
+    {
+        img: yinkaImg,
+        name: "Yinka Balogun",
+        position: "Director",
+    },
+    {
+        img: ibrahimImg,
+        name: "Ba’aba Ibrahim Musa ESQ",
+        position: "Director",
+        border: true
+    },
+    {
+        img: tundeImg,
+        name: "Tunde Akinwunmi FCA ACIT",
+        position: "Independent Director"
+    },
+    {
+        img: paulImg,
+        name: "Paul-Odeli Joshua PhD",
+        position: "Independent Director"
+    }
+]
