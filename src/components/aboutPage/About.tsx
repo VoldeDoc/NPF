@@ -26,14 +26,6 @@ export default function About() {
                 <img src={heroImg} alt="Hero img" className="w-full min-h-[250px] max-h-[500px] md:max-h-[700px] object-cover" />    
             </div>
 
-            {/* About NPF Insurance */}
-            {/* <section className="bg-white py-10 md:py-14 lg:py-16 px-7 md:px-20 xl:px-[200px] mx-auto md:max-w-[80%]" >
-                <h2 className="mb-4 font-semibold text-lg md:text-xl lg:text-3xl text-center" >About NPF INSURANCE</h2>
-                <p className="text-base md:text-lg leading-7 md:leading-8 font-medium text-[#00000080]" >
-                    NPF Insurance Company Limited is a general business insurance company, licensed by the National Insurance Commission (NAICOM). As a privately-owned company, we are dedicated to contributing to Nigeria's GDP by providing comprehensive insurance and risk management solutions. Our experienced leadership team, headed by the Chairman, Mr. Olufemi Adenaike and MD/CEO, Mr. Temitayo Oke, brings a combined experience of over 200 years in Human Resources, Risk, and Asset management across various sectors of the Nigerian economy. We are committed to providing innovative and customer-focused insurance solutions at competitive rates. Our team of experts offer exceptional services, expert risk management advice, and tailored insurance products to meet your specific needs. As a trusted insurance partner, NPF Insurance is poised to become a leader in the industry. Our emphasis is on empowering our clients through continuous improvement, risk management, capacity building and ensuring optimal value from our relationships.
-                </p>
-            </section> */}
-
             <section className="bg-white py-10 md:pt-14 lg:pt-16 px-7 md:px-20 xl:px-[200px]" >
                 <div className="mb-7 flex gap-3 items-center" >
                     <div className="h-[29px] flex">
@@ -64,7 +56,7 @@ export default function About() {
                     </div>
                     <div className="w-full md:w-2/5 md:min-w-[250px]" >
                         <div className="bg-[#3C8725] p-5 flex gap-5 items-start mb-1">
-                            <img src={visionImg} alt="" />
+                            <img src={visionImg} alt="" className="w-10 h-10 xl:w-12 xl:h-12" />
                             <div className="text-white" >
                                 <h3 className="font-semibold text-lg md:text-xl mb-1">Vision</h3>
                                 <p className="text-xs">
@@ -75,7 +67,7 @@ export default function About() {
                             </div>
                         </div>
                         <div className="bg-[#141B34] p-5 flex gap-5 items-start mb-1">
-                            <img src={visionImg} alt="" />
+                            <img src={visionImg} alt="" className="w-10 h-10 xl:w-12 xl:h-12" />
                             <div className="text-white" >
                                 <h3 className="font-semibold text-lg md:text-xl mb-1">Our Mission</h3>
                                 <p className="text-xs">
@@ -84,7 +76,7 @@ export default function About() {
                             </div>
                         </div>
                         <div className="bg-[#EFEB05] p-5 flex gap-5 items-start">
-                            <img src={objectiveImg} alt="" />
+                            <img src={objectiveImg} alt="" className="w-10 h-10 xl:w-12 xl:h-12" />
                             <div className="text-[#000000]" >
                                 <h3 className="font-semibold text-lg md:text-xl mb-1">Objective</h3>
                                 <p className="text-xs">
