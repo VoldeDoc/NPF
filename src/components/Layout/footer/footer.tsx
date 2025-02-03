@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { SiInstagram } from "react-icons/si";
 import { TbBrandX} from "react-icons/tb";
 //import Logo from "../../../assets/Logo.png"
-import NPFLogo from "../../../assets/NPFLogo.png";
+//import NPFLogo from "../../../assets/NPFLogo.png";
 
 
 export default function Footer() {
@@ -15,12 +15,10 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             
               <div>
+                
                 {/* <div className="text-2xl font-bold md:w-[300px]">
-                  <img src={Logo} alt="NPF Logo"  />
-                </div> */}
-                <div className="text-2xl font-bold md:w-[300px]">
                   <img src={NPFLogo} alt="NPF Logo"  />
-                </div>
+                </div> */}
                 
 
                   <h1 className=" text-2xl md:text-4xl font-bold pt-[-10px] text-white mt-6">Subscribe for our </h1>
