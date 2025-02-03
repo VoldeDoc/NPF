@@ -12,7 +12,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full bg-white text-black-500 px-16 py-2 flex justify-between items-center z-10">
+      <header className="fixed top-0 left-0 w-full bg-white text-black-500 px-16 flex justify-between items-center z-10">
         <div className="text-2xl font-bold ">
           <img src={Logo} alt="logo" className=' h-[40px]  w-[200px] md:w-[300px] md:h-[50px]' />
         </div>
@@ -48,9 +48,9 @@ export default function Header() {
           </Link>
         </div>
       </aside>
-      <div className="pt-16">
+      {/* <div className="pt-1"> */}
         {/* This div adds padding to the top of the body to account for the fixed header */}
-      </div>
+      {/* </div> */}
     </>
   );
 }

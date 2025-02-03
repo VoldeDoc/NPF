@@ -35,7 +35,7 @@ export default function Footer() {
                 
               </div>
 
-              <div>
+              <div className="md:pl-20">
                   <div>
                     <h1 className="text-gray-100 pb-1 text-xs"> ABOUT US</h1>
                     <div className="py-2">
@@ -74,7 +74,7 @@ export default function Footer() {
                               <ul className="text-lg">
                                 <li>Insurance Building,</li>
                                 <li>Behind Louis Edet House</li>
-                                <li>Force Headquarters, Shehu Shagari Way, Abuja </li>
+                                <li>Force Headquarters, Shehu Shagari Way, </li>
                                 <li> Abuja </li>
                               </ul>
                           </div>
@@ -98,9 +98,9 @@ export default function Footer() {
               
             </div>
        
-            <div className="text-sm">
-                <p > &#x00A9; {new Date().getFullYear()} - NPF Insurance Company LTD.</p>
-                <p> All rights reserved.</p>
+            <div className="text-[11px] md:pl-20">
+                <p > &#x00A9; {new Date().getFullYear()} - NPF Insurance Company LTD. All rights reserved.</p>
+                <p> </p>
             </div>
             
        
