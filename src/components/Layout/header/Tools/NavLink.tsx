@@ -48,7 +48,7 @@ export default function NavLinks() {
 
             {/* Dropdown for "About" */}
             {link.submenu && dropdownOpen && (
-              <div className="absolute left-0 mt-2 w-48 bg-white shadow-md rounded-md">
+              <div className="absolute left-0 mt-0 w-48 bg-white shadow-md rounded-md">
                 {link.submenu.map((sub, subIndex) => (
                   <NavLink
                     key={subIndex}
