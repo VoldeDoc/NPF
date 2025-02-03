@@ -9,9 +9,7 @@ const links = [
   {
     title: "About",
     url: "/about",
-    submenu: [
-      { title: "Superboard", url: "/about/superboard" },
-    ],
+    submenu: [{ title: "Superboard", url: "/about/superboard" }],
   },
   {
     title: "Services",
@@ -31,48 +29,36 @@ export default function NavLinks() {
       {/* Desktop Links */}
       <div className="hidden md:flex space-x-4">
         {links.map((link, index) => (
-          <div key={index} className="relative">
-            {link.submenu ? (
-              <div
-                onMouseEnter={() => setDropdownOpen(true)}
-                onMouseLeave={() => setDropdownOpen(false)}
-                className="relative"
-              >
-                <NavLink
-                  to={link.url}
-                  className={({ isActive }) =>
-                    `px-4 py-2 font-bold text-black ${
-                      isActive ? "text-green-500" : ""
-                    }`
-                  }
-                >
-                  {link.title}
-                </NavLink>
-                {dropdownOpen && (
-                  <div className="absolute left-0 mt-2 w-48 bg-white shadow-md rounded-md">
-                    {link.submenu.map((sub, subIndex) => (
-                      <NavLink
-                        key={subIndex}
-                        to={sub.url}
-                        className="block px-4 py-2 hover:bg-gray-100 text-black"
-                      >
-                        {sub.title}
-                      </NavLink>
-                    ))}
-                  </div>
-                )}
+          <div
+            key={index}
+            className="relative"
+            onMouseEnter={() => link.submenu && setDropdownOpen(true)}
+            onMouseLeave={() => link.submenu && setDropdownOpen(false)}
+          >
+            <NavLink
+              to={link.url}
+              className={({ isActive }) =>
+                `px-4 py-2 font-bold text-black ${
+                  isActive ? "text-green-500" : ""
+                }`
+              }
+            >
+              {link.title}
+            </NavLink>
+
+            {/* Dropdown for "About" */}
+            {link.submenu && dropdownOpen && (
+              <div className="absolute left-0 mt-2 w-48 bg-white shadow-md rounded-md">
+                {link.submenu.map((sub, subIndex) => (
+                  <NavLink
+                    key={subIndex}
+                    to={sub.url}
+                    className="block px-4 py-2 hover:bg-gray-100 text-black"
+                  >
+                    {sub.title}
+                  </NavLink>
+                ))}
               </div>
-            ) : (
-              <NavLink
-                to={link.url}
-                className={({ isActive }) =>
-                  `px-4 py-2 font-bold text-black ${
-                    isActive ? "text-green-500" : ""
-                  }`
-                }
-              >
-                {link.title}
-              </NavLink>
             )}
           </div>
         ))}
