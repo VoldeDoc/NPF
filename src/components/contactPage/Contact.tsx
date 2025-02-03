@@ -12,7 +12,7 @@ export default function Contact() {
         <>
             {/* <!-- Hero section --> */}
             <div className="w-full">
-                <img src={heroImg} alt="Hero img" className="w-full min-h-[250px] max-h-[500px] md:max-h-[700px] object-cover" />    
+                <img src={heroImg} alt="Hero img" className="w-full min-h-[250px] max-h-[500px] md:max-h-[700px] object-cover object-left" />    
             </div>
 
             
