@@ -8,6 +8,7 @@ import Motor_insurance_quote from "./pages/Motor_insurance_quote/Motor_insurance
 import Motor_insurance_quote_landing from "./pages/Motor_insurance_quote/Motor_insurance_quote_landing";
 import About_page from "./pages/about/about_page";
 import SuperBoard_page from "./pages/about/superboard_page";
+import Contact_page from "./pages/contact/contactus_page";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
               <Route path="/motor-insurance-quote-form" element={<Motor_insurance_quote />} />    
               <Route path="/about" element={<About_page />} />
               <Route path="/about/superboard" element={<SuperBoard_page />} />
+              <Route path="/contact" element={<Contact_page />} />
             </Routes>
           </>
       </main>
