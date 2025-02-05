@@ -2,7 +2,6 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaCaretDown } from "react-icons/fa";
 
-
 const links = [
   {
     title: "Home",
