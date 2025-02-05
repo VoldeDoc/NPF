@@ -3,75 +3,68 @@ export const getCardDetails = () => {
       {
         imageSrc: "/assets/images/car-02.svg",
         title: "Motor Insurance",
-        descriptions: ["Motor insurance", "covers vehicle damage", "third-party claims, fire,", "and theft."],
-        link: "/motor-insurance-quote"
+        //descriptions: ["Motor insurance", "covers vehicle damage", "third-party claims, fire,", "and theft."],
+        descriptions: ["Provides covers for loss of or damage to the insured vehicle, or damage to Third Party property including bodily injury/death caused by accident."],
+        //link: "/motor-insurance-quote" link is hashed for now until the page is ready
+        link: "#"
       },
       {
         imageSrc: "/assets/images/fire-02.png",
         title: "Fire and Special Perils",
-        descriptions: ["The Insurance Act 2003", "mandates fire and perils", "insurance for public", "buildings."],
+        //descriptions: ["The Insurance Act 2003", "mandates fire and perils", "insurance for public", "buildings."],
+        descriptions: ["This covers the devastating effect fire can have on assets such as building and contents in the premises. It cover fires, explosions, storms etc…"],
         link: ""
       },
       {
         imageSrc: "/assets/images/traffic-incident.svg",
-        title: "General Accident",
-        descriptions: ["General Accident", "Insurance covers", "unexpected injuries and", "damages."],
+        title: "Occupiers Liability",
+        //descriptions: ["General Accident", "Insurance covers", "unexpected injuries and", "damages."],,
+        descriptions: ["Provides cover to all building owners or occupiers for the benefit of third parties, especially in public buildings…"],
         link: ""
       },
       {
         imageSrc: "/assets/images/gun.png",
         title: "Burglary Theft",
-        descriptions: ["Burgulary and Theft", "Insurance covers loss or", "damage from break-ins", "and theft."],
+        descriptions: ["Covers loss of or damage to the properties insured as a result of forcible entry or exit, attempted theft…."],
+        link: ""
+      },
+      {
+        imageSrc: "/assets/images/safe.png",
+        title: "Our Claims Managment",
+        descriptions: ["Claims are processed daily, with cheques issued within 48 hours of claims….."],
         link: ""
       },
       {
         imageSrc: "/assets/images/shopping-basket-secure-03.png",
-        title: "Occupiers Liabilty",
-        descriptions: ["Occupiers Liability", "Insurance covers third -", "party damages", "as required by law."],
+        title: "Group Personal Accident Insurance",
+        descriptions: ["This covers all employees against death, permanent disability and partial disability during and after working hours."],
         link: ""
       },
       {
         imageSrc: "/assets/images/plant-02.png",
         title: "Plant All Risks Insurance",
-        descriptions: ["This insurance", "plant and machinery", "against all risks,excluding", "certain damages."],
+        descriptions: ["This insures plants and machinery against all risk on site, excluding certain damages…"],
         link: ""
       },
       {
         imageSrc: "/assets/images/user-shield-01.png",
         title: "Public Liability Insurance",
-        descriptions: ["Public Liability Insurance", "covers third-party harm", "or damage due to", "negligence"],
-        link: ""
-      },
-      {
-        imageSrc: "/assets/images/safe.png",
-        title: "Schedule of Property Covered",
-        descriptions: ["Provide values for", "property and items to set", "the coverage rate"],
+        descriptions: ["Covers legal liability incurred from third parties for death, injury and property damage arising out of negligence…"],
         link: ""
       },
       {
         imageSrc: "/assets/images/cash-02.png",
         title: "Money Insurance",
-        descriptions: ["Money Insurance", "covers cash loss in transit", "sales and personal custody"],
+        descriptions: ["This is an all risks cover for loss or damage subject to standard exceptions… eg. Cash in Transit, Cash in Safe etc…."],
         link: ""
       },
       {
         imageSrc: "/assets/images/tractor.png",
-        title: "Machinary breakdown Insurance",
-        descriptions: ["Machinery breakdown", "Insurance covers", "damage from defects or", "external causes."],
+        title: "Machinery Breakdown Insurance",
+        descriptions: ["This covers all machinery against damage caused by breakdown from sources within the machinery…"],
         link: ""
       },
-      {
-        imageSrc: "/assets/images/traffic-incident.svg",
-        title: "Group personal Accident insurance",
-        descriptions: ["Employee Accident", "Insurance covers death", "and disablity benefits"],
-        link: ""
-      },
-      {
-        imageSrc: "/assets/images/agreement-02.png",
-        title: "Our Claims management",
-        descriptions: ["Claims are processed", "daily, with cheques issued", "within 48 hours of signing"],
-        link: ""
-      }
+
     ];
   };
   

@@ -36,7 +36,7 @@ const UploadDetails = ({
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
   setUploadData: React.Dispatch<React.SetStateAction<any>>;
 }) => {
-  const [display, setDisplay] = useState("uploadDocuments");
+  const [display] = useState("uploadDocuments");
   const [error, setError] = useState("");
   // const {
   //   register,

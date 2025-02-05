@@ -7,11 +7,11 @@ import * as yup from "yup";
 import { VehicleFormValues } from "@/types";
 
 const schema = yup.object().shape({
-  //   user_id: yup.number().required("User ID is required"),
+    user_id: yup.number().required("User ID is required"),
   vehicle_registration_number: yup
     .string()
     .required("Vehicle Registration Number is required"),
-  value_amount: yup.number().required("Value Amount is required"),
+  value_amount: yup.string().required("Value Amount is required"),
   maker: yup.string().required("Make is required"),
   motor_type: yup.string().required("Motor Type is required"),
   model: yup.string().required("Model is required"),

@@ -12,16 +12,16 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full bg-white text-black-500 px-16 py-2 flex justify-between items-center z-10">
-        <div className="text-2xl font-bold ">
-          <img src={Logo} alt="logo" className=' h-[40px]  w-[200px] md:w-[300px] md:h-[50px]' />
+      <header className="fixed top-0 left-0 w-full bg-white text-black-500 px-6 md:px-16 flex justify-between gap-2 items-center z-10">
+        <div className="text-2xl font-bold">
+          <img src={Logo} alt="logo" className="h-8 w-auto md:h-10 lg:h-12" />
         </div>
-        <div className="hidden md:flex justify-center flex-1 px-10">
+        <div className="hidden md:flex justify-center flex-1 px-3 lg:px-10">
           <NavLinks />
         </div>
         <div className="hidden md:flex">
-          <Link to={'/motor-insurance-quote'}>
-            <button className="bg-green-900 text-white px-4 py-2 rounded-full">
+          <Link to={'#'} /* to={'/motor-insurance-quote'} */>
+            <button className="bg-green-900 text-white px-2 py-1 xl:px-4 xl:py-2 rounded-lg md:rounded-full text-sm lg:text-base w-fit">
               Get a Quote
             </button>
           </Link>
@@ -41,16 +41,16 @@ export default function Header() {
           </nav>
         </div>
         <div className="absolute bottom-2 left-0 w-full px-4">
-          <Link to={'/insurance-quote'}>
-            <button className="bg-green-900 text-white w-full px-2 rounded">
+          <Link to={'#'} /* to={'/motor-insurance-quote'} */>
+            <button className="bg-green-900 text-white w-full px-2 py-2 rounded">
               Get a Quote
             </button>
           </Link>
         </div>
       </aside>
-      <div className="pt-16">
+      {/* <div className="pt-1"> */}
         {/* This div adds padding to the top of the body to account for the fixed header */}
-      </div>
+      {/* </div> */}
     </>
   );
 }
