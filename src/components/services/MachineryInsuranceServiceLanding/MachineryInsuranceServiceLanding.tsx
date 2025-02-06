@@ -1,17 +1,14 @@
-import heroImg from "../../../assets/services/plantHero.png"
+import heroImg from "../../../assets/services/machineryHero.png"
 
 
-export default function PlantServiceLanding() {    
+export default function MachineryInsuranceServiceLanding() {    
     return (
         <>
             {/* <!-- Hero section --> */}
             <div className="w-full relative" >
-                {/* <div className="absolute inset-0" style={{
-                    background: 'linear-gradient(270deg, rgba(255, 255, 255, 0.04) 0%, rgba(31, 131, 64, 0.4) 34.5%, rgba(31, 131, 64, 0.4) 89.38%)'
-                    }}></div> */}
-                <img                    
+                <img
                     src={heroImg} alt="Hero img" className="w-full min-h-[400px] max-h-[420px] object-cover object-top" />    
-                <div className="absolute bottom-[15%] right-[20%] text-left sm:text-left bg-[#FFFFFF] bg-opacity-75 p-5 md:px-8">
+                <div className="absolute bottom-[15%] right-[20%] text-left sm:text-left bg-white bg-opacity-85 p-5 md:px-8 lg:py-10">
                     <div className="text-3xl sm:text-5xl font-bold">
                         <h1 className='text-2xl md:text-3xl lg:text-5xl xl:text-5xl'  >Your <span className="text-green-800">Safety Net</span> for</h1>
                         <h1 className='text-2xl md:text-3xl lg:text-5xl xl:text-5xl' >Life's Uncertainties</h1>
@@ -25,19 +22,21 @@ export default function PlantServiceLanding() {
                 </div>
             </div>
             <section className="bg-[#1F834008] py-12 md:py-20 lg:py-28 px-7 md:px-20 lg:px-[120px] xl:px-[160px] grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 lg:gap-20" >
-                <div className="" >
+                <div className="w-full" >
                     <div className="mb-3 text-sm text-[#1F8340] font-semibold flex gap-2 items-center w-fit">
                         <div className="w-2 h-2 rounded-full bg-[#1F8340]" ></div>
                         <span>Explore our</span>
                     </div>
                     <h4 className="font-bold text-2xl md:text-3xl lg:text-4xl mb-5" >
-                        PLANT ALL RISKS INSURANCE
+                        MACHINERY BREAKDOWN INSURANCE
                     </h4>
                     <p className="font-medium text-[#00000080] text-sm leading-7 md:text-base md:leading-8 text-justify" >
-                        This important form of protection is available to cover items of plants and machinery while at the location or within the geographical area mentioned in event of any unforeseen and sudden physical loss or damage from any cause not specifically excluded. 
-                        <br />
-                        <br />
-                        This provides cover for the insured properties against “All Risks” of direct physical loss or damage from any accidental cause to the insured plant and equipment. 
+                        This important form of protection is available to cover all the Machinery (already fixed and in use) against damage caused by breakdown from sources within the machinery. 
+                        The breakdown could result to the machinery while:  
+                        <ul className="list-disc pl-4">
+                            <li>Working or at rest</li>
+                            <li>Being dismantled, moved or re-erected for the purpose of cleaning, inspection, repair or installation in another position within the premises stated in the policy.</li>
+                        </ul>
                     </p>
                     <button className="mt-7 md:mt-14 relative px-4 py-1.5 text-white text-sm font-bold rounded-full bg-[#093618] border-[5px] border-white shadow-lg">
                         Buy Now
@@ -45,60 +44,58 @@ export default function PlantServiceLanding() {
                         <span className="absolute -left-1.5 top-0 h-full w-1 bg-[#1F834008] rounded-full"></span>
                         <span className="absolute -right-1.5 top-0 h-full w-1 bg-[#1F834008] rounded-full"></span>
                     </button>
+
                 </div>
-                <div className="rounded-xl md:rounded-2xl p-5 lg:p-10 flex-1 w-full h-fit " > 
-                    <h4 className="font-semibold mb-6 text-[#000000] pl-4" >
-                        Some of the perils excluded include loss or damage caused by: 
+                <div className="rounded-xl md:rounded-2xl p-5 lg:p-10 w-full h-fit" > 
+                    <h4 className="font-semibold mb-6 text-[#000000] pl-5" >
+                        Breakdown is the unforeseen damage resulting from: 
                     </h4>                        
-                    <div className={`font-medium text-[#787474] text-sm md:text-base`} >
+                    <div className={`font-medium text-[#00000080] text-sm md:text-base`} >
                         <ul className="list-none space-y-2 mb-8" >
-                            <li className="flex gap-1.5 items-center" >
-                                <img src="/assets/images/check.svg" alt="" className="w-4 h-4" />
-                                <span>Mechanical or electrical failure or over-heating of the insured plant;</span>
+                            <li className="pl-5">
+                                Defective material design, construction or erection, vibration, maladjustment, misalignment, loosening of parts, abnormal stresses, self-heating, excessive electrical pressure from any cause, short circuits, open circuits, or arcing, failure of protecting, measuring or regulating devices etc. 
                             </li>
                             <li className="flex gap-1.5 items-center" >
                                 <img src="/assets/images/check.svg" alt="" className="w-4 h-4" />
-                                <span>Loss or damage to any item due to its own explosion; </span>
+                                <span>Falling, impact, collision or similar occurrences obstruction or the entry of foreign bodies  </span>
                             </li>
                             <li className="flex gap-1.5 items-center" >
                                 <img src="/assets/images/check.svg" alt="" className="w-4 h-4" />
-                                <span>Breakdown;</span>
+                                <span>Any other causes not specifically excluded.  </span>
+                            </li>
+
+                            <li className="pl-5 pt-6">
+                                The type of machinery to which it might apply are as follows: 
                             </li>
                             <li className="flex gap-1.5 items-center" >
                                 <img src="/assets/images/check.svg" alt="" className="w-4 h-4" />
-                                <span>Derangement;</span>
+                                <span>Generators</span>
                             </li>
                             <li className="flex gap-1.5 items-center" >
                                 <img src="/assets/images/check.svg" alt="" className="w-4 h-4" />
-                                <span>Depreciation;</span>
+                                <span>Transformer </span>
                             </li>
                             <li className="flex gap-1.5 items-center" >
                                 <img src="/assets/images/check.svg" alt="" className="w-4 h-4" />
-                                <span>Wear and tear;</span>
+                                <span>Compressor </span>
                             </li>
                             <li className="flex gap-1.5 items-center" >
                                 <img src="/assets/images/check.svg" alt="" className="w-4 h-4" />
-                                <span>	Gradual deterioration;</span>
+                                <span>Pumps </span>
                             </li>
                             <li className="flex gap-1.5 items-center" >
                                 <img src="/assets/images/check.svg" alt="" className="w-4 h-4" />
-                                <span>	War, civil war, mutiny or military insurrection; </span>
+                                <span>Boilers </span>
                             </li>
                             <li className="flex gap-1.5 items-center" >
                                 <img src="/assets/images/check.svg" alt="" className="w-4 h-4" />
-                                <span>	Infidelity or dishonesty of the Insured Employees;</span>
+                                <span>Pressure or vacuum vessels </span>
                             </li>
                             <li className="flex gap-1.5 items-center" >
                                 <img src="/assets/images/check.svg" alt="" className="w-4 h-4" />
-                                <span>Consequential loss.</span>
+                                <span>Process Machinery </span>
                             </li>
-                            <li className="flex gap-1.5 items-center" >
-                                The policy applies while the insured items are at work or 
-                                at rest, or being temporarily dismantled and taken for the
-                                purpose of cleaning or overhauling, or after successful 
-                                commissioning following re-erection.
-                            </li>
-                        </ul>                        
+                        </ul>
                     </div>
                     
                 </div>

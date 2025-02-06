@@ -24,8 +24,8 @@ export default function MotorInsuranceServiceLanding() {
                     </div>
                 </div>
             </div>
-            <section className="bg-[#1F834008] py-12 md:py-20 lg:py-28 px-7 md:px-20 lg:px-[160px] xl:px-[200px] flex flex-col md:flex-row gap-10 md:gap-14 lg:gap-20 xl:gap-28" >
-                <div className="flex-1" >
+            <section className="bg-[#1F834008]  py-12 md:py-20 lg:py-28 px-7 md:px-20 lg:px-[120px] xl:px-[160px] grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 lg:gap-20" >
+                <div className="" >
                     <div className="mb-3 text-sm text-[#1F8340] font-semibold flex gap-2 items-center w-fit">
                         <div className="w-2 h-2 rounded-full bg-[#1F8340]" ></div>
                         <span>Explore our</span>
@@ -33,10 +33,16 @@ export default function MotorInsuranceServiceLanding() {
                     <h4 className="font-bold text-2xl md:text-3xl lg:text-4xl mb-5" >
                         MOTOR INSURANCE
                     </h4>
-                    <p className="font-medium text-[#00000080] text-sm leading-7 md:text-base md:leading-8" >
+                    <p className="font-medium text-[#00000080] text-sm leading-7 md:text-base md:leading-8 text-justify" >
                         Motor insurance which is the most common of all the known classes of insurance is designed to protect the insured for loss of or damage to the vehicle insured, damage to Third Party property including bodily injury/death caused by accident.
                     </p>
-                    <button className="md:mt-14 hidden md:block relative px-4 py-1.5 text-white text-sm font-bold rounded-full bg-[#093618] border-[5px] border-white shadow-lg">
+                    {/* <button className="md:mt-14 hidden md:block relative px-4 py-1.5 text-white text-sm font-bold rounded-full bg-[#093618] border-[5px] border-white shadow-lg">
+                        Buy Now
+                        <span className="absolute inset-0 rounded-full border-2 border-[#000000] -m-1.5"></span>
+                        <span className="absolute -left-1.5 top-0 h-full w-1 bg-[#1F834008] rounded-full"></span>
+                        <span className="absolute -right-1.5 top-0 h-full w-1 bg-[#1F834008] rounded-full"></span>
+                    </button> */}
+                    <button className="mt-7 md:mt-14 relative px-4 py-1.5 text-white text-sm font-bold rounded-full bg-[#093618] border-[5px] border-white shadow-lg">
                         Buy Now
                         <span className="absolute inset-0 rounded-full border-2 border-[#000000] -m-1.5"></span>
                         <span className="absolute -left-1.5 top-0 h-full w-1 bg-[#1F834008] rounded-full"></span>
@@ -44,7 +50,7 @@ export default function MotorInsuranceServiceLanding() {
                     </button>
 
                 </div>
-                <div className="border-[#00000033] border-2 bg-[#141B34] text-white rounded-xl md:rounded-2xl p-5 lg:p-10 flex-1 w-full h-fit" >                    
+                <div className="border-[#00000033] border-2 bg-[#141B34] text-white rounded-xl md:rounded-2xl p-5 lg:p-10 w-full h-fit" >                    
                     <h4 className="font-semibold mb-6" >
                         Comprehensive Motor Insurance Scope of Cover
                     </h4>                        
@@ -59,9 +65,9 @@ export default function MotorInsuranceServiceLanding() {
                             <li>Excess Buy Back (optional)</li>
                             <li>Strike, Riot and Civil Commotion (SRCC)</li>
                         </ul>
-                        <button className="md:hidden mt-3 text-[#EFEB05]" >
+                        {/* <button className="md:hidden mt-3 text-[#EFEB05]" >
                             Buy Now
-                        </button>
+                        </button> */}
                     </div>
                     
                 </div>

@@ -20,7 +20,7 @@ export const getCardDetails = () => {
         title: "Occupiers Liability",
         //descriptions: ["General Accident", "Insurance covers", "unexpected injuries and", "damages."],,
         descriptions: ["Provides cover to all building owners or occupiers for the benefit of third parties, especially in public buildings…"],
-        link: ""
+        link: "/services/occupiers-liability-insurance"
       },
       {
         imageSrc: "/assets/images/gun.png",
@@ -32,13 +32,13 @@ export const getCardDetails = () => {
         imageSrc: "/assets/images/safe.png",
         title: "Our Claims Managment",
         descriptions: ["Claims are processed daily, with cheques issued within 48 hours of claims….."],
-        link: ""
+        link: "/services/claims-management"
       },
       {
         imageSrc: "/assets/images/shopping-basket-secure-03.png",
         title: "Group Personal Accident Insurance",
         descriptions: ["This covers all employees against death, permanent disability and partial disability during and after working hours."],
-        link: ""
+        link: "/services/group-personal-insurance"
       },
       {
         imageSrc: "/assets/images/plant-02.png",
@@ -62,7 +62,7 @@ export const getCardDetails = () => {
         imageSrc: "/assets/images/tractor.png",
         title: "Machinery Breakdown Insurance",
         descriptions: ["This covers all machinery against damage caused by breakdown from sources within the machinery…"],
-        link: ""
+        link: "/services/machinery-insurance"
       },
 
     ];

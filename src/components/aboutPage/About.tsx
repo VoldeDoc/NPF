@@ -38,13 +38,13 @@ export default function About() {
 
                 <section className="flex flex-col md:flex-row w-full gap-8 ">
                     <div className="w-full">
-                        <p className="text-base md:text-lg leading-7 md:leading-8 font-medium text-[#00000080]" >
+                        <p className="text-base md:text-lg leading-7 md:leading-8 font-medium text-[#00000080] text-justify" >
                             NPF Insurance Company Limited is a general business insurance company,
                             licensed by the National Insurance Commission <span className="font-bold" >(NAICOM)</span>.
                             As a privately-owned company, we are dedicated to contributing to Nigeria's GDP by providing
                             comprehensive insurance and risk management solutions. Our experienced leadership team, headed
                             by the Chairman, <span className="font-bold" >Mr. Olufemi Adenaike</span> and
-                            <span className="font-bold" >MD/CEO, Mr. Temitayo Oke,</span> brings a combined experience
+                            <span className="font-bold" > MD/CEO, Mr. Temitayo Oke,</span> brings a combined experience
                             of over 20 years in Human Resources, Risk, and Asset management across various sectors of the Nigerian
                             economy. We are committed to providing innovative and customer-focused insurance solutions at competitive
                             rates. Our team of experts offer exceptional services, expert risk management advice, and tailored
@@ -237,15 +237,15 @@ const teamMembers = [
         img: temitayoImg,        
     },
     {
-        name: "Mac Ekechukwu FIIN PhD",
-        position: "Executive Director Operations",
-        img: ekechukwuImg,        
-    },
-    {
         name: "Julius Adedeji Esq",
         position: "Company Secretary",
         img: juliusImg
     },
+    {
+        name: "Mac Ekechukwu FIIN PhD",
+        position: "Executive Director Operations",
+        img: ekechukwuImg,        
+    },    
     {
         name: "Ahemen Rose Wende  MBA,PhRI",
         position: "Executive Director Admin &Corporate Services",
