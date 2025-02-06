@@ -17,7 +17,7 @@ const Card: React.FC<CardProps> = ({ imageSrc, title, descriptions, link }) => {
       <div className="text-gray-600">
         <h1 className="text-black-500 text-xl font-bold py-2">{title}</h1>
         {descriptions.map((desc, index) => (
-          <p key={index}>{desc}</p>
+          <p key={index} className='text-left text-sm'>{desc}</p>
         ))}
       </div>
     </Link>

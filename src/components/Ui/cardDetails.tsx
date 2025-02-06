@@ -6,14 +6,14 @@ export const getCardDetails = () => {
         //descriptions: ["Motor insurance", "covers vehicle damage", "third-party claims, fire,", "and theft."],
         descriptions: ["Provides covers for loss of or damage to the insured vehicle, or damage to Third Party property including bodily injury/death caused by accident."],
         //link: "/motor-insurance-quote" link is hashed for now until the page is ready
-        link: "#"
+        link: "/services/motor-insurance"
       },
       {
         imageSrc: "/assets/images/fire-02.png",
         title: "Fire and Special Perils",
         //descriptions: ["The Insurance Act 2003", "mandates fire and perils", "insurance for public", "buildings."],
         descriptions: ["This covers the devastating effect fire can have on assets such as building and contents in the premises. It cover fires, explosions, storms etc…"],
-        link: ""
+        link: "/services/fire-specials-insurance"
       },
       {
         imageSrc: "/assets/images/traffic-incident.svg",
@@ -26,7 +26,7 @@ export const getCardDetails = () => {
         imageSrc: "/assets/images/gun.png",
         title: "Burglary Theft",
         descriptions: ["Covers loss of or damage to the properties insured as a result of forcible entry or exit, attempted theft…."],
-        link: ""
+        link: "/services/burglary-theft-insurance"
       },
       {
         imageSrc: "/assets/images/safe.png",
@@ -44,19 +44,19 @@ export const getCardDetails = () => {
         imageSrc: "/assets/images/plant-02.png",
         title: "Plant All Risks Insurance",
         descriptions: ["This insures plants and machinery against all risk on site, excluding certain damages…"],
-        link: ""
+        link: "/services/plant-insurance"
       },
       {
         imageSrc: "/assets/images/user-shield-01.png",
         title: "Public Liability Insurance",
         descriptions: ["Covers legal liability incurred from third parties for death, injury and property damage arising out of negligence…"],
-        link: ""
+        link: "/services/public-liability-insurance"
       },
       {
         imageSrc: "/assets/images/cash-02.png",
         title: "Money Insurance",
         descriptions: ["This is an all risks cover for loss or damage subject to standard exceptions… eg. Cash in Transit, Cash in Safe etc…."],
-        link: ""
+        link: "/services/money-insurance"
       },
       {
         imageSrc: "/assets/images/tractor.png",

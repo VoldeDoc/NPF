@@ -10,7 +10,7 @@ export default function PlantServiceLanding() {
                     background: 'linear-gradient(270deg, rgba(255, 255, 255, 0.04) 0%, rgba(31, 131, 64, 0.4) 34.5%, rgba(31, 131, 64, 0.4) 89.38%)'
                     }}></div> */}
                 <img                    
-                    src={heroImg} alt="Hero img" className="w-full min-h-[400px] max-h-[500px] md:max-h-[700px] object-cover object-top" />    
+                    src={heroImg} alt="Hero img" className="w-full min-h-[400px] max-h-[420px] object-cover object-top" />    
                 <div className="absolute bottom-[15%] right-[20%] text-left sm:text-left bg-[#FFFFFF] bg-opacity-75 p-5 md:px-8">
                     <div className="text-3xl sm:text-5xl font-bold">
                         <h1 className='text-2xl md:text-3xl lg:text-5xl xl:text-5xl'  >Your <span className="text-green-800">Safety Net</span> for</h1>
@@ -39,7 +39,7 @@ export default function PlantServiceLanding() {
                         <br />
                         This provides cover for the insured properties against “All Risks” of direct physical loss or damage from any accidental cause to the insured plant and equipment. 
                     </p>
-                    <button className="md:mt-16 hidden md:block relative px-6 py-3 text-white text-lg font-bold rounded-full bg-[#093618] border-[5px] border-white shadow-lg">
+                    <button className="md:mt-14 hidden md:block relative px-4 py-1.5 text-white text-sm font-bold rounded-full bg-[#093618] border-[5px] border-white shadow-lg">
                         Buy Now
                         <span className="absolute inset-0 rounded-full border-2 border-[#000000] -m-1.5"></span>
                         <span className="absolute -left-1.5 top-0 h-full w-1 bg-[#1F834008] rounded-full"></span>

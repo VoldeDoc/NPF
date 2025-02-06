@@ -10,7 +10,7 @@ export default function MotorInsuranceServiceLanding() {
                         background: 'linear-gradient(270deg, rgba(255, 255, 255, 0.02) 31.72%, rgba(31, 131, 64, 0.2) 89.38%)' 
                     }}></div>
                 <img
-                    src={heroImg} alt="Hero img" className="w-full min-h-[400px] max-h-[500px] md:max-h-[700px] object-cover object-top" />    
+                    src={heroImg} alt="Hero img" className="w-full min-h-[400px] max-h-[420px] object-cover object-top" />    
                 <div className="absolute bottom-[15%] right-[20%] text-left sm:text-left bg-opacity-85 p-5 md:px-8 rounded-2xl">
                     <div className="text-3xl sm:text-5xl font-bold">
                         <h1 className='text-2xl md:text-3xl lg:text-5xl xl:text-5xl'  >Your <span className="text-green-800">Safety Net</span> for</h1>
@@ -36,7 +36,7 @@ export default function MotorInsuranceServiceLanding() {
                     <p className="font-medium text-[#00000080] text-sm leading-7 md:text-base md:leading-8" >
                         Motor insurance which is the most common of all the known classes of insurance is designed to protect the insured for loss of or damage to the vehicle insured, damage to Third Party property including bodily injury/death caused by accident.
                     </p>
-                    <button className="md:mt-16 hidden md:block relative px-6 py-3 text-white text-lg font-bold rounded-full bg-[#093618] border-[5px] border-white shadow-lg">
+                    <button className="md:mt-14 hidden md:block relative px-4 py-1.5 text-white text-sm font-bold rounded-full bg-[#093618] border-[5px] border-white shadow-lg">
                         Buy Now
                         <span className="absolute inset-0 rounded-full border-2 border-[#000000] -m-1.5"></span>
                         <span className="absolute -left-1.5 top-0 h-full w-1 bg-[#1F834008] rounded-full"></span>
