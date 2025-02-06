@@ -26,6 +26,10 @@ const links = [
       { title: "Plant Insurance", url: "/services/plant-insurance" },
       { title: "Public Liability Insurance", url: "/services/public-liability-insurance" },
       { title: "Money Insurance", url: "/services/money-insurance" },
+      { title: "Machinery Insurance", url: "/services/machinery-insurance" },
+      { title: "Claims Management", url: "/services/claims-management" },
+      { title: "Group Personal Insurance", url: "/services/group-personal-insurance" },
+      { title: "Occupiers Liability", url: "/services/occupiers-liability-insurance" },
     ],
   },
   {
@@ -94,7 +98,7 @@ export default function NavLinks() {
                 </button>
                 {dropdownOpen === index && (
                   <>
-                    <div className="mt-1 space-y-1 bg-white shadow-md rounded-md">
+                    <div className="mt-1 space-y-1 bg-white shadow-md rounded-md relative z-20 max-h-[200px] overflow-y-scroll">
                       <NavLink
                         key={index}
                         to={link.url}

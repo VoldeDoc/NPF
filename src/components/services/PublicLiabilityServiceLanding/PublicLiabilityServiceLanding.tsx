@@ -24,8 +24,8 @@ export default function PublicLiabilityServiceLanding() {
                     </div>
                 </div>
             </div>
-            <section className="bg-[#1F834008] py-12 md:py-20 lg:py-28 px-7 md:px-20 lg:px-[160px] xl:px-[200px] flex flex-col md:flex-row gap-10 md:gap-14 lg:gap-20 xl:gap-28" >
-                <div className="flex-1" >
+            <section className="bg-[#1F834008] py-12 md:py-20 lg:py-28 px-7 md:px-20 lg:px-[120px] xl:px-[160px] grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 lg:gap-20" >
+                <div className="" >
                     <div className="mb-3 text-sm text-[#1F8340] font-semibold flex gap-2 items-center w-fit">
                         <div className="w-2 h-2 rounded-full bg-[#1F8340]" ></div>
                         <span>Explore our</span>
@@ -33,21 +33,21 @@ export default function PublicLiabilityServiceLanding() {
                     <h4 className="font-bold text-2xl md:text-3xl lg:text-4xl mb-5" >
                         PUBLIC LIABILITY INSURANCE
                     </h4>
-                    <p className="font-medium text-[#00000080] text-sm leading-7 md:text-base md:leading-8" >
+                    <p className="font-medium text-[#00000080] text-sm leading-7 md:text-base md:leading-8 text-justify" >
                         Your organization may be held liable for injury to third parties or their property as a result of negligence or other torts. Such liability, if proved, may result in heavy financial burden, which most organizations may find very difficult to pay out of purse. 
                         <br />
                         <br />
                         It is for such eventualities that the public liability insurance was designed. Apart from liability arising from the occupation or operation of an organization on their premises, the policy may be extended to include product liability, which implies reimbursement for liability attaching from goods sold.
                     </p>
-                    <button className="md:mt-14 hidden md:block relative px-4 py-1.5 text-white text-sm font-bold rounded-full bg-[#093618] border-[5px] border-white shadow-lg">
+                    <button className="mt-7 md:mt-14 relative px-4 py-1.5 text-white text-sm font-bold rounded-full bg-[#093618] border-[5px] border-white shadow-lg">
                         Buy Now
                         <span className="absolute inset-0 rounded-full border-2 border-[#000000] -m-1.5"></span>
                         <span className="absolute -left-1.5 top-0 h-full w-1 bg-[#1F834008] rounded-full"></span>
                         <span className="absolute -right-1.5 top-0 h-full w-1 bg-[#1F834008] rounded-full"></span>
                     </button>
                 </div>
-                <div className="bg-[#FFFFFF] rounded-xl md:rounded-2xl p-5 lg:p-10 flex-1 w-full h-fit shadow-lg" > 
-                    <h4 className="font-semibold mb-6 text-[#000000]" >
+                <div className="rounded-xl md:rounded-2xl p-5 lg:p-10 w-full h-fit " > 
+                    <h4 className="font-semibold mb-6 text-[#000000] pl-4" >
                         Generally, the basic public liability policy offers reimbursement against legal liability incurred from third parties for:
                     </h4>                        
                     <div className={`font-medium text-[#787474] text-sm md:text-base`} >
@@ -64,10 +64,7 @@ export default function PublicLiabilityServiceLanding() {
                                 <img src="/assets/images/check.svg" alt="" className="w-4 h-4" />
                                 <span>Property damage arising out of negligence traceable to the organization or its employees whilst they are engaged on the company's business. </span>
                             </li>                            
-                        </ul>
-                        <button className="md:hidden mt-3 text-[#3C8725]" >
-                            Buy Now
-                        </button>
+                        </ul>                        
                     </div>
                     
                 </div>
