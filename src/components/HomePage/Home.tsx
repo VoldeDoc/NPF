@@ -3,6 +3,7 @@ import { Layout } from "../Layout/layout";
 import { getCardDetails } from "../Ui/cardDetails";
 import Card from "../Ui/Card";
 import CarouselComponent from "../Ui/carousel";
+import { Link } from "react-router-dom";
 export default function Home() {
     const services = getCardDetails()
     return (
@@ -20,38 +21,37 @@ export default function Home() {
 
                     <div className="sm:px-16 px-8 py-16">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-14 py-10">
-                            <div className="relative flex justify-center md:block">
-                                  <img src="/assets/images/Frame 20.svg" alt="" className="absolute top-20 right-10 w-1/3 hidden md:block" />
-
-                                <img src="assets/images/african-mother-little-girl-close-up 1 (1).png" alt="" className="relative rounded-lg h-[410px] w-[85%]" />
-                                <img src="/assets/images/Frame 20.svg" alt="" className="absolute top-20 right-10 w-1/3" />
+                            <div className="relative flex justify-center items-center">
+                                <img src="/assets/images/Frame 20.svg" alt="" className="absolute top-20 right-10 w-1/3 h-auto" />
+                                <img src="assets/images/are-you-covered.png" alt="" className="relative rounded-lg h-[410px] w-96" />
+                                <img src="/assets/images/Frame 20.svg" alt="" className="absolute top-20 right-2 w-1/3 h-auto" />
                             </div>
                             <div>
                                 <div className="mb-8">
                                     <h1 className="text-green-700 font-semibold">ABOUT US</h1>
                                     <p className="text-gray-600">
                                         NPF Insurance Company Limited is a general business insurance
-                                        company, licensed by the National Insurance Commission (NAICOM). As a privately-owned company, we are dedicated to contributing to Nigeria's GDP by providing comprehensive insurance and risk management solutions. Read more
+                                        company, licensed by the National Insurance Commission (NAICOM). As a privately-owned company, we are dedicated to contributing to Nigeria's GDP by providing comprehensive insurance and risk management solutions.
                                     </p>
                                 </div>
                                 <div className="flex flex-col md:flex-row gap-y-8 md:gap-x-16">
                                     <div className="space-y-2 py-2">
                                         <div className="flex space-x-5"></div>
                                         <div className="flex space-x-5">
-                                            <img src="/assets/images/setting-done-01.png" alt="" /> <span className="text-green-600">Customer-centric Approach</span>
+                                            <img src="/assets/images/check.svg" alt="check" className="w-6 h-6" /> <span className="text-green-600">We are customer centric and flexible</span>
                                         </div>
                                         <div className="flex space-x-5">
-                                            <img src="/assets/images/setting-done-01.png" alt="" /> <span className="text-green-600">Transparent communication</span>
+                                            <img src="/assets/images/check.svg" alt="check" className="w-6 h-6" /> <span className="text-green-600">We offer valued personalized services</span>
                                         </div>
                                         <div className="flex space-x-5">
-                                            <img src="/assets/images/setting-done-01.png" alt="" /> <span className="text-green-600">365 / 24x7 Quick Supports</span>
+                                            <img src="/assets/images/check.svg" alt="check" className="w-6 h-6" /> <span className="text-green-600">We give value for your money</span>
                                         </div>
                                         <div className=" flex space-x-5">
-                                            <img src="/assets/images/setting-done-01.png" alt="" /> <span className="text-green-600">Critical Illness Insurance</span>
+                                            <img src="/assets/images/check.svg" alt="check" className="w-6 h-6" /> <span className="text-green-600">We are committed to the ultimate security of our customers</span>
                                         </div>
                                     </div>
 
-                                    <div className="bg-gray-200 rounded-lg px-4 py-2 text-center " >
+                                    <div className="bg-gray-200 rounded-lg px-4 py-2 text-center h-fit " >
                                         <h1 className="text-green-600 text-2xl font-bold">100%</h1>
                                         <p className="text-gray-500">success rate</p>
                                         <hr className="border " />
@@ -60,8 +60,10 @@ export default function Home() {
                                     </div>
 
                                 </div>
-                                <div className="py-8">
-                                    <button className="bg-green-800 rounded-full py-2 px-4 text-white hover:text-white hover:bg-green-800 transition duration-300">More about</button>
+                                <div className="py-8 text-center sm:text-left">
+                                    <Link to={"/about"} >
+                                        <button className="bg-green-800 rounded-full py-2 px-4 text-white hover:text-white hover:bg-green-800 transition duration-300">More about</button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +75,7 @@ export default function Home() {
                             <h1 className="font-bold text-4xl py-5">Explore Our Services and Experience Protection</h1>
                             <p className="text-gray-600 text-xl">From life to asset coverage, we offer tailored insurance solutions designed to secure what matters most to you.</p>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-8 sm:px-16 py-10">
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-2 sm:px-16 py-10">
                             {services.map((service, index) => (
                                 <Card key={index} imageSrc={service.imageSrc} title={service.title} descriptions={service.descriptions} link={service.link} />
                             ))}
@@ -84,7 +86,9 @@ export default function Home() {
                     <div className="py-14">
                         <div className="text-center">
                             <h1 className="text-xl font-bold py-2">Have any question?</h1>
-                            <button className="bg-black-500 rounded-full px-4 py-2 text-white">Contact us</button>
+                            <Link to="/contact">
+                                <button className="bg-black-500 rounded-full px-4 py-2 text-white">Contact us</button>
+                            </Link>
                         </div>
                     </div>
 
@@ -100,16 +104,16 @@ export default function Home() {
                         </div>
 
                         <div className="px-8 sm:px-16 py-12">
-                            <div className="flex flex-col sm:flex-row sm:space-x-10 relative space-y-10 sm:space-y-0">
+                            <div className="flex flex-col sm:flex-row sm:space-x-10 relative space-y-10 sm:space-y-0 justify-center">
                                 <div className="text-center bg-white rounded-md p-5 w-full sm:w-72 relative">
                                     <div className="text-center flex justify-center">
                                         <img src="/assets/images/tape-measure.png" alt="" />
                                     </div>
                                     <div className="text-gray-600">
-                                        <h1 className="text-black-500 text-xl font-bold py-2">Tailored Situations</h1>
-                                        <p>Our experts craft a</p>
-                                        <p>personalized insurance plan</p>
-                                        <p>that fits your lifestyle.</p>
+                                        <h1 className="text-black-500 text-xl font-bold py-2">Visit our website</h1>
+                                        <p>To choose the insurance</p>
+                                        <p>policy type that best fits you</p>
+                                        <p> or your business.</p>
                                     </div>
                                     <div className="bg-green-800 rounded-full w-8 h-8 px-2 py-2 text-center flex items-center justify-center text-white font-bold absolute bottom-[-20px] left-1/2 transform -translate-x-1/2 sm:left-[120px]">1</div>
                                     <div className="absolute bottom-[-100px] left-[140px] hidden lg:block">
@@ -123,10 +127,10 @@ export default function Home() {
                                         <img src="/assets/images/checkmark-badge-03.png" alt="" />
                                     </div>
                                     <div className="text-gray-600">
-                                        <h1 className="text-black-500 text-xl font-bold py-2">Easy Enrollment</h1>
-                                        <p>We guide you through the</p>
-                                        <p>simple,hassle-free process</p>
-                                        <p>of securing your coverage.</p>
+                                        <h1 className="text-black-500 text-xl font-bold py-2">Form Completion</h1>
+                                        <p>Fill out the required </p>
+                                        <p>information on the form,</p>
+                                        <p>and submit. </p>
                                     </div>
                                     <div className="bg-green-800 rounded-full w-8 h-8 px-2 py-2 text-center flex items-center justify-center text-white font-bold absolute top-[-10px] left-1/2 transform -translate-x-1/2 sm:top-[-20px] sm:left-[135px]">2</div>
                                     <div className="absolute top-[-100px] left-[120px] hidden lg:block">
@@ -139,10 +143,10 @@ export default function Home() {
                                         <img src="/assets/images/mentoring.png" alt="" />
                                     </div>
                                     <div className="text-gray-600">
-                                        <h1 className="text-black-500 text-xl font-bold py-2">Ongoing support</h1>
-                                        <p>Enjoy peace of mind with our</p>
-                                        <p>24/7 support and assistance</p>
-                                        <p>whenever you need it</p>
+                                        <h1 className="text-black-500 text-xl font-bold py-2">Make Premium Payment </h1>
+                                        <p>Complete your Premium</p>
+                                        <p>Payment effortlessly using </p>
+                                        <p>our user-friendly payment platform.</p>
                                     </div>
                                     <div className="bg-green-800 rounded-full w-8 h-8 px-2 py-2 text-center flex items-center justify-center text-white font-bold absolute bottom-[-20px] left-1/2 transform -translate-x-1/2 sm:left-[120px]">3</div>
                                     <div className="absolute bottom-[-100px] left-[140px] hidden lg:block">
@@ -155,10 +159,9 @@ export default function Home() {
                                         <img src="/assets/images/policy.png" alt="" />
                                     </div>
                                     <div className="text-gray-600">
-                                        <h1 className="text-black-500 text-xl font-bold py-2">Claims & Adjustments</h1>
-                                        <p>Quick efficeient claims</p>
-                                        <p>handling and flexible policy</p>
-                                        <p>Adjustments to ensure.</p>
+                                        <h1 className="text-black-500 text-xl font-bold py-2">Get Your Claimed</h1>
+                                        <p>Access Your Quick and</p>
+                                        <p>Streamlined Claims</p>
                                     </div>
                                     <div className="bg-green-800 rounded-full w-8 h-8 px-2 py-2 text-center flex items-center justify-center text-white font-bold absolute top-[-10px] left-1/2 transform -translate-x-1/2 sm:top-[-20px] sm:left-[135px]">4</div>
                                 </div>
