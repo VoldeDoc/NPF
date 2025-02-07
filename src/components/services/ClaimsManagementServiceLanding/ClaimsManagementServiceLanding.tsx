@@ -41,7 +41,7 @@ export default function ClaimsManagementServiceLanding() {
                     </button>
 
                 </div>
-                <div className="rounded-xl md:rounded-2xl p-5 lg:p-10 w-full h-fit" > 
+                <div className="rounded-xl md:rounded-2xl p-5 lg:p-10 w-full h-fit bg-white shadow-lg" > 
                     <h4 className="font-semibold mb-6 text-[#000000] pl-5" >
                         Meanwhile, find attached documents for your perusal and verification.
                     </h4>                        

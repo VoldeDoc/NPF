@@ -46,7 +46,7 @@ export default function PublicLiabilityServiceLanding() {
                         <span className="absolute -right-1.5 top-0 h-full w-1 bg-[#1F834008] rounded-full"></span>
                     </button>
                 </div>
-                <div className="rounded-xl md:rounded-2xl p-5 lg:p-10 w-full h-fit " > 
+                <div className="rounded-xl md:rounded-2xl p-5 lg:p-10 w-full h-fit bg-white shadow-lg " > 
                     <h4 className="font-semibold mb-6 text-[#000000] pl-4" >
                         Generally, the basic public liability policy offers reimbursement against legal liability incurred from third parties for:
                     </h4>                        

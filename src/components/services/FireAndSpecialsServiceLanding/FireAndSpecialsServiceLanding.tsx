@@ -32,7 +32,7 @@ export default function FireAndSpecialsServiceLanding() {
                     <h4 className="font-bold text-2xl md:text-3xl lg:text-4xl mb-5" >
                         FIRE & SPECIAL PERILS
                     </h4>
-                    <p className="font-medium text-[#00000080] text-sm leading-7 md:text-base md:leading-8 text-justify" >
+                    <p className="font-medium text-[#000000] text-sm leading-7 md:text-base md:leading-8 text-justify" >
                         The Insurance Act 2003 makes it mandatory for every public building to be insured with a registered insurer against the risk of fire and special perils. Fire and special Perils Insurance covers the devastating effect fire can have on assets such as building and contents in the premises. This policy covers fire, explosions, bush fire, flood, impact, riot, strike, malicious damage, earthquake, burst pipes and all others included or added to the policy.
                     </p>
                     <button className="mt-7 md:mt-14 relative px-4 py-1.5 text-white text-sm font-bold rounded-full bg-[#093618] border-[5px] border-white shadow-lg">
@@ -46,7 +46,7 @@ export default function FireAndSpecialsServiceLanding() {
                     <h4 className="font-semibold mb-6" >
                         SCHEDULE OF PROPERTY COVERED
                     </h4>                        
-                    <div className={`font-medium text-[#DCDFDD] text-sm md:text-base text-justify`} >
+                    <div className={`font-medium text-white text-sm md:text-base text-justify`} >
                         <p>
                             On Building of Standard Construction including outbuilding, contents, machinery & stock, situate anywhere in Nigeria owned or held by the insured in trust or commission. Please advise value per building/location, value of contents, machinery and stock of items to be covered , to enable us indicate our rate.
                         </p>                        

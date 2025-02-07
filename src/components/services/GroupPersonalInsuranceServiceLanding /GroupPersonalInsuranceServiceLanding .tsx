@@ -8,7 +8,7 @@ export default function GroupPersonalInsuranceServiceLanding() {
                     src={heroImg} alt="Hero img" className="w-full min-h-[400px] max-h-[420px] object-cover object-top" />     */}
                 <div className=" text-left sm:text-left bg-opacity-85 p-5 md:px-8 lg:py-10 text-[#FFFFFF]">
                     <div className="text-3xl sm:text-5xl font-bold">
-                        <h1 className='text-2xl md:text-3xl lg:text-5xl xl:text-5xl'  >Your <span className="text-[#06195F]">Safety Net</span> for</h1>
+                        <h1 className='text-2xl md:text-3xl lg:text-5xl xl:text-5xl'  >Your <span className="text-[#EFEB05]">Safety Net</span> for</h1>
                         <h1 className='text-2xl md:text-3xl lg:text-5xl xl:text-5xl' >Life's Uncertainties</h1>
                     </div>
                     <div className="my-1 text-lg sm:text-xl py-3">

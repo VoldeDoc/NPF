@@ -46,7 +46,7 @@ export default function MachineryInsuranceServiceLanding() {
                     </button>
 
                 </div>
-                <div className="rounded-xl md:rounded-2xl p-5 lg:p-10 w-full h-fit" > 
+                <div className="rounded-xl md:rounded-2xl p-5 lg:p-10 w-full h-fit bg-white shadow-lg" > 
                     <h4 className="font-semibold mb-6 text-[#000000] pl-5" >
                         Breakdown is the unforeseen damage resulting from: 
                     </h4>                        

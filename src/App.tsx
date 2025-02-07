@@ -19,6 +19,8 @@ import Machinery_Insurance_Service_Landing from "./pages/services/Machinery_Insu
 import Claims_Management_Service_Landing from "./pages/services/Claims_Management_Service_Landing/Claims_Management_Service_Landing ";
 import Group_Personal_Insurance_Service_Landing from "./pages/services/Group_Personal_Insurance_Service_Landing/Group_Personal_Insurance_Service_Landing";
 import Occupiers_Liability_Service_Landing from "./pages/services/Occupiers_Liability_Service_Landing/Occupiers_Liability_Service_Landing";
+import Privacy_policy from "./pages/privacy_policy/privacy_policy";
+import Claims_page from "./pages/claims/claims_page";
 
 
 function App() {
@@ -59,7 +61,8 @@ function App() {
               <Route path="/services/claims-management" element={<Claims_Management_Service_Landing />} />
               <Route path="/services/group-personal-insurance" element={<Group_Personal_Insurance_Service_Landing />} />
               <Route path="/services/occupiers-liability-insurance" element={<Occupiers_Liability_Service_Landing />} />
-          
+              <Route path="/privacy-policy" element={<Privacy_policy />} />
+              <Route path="/claims" element={<Claims_page />} />
             </Routes>
           </>
       </main>
