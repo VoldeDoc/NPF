@@ -4,8 +4,8 @@ import * as yup from "yup";
 import ProgressBar from "./ProgressBar";
 import downArrow from "../../../assets/insurance/down-arrow.svg";
 import { UserFormValues } from "@/types";
-// import UseInsurance from "@/hooks/UseInsurance";
-
+import useInsurance from "@/hooks/UseInsurance";
+import { useEffect, useState } from "react";
 
 const schema = yup.object().shape({
   insurance_type: yup
@@ -13,10 +13,12 @@ const schema = yup.object().shape({
     .oneOf(["comprehensive", "third_party"], "The selected insurance type is invalid.")
     .required("Field is required"),
   category: yup.string().required("Category is required"),
+  sub_category: yup.string().required("Subcategory is required"),
   title: yup
     .string()
-    .oneOf(["MR", "MRS", "MISS"], "The selected title is invalid.")
+    .oneOf(["MR", "MRS", "MISS", "MS", "DR", "PROF", "ENGR", "ARCH", "BARR", "CAPT", "LT", "MAJ", "GEN", "COL", "REV", "PASTOR", "EVANG", "CHIEF", "PRINCE", "PRINCESS", "HON", "SEN"], "The selected title is invalid.")
     .required("Title is required"),
+  use_type: yup.string().oneOf(["individual", "corporate"]).required("Use type is required"),
   first_name: yup.string().required("First name is required"),
   last_name: yup.string().required("Last name is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
@@ -36,10 +38,12 @@ const PersonalDetails = ({
   currentStep,
   setCurrentStep,
   setUserData,
+  initialValues,
 }: {
   currentStep: number;
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
   setUserData: React.Dispatch<React.SetStateAction<any>>;
+  initialValues: any;
 }) => {
   const {
     register,
@@ -47,23 +51,40 @@ const PersonalDetails = ({
     formState: { errors },
   } = useForm<UserFormValues>({
     resolver: yupResolver(schema),
+    defaultValues: initialValues,
   });
 
-  const onSubmit: SubmitHandler<UserFormValues> = (data) => {
-    // SubmituserDetails(data)
-    //   .then((response) => {
-        // if (response) {
-          // console.log(response);
-          setUserData(data);
-          setCurrentStep(currentStep + 1);
-      //   } else {
-      //     console.error("No response received from the server.");
-      //   }
-      // })
-      // .catch((error) => {
-      //   console.error("Error submitting user details:", error);
-      // });
+  const { getCategories } = useInsurance();
+  const [categories, setCategories] = useState<{ id: number; name: string; sub_categories: { id: number; name: string }[] }[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [subCategories, setSubCategories] = useState<{ id: number; name: string }[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const categories = await getCategories();
+        setCategories(categories);
+        console.log(categories);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    const category = categories.find(cat => cat.name === selectedCategory);
+    setSubCategories(category ? category.sub_categories : []);
+  }, [selectedCategory, categories]);
+
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCategory(e.target.value);
   };
+
+  const onSubmit: SubmitHandler<UserFormValues> = (data) => {
+    setUserData(data);
+    setCurrentStep(currentStep + 1);
+  };
+
   return (
     <>
       <section className="">
@@ -100,19 +121,57 @@ const PersonalDetails = ({
           </div>
 
           <div className="flex flex-col gap-3 md:gap-4 w-full">
+            <label htmlFor="use_type">USE TYPE *</label>
+            <div className="relative">
+              <select
+                {...register("use_type")}
+                className="bg-[#F4F4F4] border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full appearance-none text-[#7A7575]"
+              >
+                <option value="">Select Use Type</option>
+                <option value="individual">Individual</option>
+                <option value="corporate">Corporate</option>
+              </select>
+              <img src={downArrow} alt="down-arrow" className="w-10 h-10 absolute transform right-2 top-1/2 -translate-y-1/2" />
+              {errors.use_type && <p className="text-red-500 text-xs mt-1">{errors.use_type.message}</p>}
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-3 md:gap-4 w-full">
             <label htmlFor="category">CATEGORY *</label>
             <div className="relative">
               <select
                 {...register("category")}
                 className="bg-[#F4F4F4] border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full appearance-none text-[#7A7575]"
+                onChange={handleCategoryChange}
               >
                 <option value="">Select Category</option>
-                <option value="individual">Individual</option>
+                {categories.map(category => (
+                  <option key={category.id} value={category.name}>{category.name}</option>
+                ))}
               </select>
               <img src={downArrow} alt="down-arrow" className="w-10 h-10 absolute transform right-2 top-1/2 -translate-y-1/2" />
               {errors.category && <p className="text-red-500 text-xs mt-1">{errors.category.message}</p>}
             </div>
           </div>
+
+          {selectedCategory && (
+            <div className="flex flex-col gap-3 md:gap-4 w-full">
+              <label htmlFor="sub_category">SUBCATEGORY *</label>
+              <div className="relative">
+                <select
+                  {...register("sub_category")}
+                  className="bg-[#F4F4F4] border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full appearance-none text-[#7A7575]"
+                >
+                  <option value="">Select Subcategory</option>
+                  {subCategories.map(subCategory => (
+                    <option key={subCategory.id} value={subCategory.name}>{subCategory.name}</option>
+                  ))}
+                </select>
+                <img src={downArrow} alt="down-arrow" className="w-10 h-10 absolute transform right-2 top-1/2 -translate-y-1/2" />
+                {errors.sub_category && <p className="text-red-500 text-xs mt-1">{errors.sub_category.message}</p>}
+              </div>
+            </div>
+          )}
 
           <div className="flex flex-col gap-3 md:gap-4 w-full">
             <label htmlFor="title">TITLE *</label>
@@ -125,6 +184,25 @@ const PersonalDetails = ({
                 <option value="MR">Mr</option>
                 <option value="MRS">Mrs</option>
                 <option value="MISS">Miss</option>
+                <option value="MS">Ms</option>
+                <option value="DR">Dr</option>
+                <option value="PROF">Prof</option>
+                <option value="ENGR">Engr</option>
+                <option value="ARCH">Arch</option>
+                <option value="BARR">Barr</option>
+                <option value="CAPT">Capt</option>
+                <option value="LT">Lt</option>
+                <option value="MAJ">Maj</option>
+                <option value="GEN">Gen</option>
+                <option value="COL">Col</option>
+                <option value="REV">Rev</option>
+                <option value="PASTOR">Pastor</option>
+                <option value="EVANG">Evang</option>
+                <option value="CHIEF">Chief</option>
+                <option value="PRINCE">Prince</option>
+                <option value="PRINCESS">Princess</option>
+                <option value="HON">Hon</option>
+                <option value="SEN">Sen</option>
               </select>
               <img src={downArrow} alt="down-arrow" className="w-10 h-10 absolute transform right-2 top-1/2 -translate-y-1/2" />
               {errors.title && <p className="text-red-500 text-xs mt-1">{errors.title.message}</p>}

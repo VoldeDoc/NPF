@@ -18,6 +18,7 @@ export default function Footer() {
 
               <div className="text-2xl font-bold md:w-[300px]">
                   <img src={NPFLogo} alt="NPF Logo"  />
+                  {/* <img src="/assets/logo/NPF logo 5.svg" alt="" /> */}
                 </div>
 
 

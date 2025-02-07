@@ -10,8 +10,11 @@ export default function MotorInsuranceQuote() {
   const [currentStep, setCurrentStep] = useState(1);
   const [userData, setUserData] = useState(null);
   const [vehicleData, setVehicleData] = useState(null);
-  const [uploadData, setUploadData] = useState(null);
-
+  const [uploadData, setUploadData] = useState<{ validId: File | null; vehicleLicense: File | null; utilityBill: File | null; } | null>({
+    validId: null,
+    vehicleLicense: null,
+    utilityBill: null,
+  });
   return (
     <>
       {/* <!-- Hero section --> */}
@@ -24,6 +27,7 @@ export default function MotorInsuranceQuote() {
             currentStep={currentStep}
             setCurrentStep={setCurrentStep}
             setUserData={setUserData}
+            initialValues={userData}
           />
         )}
         {currentStep === 2 && (
@@ -31,6 +35,7 @@ export default function MotorInsuranceQuote() {
             currentStep={currentStep}
             setCurrentStep={setCurrentStep}
             setVehicleData={setVehicleData}
+            initialValues={vehicleData}
           />
         )}
         {currentStep === 3 && (
@@ -38,6 +43,7 @@ export default function MotorInsuranceQuote() {
             currentStep={currentStep}
             setCurrentStep={setCurrentStep}
             setUploadData={setUploadData}
+            initialValues={uploadData || { validId: null, vehicleLicense: null, utilityBill: null }}
           />
         )}
         {currentStep === 4 && (

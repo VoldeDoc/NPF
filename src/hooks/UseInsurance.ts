@@ -58,7 +58,6 @@ export default function useInsurance() {
 
     const submitInsuranceDetails = async (userData: UserFormValues, vehicleData: VehicleFormValues, uploadData: DocumentFormValues) => {
         try {
-            // return console.log(userData);
             setLoading(true);
             const userResponse = await submitUserDetails(userData)
             console.log(userResponse);
@@ -70,12 +69,21 @@ export default function useInsurance() {
             const vehicleResponse = await submitVehicleDetails(vehicleData)
             console.log(vehicleResponse);
 
-            // if (!vehicleResponse.message.includes("successfully")) {
-            //     return new Error("Vehicle details not submitted successfully");
-            // }
             let document: DocumentUploadProps | undefined = undefined;
+            const validTypes = ["application/pdf", "image/jpeg", "image/png", "image/jpg"];
+            const maxSize = 2048 * 1024; 
+    
+            const validateFile = (file: File) => {
+                if (!validTypes.includes(file.type)) {
+                    throw new Error("Invalid file type. Only PDF, JPEG, PNG, and JPG are allowed.");
+                }
+                if (file.size > maxSize) {
+                    throw new Error("File size exceeds the maximum limit of 2MB.");
+                }
+            };
             switch (true) {
                 case !!uploadData.utility_bill.name:
+                    validateFile(uploadData.utility_bill);
                     document = {
                         user_id: vehicleResponse.vehicle.user_id,
                         type: "utility_bill",
@@ -84,6 +92,7 @@ export default function useInsurance() {
                     };
                     break;
                 case !!uploadData.validId.name:
+                    validateFile(uploadData.validId)
                     document = {
                         user_id: vehicleResponse.vehicle.user_id,
                         type: "government_id",
@@ -92,6 +101,7 @@ export default function useInsurance() {
                     };
                     break;
                 case !!uploadData.vehicleLicense.name:
+                    validateFile(uploadData.vehicleLicense)
                     document = {
                         user_id: vehicleResponse.vehicle.user_id,
                         type: "vehicle_license",
@@ -138,6 +148,58 @@ export default function useInsurance() {
         }
     }
 
+    const getCarType = async () => {
+        try {
+            setLoading(true)
+            const res = await client.get('/cars');
+            return res?.data?.data
+        } catch (error:any) {
+            const resError = error.response?.data;
+            const errorMessage = resError?.message || resError?.data
+            console.log(errorMessage);
+            setLoading(false);
+        }
+    }
+
+    const getCarMakers = async () => {
+        try {
+            setLoading(true)
+            const res = await client.get('/car/maker');
+            return res?.data?.data
+        } catch (error:any) {
+            const resError = error.response?.data;
+            const errorMessage = resError?.message || resError?.data
+            console.log(errorMessage);
+            setLoading(false);
+        }
+    }
+
+    const getCarModels = async () => {
+        try {
+            setLoading(true)
+            const res = await client.get('/car/model');
+            return res?.data?.data
+        } catch (error:any) {
+            const resError = error.response?.data;
+            const errorMessage = resError?.message || resError?.data
+            console.log(errorMessage);
+            setLoading(false);
+        }
+    }
+
+    const getCategories = async()=>{
+        try {
+            setLoading(true)
+            const res = await client.get('/categories')
+            return res?.data?.data
+        } catch (error:any) {
+            const resError = error.response?.data;
+            const errorMessage = resError?.message || resError?.data
+            console.log(errorMessage);
+            setLoading(false);
+        }
+    }
+
     return {
         loading,
         submitUserDetails,
@@ -145,6 +207,10 @@ export default function useInsurance() {
         getUserDetails,
         submitDocuments,
         submitInsuranceDetails,
-        initializePayment
+        initializePayment,
+        getCarType,
+        getCarMakers,
+        getCarModels,
+        getCategories,
     };
 }

@@ -1,13 +1,15 @@
 import ProgressBar from "./ProgressBar";
-import downArrow from "../../../assets/insurance/down-arrow.svg";
 import { BackButton } from "./NextButton";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { VehicleFormValues } from "@/types";
+import useInsurance from "@/hooks/UseInsurance";
+import { useEffect, useState } from "react";
+import { FaChevronDown } from "react-icons/fa";
 
 const schema = yup.object().shape({
-    user_id: yup.number().required("User ID is required"),
+  // user_id: yup.number(),
   vehicle_registration_number: yup
     .string()
     .required("Vehicle Registration Number is required"),
@@ -26,43 +28,77 @@ const schema = yup.object().shape({
 const VehicleDetails = ({
   currentStep,
   setCurrentStep,
-  //   userData,
   setVehicleData,
+  initialValues,
 }: {
   currentStep: number;
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
-  //   userData: any;
   setVehicleData: React.Dispatch<React.SetStateAction<any>>;
+  initialValues: any;
 }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    // setValue,
   } = useForm<VehicleFormValues>({
     resolver: yupResolver(schema),
+    defaultValues: initialValues,
   });
 
-  //   useEffect(() => {
-  //     console.log("this is user data", userData);
-
-  //     if (userData && userData.id) {
-  //       setValue("user_id", userData.id);
-  //     }
-  //   }, [userData, setValue]);
-
   const onSubmit: SubmitHandler<VehicleFormValues> = (data) => {
-    console.log("Form submitted with data:", data); // Debug log
-    // SubmitVehicleDetails(data)
-    //   .then((response) => {
-    //     console.log("Response from server:", response); // Debug log
-    setCurrentStep((prev) => prev + 1);
     setVehicleData(data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error submitting vehicle details:", error);
-    //   });
+    setCurrentStep((prev) => prev + 1)
+    
   };
+
+  const { getCarType, getCarMakers, getCarModels } = useInsurance();
+  const [carType, setCarType] = useState([]);
+  const [carMakers, setCarMakers] = useState([]);
+  const [carModels, setCarModels] = useState([]);
+
+  useEffect(() => {
+    const fetchCarTypes = async () => {
+      try {
+        const response = await getCarType();
+        console.log(response);
+        setCarType(response);
+      } catch (error) {
+        console.error("Error fetching car types:", error);
+      }
+    };
+
+    fetchCarTypes();
+  }, []);
+
+
+  useEffect(() => {
+    const fetchCarMakers = async () => {
+      try {
+        const makers = await getCarMakers();
+        console.log(makers);
+
+        setCarMakers(makers);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchCarMakers();
+  }, []);
+
+  useEffect(() => {
+    const fetchCarModels = async () => {
+      try {
+        const models = await getCarModels();
+        console.log(models);
+        setCarModels(models);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchCarModels();
+  }, []);
+
+
 
   return (
     <section className="">
@@ -85,7 +121,7 @@ const VehicleDetails = ({
       >
         <input type="hidden" {...register("user_id")} />
 
-        <div className="flex flex-col md:flex-row gap-6 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
           <div className="flex flex-col gap-3 md:gap-4 w-full">
             <label htmlFor="vehicle_registration_number">
               Vehicle Registration Number *
@@ -117,171 +153,146 @@ const VehicleDetails = ({
             )}
           </div>
         </div>
-
+        
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
-          <div className="flex flex-col gap-3 md:gap-4 w/full">
-            <label htmlFor="maker">Make *</label>
+          <div className="flex flex-col gap-4 w-full">
+            <label htmlFor="maker">Maker *</label>
             <div className="relative">
               <select
                 id="maker"
                 {...register("maker")}
-                className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w/full appearance-none text-black"
+                className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full appearance-none text-black"
               >
                 <option value="">Select Make</option>
-                <option value="Toyota">Toyota</option>
-                <option value="lexus">lexus</option>
-                <option value="hilux">hilux</option>
+                {carMakers.map((maker: any,index:number) => (
+                  <option key={maker.id || index} value={maker.name}>
+                    {maker.name}
+                  </option>
+                ))}
               </select>
-              <img
-                src={downArrow}
-                alt="down-arrow"
-                className="w-10 h-10 absolute transform right-2 top-1/2 -translate-y-1/2"
-              />
+              <FaChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
             </div>
-            {errors.maker && (
-              <p className="text-red-500">{errors.maker.message}</p>
-            )}
+            {errors.maker && <p className="text-red-500">{errors.maker.message}</p>}
           </div>
-          <div className="flex flex-col gap-3 md:gap-4 w/full">
+
+          <div className="flex flex-col gap-4 w-full">
             <label htmlFor="model">Model *</label>
             <div className="relative">
               <select
                 id="model"
                 {...register("model")}
-                className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w/full appearance-none text-black"
+                className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full appearance-none text-black"
               >
                 <option value="">Select Model</option>
-                <option value="Toyota">Toyota</option>
-                <option value="lexus">lexus</option>
-                <option value="hilux">hilux</option>
+                {carModels.map((model: any, index:number) => (
+                  <option key={model.id || index } value={model.name}>
+                    {model.name}
+                  </option>
+                ))}
               </select>
-              <img
-                src={downArrow}
-                alt="down-arrow"
-                className="w-10 h-10 absolute transform right-2 top-1/2 -translate-y-1/2"
-              />
+              <FaChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
             </div>
-            {errors.model && (
-              <p className="text-red-500">{errors.model.message}</p>
-            )}
+            {errors.model && <p className="text-red-500">{errors.model.message}</p>}
           </div>
-          <div className="flex flex-col gap-3 md:gap-4 w/full">
+
+          <div className="flex flex-col gap-4 w-full">
             <label htmlFor="body_color">Body Color *</label>
             <div className="relative">
               <select
                 id="body_color"
                 {...register("body_color")}
-                className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w/full appearance-none text-black"
+                className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full appearance-none text-black"
               >
                 <option value="">Select Color</option>
-                <option value="Toyota">Toyota</option>
-                <option value="lexus">lexus</option>
-                <option value="hilux">hilux</option>
+                <option value="Red">Red</option>
+                <option value="Blue">Blue</option>
+                <option value="Black">Black</option>
               </select>
-              <img
-                src={downArrow}
-                alt="down-arrow"
-                className="w-10 h-10 absolute transform right-2 top-1/2 -translate-y-1/2"
-              />
+              <FaChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
             </div>
-            {errors.body_color && (
-              <p className="text-red-500">{errors.body_color.message}</p>
-            )}
+            {errors.body_color && <p className="text-red-500">{errors.body_color.message}</p>}
           </div>
-          <div className="flex flex-col gap-3 md:gap-4 w/full">
-            <label htmlFor="year">Select year *</label>
-            <div className="relative">
-              <input
-                id="year"
-                type="number"
-                {...register("year")}
-                className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full text-black"
-              />
-              <img
-                src={downArrow}
-                alt="down-arrow"
-                className="w-10 h-10 absolute transform right-2 top-1/2 -translate-y-1/2"
-              />
-            </div>
-            {errors.year && (
-              <p className="text-red-500">{errors.year.message}</p>
-            )}
+
+          <div className="flex flex-col gap-4 w-full">
+            <label htmlFor="year">Select Year *</label>
+            <input
+              id="year"
+              type="number"
+              {...register("year")}
+              className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full text-black"
+            />
+            {errors.year && <p className="text-red-500">{errors.year.message}</p>}
           </div>
-          <div className="flex flex-col gap-3 md:gap-4 w/full">
+
+          <div className="flex flex-col gap-4 w-full">
             <label htmlFor="car_type">Car Type *</label>
             <div className="relative">
               <select
                 id="car_type"
                 {...register("car_type")}
-                className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w/full appearance-none text-black"
+                className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full appearance-none text-black"
               >
                 <option value="">Select Type</option>
-                <option value="Toyota">Toyota</option>
-                <option value="lexus">lexus</option>
-                <option value="hilux">hilux</option>
+                {carType.map((car: any, index: number) => (
+                  <option key={car.id || index} value={car.name}>
+                    {car.name}
+                  </option>
+                ))}
               </select>
-              <img
-                src={downArrow}
-                alt="down-arrow"
-                className="w-10 h-10 absolute transform right-2 top-1/2 -translate-y-1/2"
-              />
+              <FaChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
             </div>
-            {errors.car_type && (
-              <p className="text-red-500">{errors.car_type.message}</p>
-            )}
+            {errors.car_type && <p className="text-red-500">{errors.car_type.message}</p>}
           </div>
-          <div className="flex flex-col gap-3 md:gap-4 w/full">
+
+          <div className="flex flex-col gap-4 w-full">
             <label htmlFor="chassis_number">Chassis Number</label>
             <input
               id="chassis_number"
               placeholder="Chassis Number"
               {...register("chassis_number")}
-              className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w/full text-black"
+              className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full text-black"
             />
-            {errors.chassis_number && (
-              <p className="text-red-500">{errors.chassis_number.message}</p>
-            )}
+            {errors.chassis_number && <p className="text-red-500">{errors.chassis_number.message}</p>}
           </div>
-          <div className="flex flex-col gap-3 md:gap-4 w/full">
-            <label htmlFor="engine_number">Motor Type *</label>
+
+          <div className="flex flex-col gap-4 w-full">
+            <label htmlFor="motor_type">Motor Type *</label>
             <select
               id="motor_type"
               {...register("motor_type")}
-              className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w/full appearance-none text-black"
+              className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full appearance-none text-black"
             >
               <option value="">Select Type</option>
               <option value="private">Private</option>
               <option value="public">Public</option>
             </select>
-            {errors.motor_type && (
-              <p className="text-red-500">{errors.motor_type.message}</p>
-            )}
+            {errors.motor_type && <p className="text-red-500">{errors.motor_type.message}</p>}
           </div>
-          <div className="flex flex-col gap-3 md:gap-4 w/full">
+
+          <div className="flex flex-col gap-4 w-full">
             <label htmlFor="engine_number">Engine Number</label>
             <input
               id="engine_number"
               placeholder="Engine Number"
               {...register("engine_number")}
-              className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w/full text-black"
+              className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full text-black"
             />
-            {errors.engine_number && (
-              <p className="text-red-500">{errors.engine_number.message}</p>
-            )}
-          </div>
-          <div className="flex flex-col gap-3 md:gap-4 w/full">
+            {errors.engine_number && <p className="text-red-500">{errors.engine_number.message}</p>}
+        </div>
+
+          <div className="flex flex-col gap-4 w-full">
             <label htmlFor="with_effect_from">With Effect From *</label>
             <input
               id="with_effect_from"
               type="date"
               {...register("with_effect_from")}
-              className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w/full text-black"
+              className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full text-black"
             />
-            {errors.with_effect_from && (
-              <p className="text-red-500">{errors.with_effect_from.message}</p>
-            )}
+            {errors.with_effect_from && <p className="text-red-500">{errors.with_effect_from.message}</p>}
           </div>
         </div>
+
+
         <div className="flex justify-between items-center mt-5">
           <BackButton
             currentStep={currentStep}

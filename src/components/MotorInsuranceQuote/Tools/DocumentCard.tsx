@@ -5,6 +5,7 @@ interface DocumentCardProps {
   description: string;
   icon?: React.ReactNode;
   isActive?: boolean;
+  className?: string;
 }
 
 const DocumentCard: React.FC<DocumentCardProps> = ({ title, description, icon, isActive = false }) => {

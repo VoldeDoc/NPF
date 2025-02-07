@@ -1,7 +1,9 @@
 export interface UserFormValues{
     insurance_type: "comprehensive" | "third_party";
     category:string;
-    title: "MR" | "MRS" | "MISS";
+    sub_category:string;
+    title: "MR" | "MRS" | "MISS"|"MS"|"DR"|"PROF"|"ENGR"|"ARCH"|"BARR"|"CAPT"|"LT"|"MAJ"|"GEN"|"COL"|"REV"|"PASTOR"|"EVANG"|"CHIEF"|"PRINCE"|"PRINCESS"|"HON"|"SEN";
+    use_type:"individual" | "corporate";
     first_name:string;
     last_name:string;
     email:string;
@@ -12,7 +14,7 @@ export interface UserFormValues{
 }
 
 export interface VehicleFormValues{
-    user_id:number;
+    user_id?:number;
     vehicle_registration_number:string;
     value_amount:string;
     maker:string;

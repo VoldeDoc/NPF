@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { MdMenu, MdClose } from 'react-icons/md';
 import NavLinks from './Tools/NavLink';
 import { Link } from 'react-router-dom';
-import Logo from "../../../assets/Logo.png"
+// import Logo from "."
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -14,13 +14,13 @@ export default function Header() {
     <>
       <header className="fixed top-0 left-0 w-full bg-white text-black-500 px-6 md:px-16 flex justify-between gap-2 items-center z-10">
         <div className="text-2xl font-bold">
-          <img src={Logo} alt="logo" className="h-8 w-auto md:h-10 lg:h-12" />
+          <img src={'/assets/logo/logo.svg'} alt="logo"/>
         </div>
         <div className="hidden md:flex justify-center flex-1 px-3 lg:px-10">
           <NavLinks />
         </div>
         <div className="hidden md:flex">
-          <Link to={'#'} /* to={'/motor-insurance-quote'} */>
+          <Link to={'/motor-insurance-quote'} /* to={'/motor-insurance-quote'} */>
             <button className="bg-green-900 text-white px-2 py-1 xl:px-4 xl:py-2 rounded-lg md:rounded-full text-sm lg:text-base w-fit">
               Get a Quote
             </button>
@@ -41,7 +41,7 @@ export default function Header() {
           </nav>
         </div>
         <div className="absolute bottom-2 left-0 w-full px-4">
-          <Link to={'#'} /* to={'/motor-insurance-quote'} */>
+          <Link to={'/motor-insurance-quote'} /* to={'/motor-insurance-quote'} */>
             <button className="bg-green-900 text-white w-full px-2 py-2 rounded">
               Get a Quote
             </button>
