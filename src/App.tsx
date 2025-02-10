@@ -15,12 +15,12 @@ import Burglary_Theft_Service_Landing from "./pages/services/Burglary_Theft_Serv
 import Plant_Service_Landing from "./pages/services/Plant_Service_Landing/Plant_Service_Landing";
 import Public_Liability_Service_Landing from "./pages/services/Public_Liability_Service_Landing/Public_Liability_Service_Landing";
 import Money_Service_Landing from "./pages/services/Money_Service_Landing/Money_Service_Landing";
-import Machinery_Insurance_Service_Landing from "./pages/services/Machinery_Insurance_Service_Landing /Machinery_Insurance_Service_Landing ";
 import Claims_Management_Service_Landing from "./pages/services/Claims_Management_Service_Landing/Claims_Management_Service_Landing ";
 import Group_Personal_Insurance_Service_Landing from "./pages/services/Group_Personal_Insurance_Service_Landing/Group_Personal_Insurance_Service_Landing";
 import Occupiers_Liability_Service_Landing from "./pages/services/Occupiers_Liability_Service_Landing/Occupiers_Liability_Service_Landing";
 import Privacy_policy from "./pages/privacy_policy/privacy_policy";
 import Claims_page from "./pages/claims/claims_page";
+import Machinery_Insurance_Service_Landing from "./pages/services/Machinery_Insurance_Service_Landing/Machinery_Insurance_Service_Landing ";
 
 
 function App() {

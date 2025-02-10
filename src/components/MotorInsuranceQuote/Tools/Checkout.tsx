@@ -2,7 +2,6 @@ import ProgressBar from "./ProgressBar";
 import { BackButton } from "./NextButton";
 import UseInsurance from "@/hooks/UseInsurance";
 import { toast } from "react-toastify";
-// import { useState } from "react";
 
 const Checkout = ({
   currentStep,
@@ -18,28 +17,25 @@ const Checkout = ({
   uploadData: any;
 }) => {
   const { submitInsuranceDetails, initializePayment, loading } = UseInsurance();
-//   const [payStackLink, setPayStackLink] = useState("");
 
-  const handlePayNow = async () => {    
-    // setCurrentStep((prev) => prev + 1);
-    submitInsuranceDetails(userData, vehicleData, uploadData).then(
-      (response) => {
-        console.log("This is the response", response);
-
-        if (response && response.message) {
-          if (!(response instanceof Error)) {
-            toast.success(response.message);
-            initializePayment(response.userId).then((response) => {
-              console.log("This is the response", response);
-            //   setPayStackLink(response.data.authorization_url);
-              window.open(response.data.authorization_url, "_self");
-            });
-          } else {
-            toast.error(response.message);
-          }
+  const handlePayNow = async () => {
+    if (!userData || !vehicleData || !uploadData) {
+      toast.error("Missing required data. Please go back and complete all steps.");
+      return;
+    }
+    const response = await submitInsuranceDetails(userData, vehicleData, uploadData);
+    if (response && response.message) {
+      if (!(response instanceof Error)) {
+        toast.success(response.message);
+        const paymentResponse = await initializePayment("25");
+        if (paymentResponse && paymentResponse.data.authorization_url) {
+          toast.success("Redirecting to payment gateway...");
+          window.open(paymentResponse.data.authorization_url, "_self");
+        } else {
+          toast.error("Payment initialization failed");
         }
-      }
-    );
+    }
+  }
   };
 
   return (
@@ -62,10 +58,16 @@ const Checkout = ({
             <span className="font-semibold">Insurance Type:</span>{" "}
             {userData.insurance_type === "third_party"
               ? "Third Party"
-              : "Comprehensive"}
+              : "premium"}
+          </p>
+          <p className="text-base">
+            <span className="font-semibold">Use Type:</span> {userData.use_type}
           </p>
           <p className="text-base">
             <span className="font-semibold">Category:</span> {userData.category}
+          </p>
+          <p className="text-base">
+            <span className="font-semibold">Sub Category:</span> {userData.sub_category}
           </p>
           <p className="text-base">
             <span className="font-semibold">Full Name:</span> {userData.title}{" "}
@@ -134,22 +136,22 @@ const Checkout = ({
 
         <div>
           <h3 className="font-semibold text-lg">Uploaded Documents</h3>
-          {uploadData.validId.name && (
+          {uploadData.validId?.name && (
             <div className="text-base">
               <span className="font-semibold">Valid ID:</span>{" "}
               {uploadData.validId.name}
             </div>
           )}
-          {uploadData.vehicleLicense.name && (
+          {uploadData.vehicleLicense?.name && (
             <div className="text-base">
               <span className="font-semibold">Vehicle License:</span>{" "}
               {uploadData.vehicleLicense.name}
             </div>
           )}
-          {uploadData.utility_bill.name && (
+          {uploadData.utilityBill?.name && (
             <div className="text-base">
               <span className="font-semibold">Utility Bill:</span>{" "}
-              {uploadData.utility_bill.name}
+              {uploadData.utilityBill.name}
             </div>
           )}
         </div>
@@ -165,7 +167,7 @@ const Checkout = ({
 
         <p className="font-semibold text-sm md:text-xl text-[#000000CC]">
           Third Party Insurance -{" "}
-          {(15000).toLocaleString("en-NG", {
+          {(20000).toLocaleString("en-NG", {
             style: "currency",
             currency: "NGN",
           })}
