@@ -8,7 +8,7 @@ export default function PrivacyPolicy() {
             <div className="w-full relative">
                 <img src={heroImg} alt="Hero img" className="w-full min-h-[400px] max-h-[420px] object-cover object-left-top" />    
             </div>
-            <section className="bg-[#1F834008] text-[#00000080] font-medium py-12 md:py-20 lg:py-28 px-7 md:px-20 lg:px-[120px] xl:px-[160px] text-base lg:text-lg" >
+            <section className="bg-[#1F834008] text-[#00000080] font-medium py-12 md:py-16 px-7 md:px-20 lg:px-[120px] xl:px-[160px] text-base" >
                 <p>
                     NPF Insurance Company Limited is a general business insurance company,
                     licensed by the National Insurance Commission (NAICOM). As a privately-owned company,

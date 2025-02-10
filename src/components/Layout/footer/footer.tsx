@@ -43,8 +43,8 @@ export default function Footer() {
                 <h1 className="text-gray-100 pb-1 text-xs"> ABOUT US</h1>
                 <div className="py-2">
                   <ul className="text-lg">
-                    <li><a href="">Privacy</a></li>
-                    <li><a href="">Claims</a></li>
+                    <li><a href="/privacy-policy">Privacy</a></li>
+                    <li><a href="/claims">Claims</a></li>
                     <li><a href="">Third Party claims</a></li>
                     <li><a href="">About Us</a></li>
                   </ul>
