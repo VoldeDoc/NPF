@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Claims() {    
     return (
         <>
@@ -5,12 +7,12 @@ export default function Claims() {
             <div className="w-full relative min-h-[400px] max-h-[420px] bg-[#1F8340] flex items-center justify-center">                
                 <div className="text-center p-5 md:px-8 lg:py-10 text-[#FFFFFF]">
                     <div className="text-3xl sm:text-5xl font-bold">
-                        <h1 className='text-2xl md:text-3xl lg:text-5xl xl:text-5xl text-[#000000] inline-block px-4 py-2'>
+                        <h1 className='text-2xl md:text-3xl lg:text-5xl xl:text-5xl text-[#EFEB05] inline-block px-4 py-2'>
                             Claims
                         </h1>
                     </div>
                     <div className="my-1 text-lg sm:text-xl py-3">
-                        <p>Home -&gt; Claims</p>
+                        <p><Link to="/" >Home</Link> -&gt; Claims</p>
                     </div>
                 </div>
             </div>
