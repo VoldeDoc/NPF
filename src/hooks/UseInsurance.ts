@@ -12,8 +12,9 @@ export default function useInsurance() {
             return response.data;
         } catch (error: any) {
             const resError = error.response?.data;
-            const errorMessage = resError?.message || resError?.data
+            const errorMessage = resError?.message || resError?.data;
             console.log(errorMessage);
+            throw new Error(errorMessage);
         }
     };
 
@@ -25,10 +26,11 @@ export default function useInsurance() {
         } catch (error: any) {
             const resError = error.response?.data;
             console.log(resError);
-            const errorMessage = resError?.message || resError?.data
+            const errorMessage = resError?.message || resError?.data;
             console.log(errorMessage);
+            throw new Error(errorMessage);
         }
-    }
+    };
 
     const submitVehicleDetails = async (data: VehicleFormValues) => {
         try {
@@ -37,71 +39,95 @@ export default function useInsurance() {
             return response.data;
         } catch (error: any) {
             console.log(error);
-
             const resError = error.response?.data;
-            const errorMessage = resError?.message || resError?.data
+            const errorMessage = resError?.message || resError?.data;
             console.log(errorMessage);
+            throw new Error(errorMessage);
         }
     };
 
     const submitDocuments = async (data: DocumentUploadProps) => {
         try {
-            const response = await client.post('/documents/upload', data);
+            const formData = new FormData();
+            formData.append('user_id', data.user_id.toString());
+            formData.append('type', data.type);
+            formData.append('document_type', data.document_type);
+    
+            if (data.file) {
+                formData.append('file', data.file);
+            }
+    
+            const response = await client.post('/documents/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
             console.log("This is the response", response.data);
             return response.data;
         } catch (error: any) {
             const resError = error.response?.data;
-            const errorMessage = resError?.message || resError?.data
+            const errorMessage = resError?.message || resError?.data;
             console.log(errorMessage);
+            throw new Error(errorMessage);
         }
-    }
+    };
 
     const submitInsuranceDetails = async (userData: UserFormValues, vehicleData: VehicleFormValues, uploadData: DocumentFormValues) => {
         try {
-            // return console.log(userData);
             setLoading(true);
-            const userResponse = await submitUserDetails(userData)
+            const userResponse = await submitUserDetails(userData);
             console.log(userResponse);
             if (!userResponse.message.includes("successfully")) {
-                return new Error("User details not submitted successfully");
+                throw new Error("User details not submitted successfully");
             }
-            vehicleData.user_id = userResponse.data.id
-            console.log(vehicleData);
-            const vehicleResponse = await submitVehicleDetails(vehicleData)
+            vehicleData.user_id = userResponse.data.id;
+            const vehicleResponse = await submitVehicleDetails(vehicleData);
             console.log(vehicleResponse);
-
-            // if (!vehicleResponse.message.includes("successfully")) {
-            //     return new Error("Vehicle details not submitted successfully");
-            // }
+    
             let document: DocumentUploadProps | undefined = undefined;
+            const validTypes = ["application/pdf", "image/jpeg", "image/png", "image/jpg"];
+            const maxSize = 2048 * 1024; // 2MB
+    
+            const validateFile = (file: File) => {
+                if (!validTypes.includes(file.type)) {
+                    throw new Error("Invalid file type. Only PDF, JPEG, PNG, and JPG are allowed.");
+                }
+                if (file.size > maxSize) {
+                    throw new Error("File size exceeds the maximum limit of 2MB.");
+                }
+            };
+    
             switch (true) {
-                case !!uploadData.utility_bill.name:
+                case !!uploadData.utility_bill?.name:
+                    validateFile(uploadData.utility_bill);
                     document = {
                         user_id: vehicleResponse.vehicle.user_id,
                         type: "utility_bill",
                         document_type: "driver_license",
-                        file: uploadData.utility_bill
+                        file: uploadData.utility_bill as File & { type: "application/pdf" | "image/jpeg" | "image/png" }
                     };
                     break;
-                case !!uploadData.validId.name:
+                case !!uploadData.validId?.name:
+                    validateFile(uploadData.validId);
                     document = {
                         user_id: vehicleResponse.vehicle.user_id,
                         type: "government_id",
                         document_type: "international_passport",
-                        file: uploadData.validId
+                        file: uploadData.validId as File & { type: "image/jpeg" | "image/png" | "application/pdf" }
                     };
                     break;
-                case !!uploadData.vehicleLicense.name:
+                case !!uploadData.vehicleLicense?.name:
+                    validateFile(uploadData.vehicleLicense);
                     document = {
                         user_id: vehicleResponse.vehicle.user_id,
                         type: "vehicle_license",
                         document_type: "driver_license",
-                        file: uploadData.vehicleLicense
+                        file: uploadData.vehicleLicense as File & { type: "application/pdf" | "image/jpeg" | "image/png" }
                     };
                     break;
             }
             console.log(document);
-
+    
             if (document) {
                 const documentResponse = await submitDocuments(document);
                 console.log(documentResponse);
@@ -112,31 +138,87 @@ export default function useInsurance() {
             }
         } catch (error: any) {
             const resError = error.response?.data;
-            const errorMessage = resError?.message || resError?.data
+            console.log(resError);
+    
+            const errorMessage = resError?.message || resError?.data || error.message;
             console.log(errorMessage);
             setLoading(false);
+            return { message: errorMessage };
         }
-    }
+    };
 
-    const initializePayment = async (userId: number) => {
+    const initializePayment = async (userId: number | string) => {
         try {
             setLoading(true);
+            console.log(userId)
+            console.log(`${window.location.origin}/payments/callback`);
+            
             const response = await client.post('/payments/initialize', {
                 user_id: userId,
-                callback_url: window.location.origin + "/payment/callback"
-            });
-            console.log(response);
-
-            console.log("This is the response", response.data);
+                callbackurl: `${window.location.origin}/payments/callback`
+            });             
             setLoading(false);
             return response.data;
         } catch (error: any) {
             const resError = error.response?.data;
-            const errorMessage = resError?.message || resError?.data
+            const errorMessage = resError?.message || resError?.data || error.message;
+            console.log(errorMessage);
+            setLoading(false);
+            return { message: errorMessage };
+        }
+    };
+
+    const getCarType = async () => {
+        try {
+            setLoading(true);
+            const res = await client.get('/cars');
+            return res?.data?.data;
+        } catch (error: any) {
+            const resError = error.response?.data;
+            const errorMessage = resError?.message || resError?.data;
             console.log(errorMessage);
             setLoading(false);
         }
-    }
+    };
+
+    const getCarMakers = async () => {
+        try {
+            setLoading(true);
+            const res = await client.get('/car/maker');
+            return res?.data?.data;
+        } catch (error: any) {
+            const resError = error.response?.data;
+            const errorMessage = resError?.message || resError?.data;
+            console.log(errorMessage);
+            setLoading(false);
+        }
+    };
+
+    const getCarModels = async () => {
+        try {
+            setLoading(true);
+            const res = await client.get('/car/model');
+            return res?.data?.data;
+        } catch (error: any) {
+            const resError = error.response?.data;
+            const errorMessage = resError?.message || resError?.data;
+            console.log(errorMessage);
+            setLoading(false);
+        }
+    };
+
+    const getCategories = async () => {
+        try {
+            setLoading(true);
+            const res = await client.get('/categories');
+            return res?.data?.data;
+        } catch (error: any) {
+            const resError = error.response?.data;
+            const errorMessage = resError?.message || resError?.data;
+            console.log(errorMessage);
+            setLoading(false);
+        }
+    };
 
     return {
         loading,
@@ -145,6 +227,10 @@ export default function useInsurance() {
         getUserDetails,
         submitDocuments,
         submitInsuranceDetails,
-        initializePayment
+        initializePayment,
+        getCarType,
+        getCarMakers,
+        getCarModels,
+        getCategories,
     };
 }

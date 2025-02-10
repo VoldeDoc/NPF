@@ -1,7 +1,15 @@
 export interface UserFormValues{
+<<<<<<< HEAD
     insurance_type: "comprehensive" | "third_party";
     category:string;
     title: "MR" | "MRS" | "MISS";
+=======
+    insurance_type: "premium" | "third_party";
+    category:string;
+    sub_category:string;
+    title: "MR" | "MRS" | "MISS"|"MS"|"DR"|"PROF"|"ENGR"|"ARCH"|"BARR"|"CAPT"|"LT"|"MAJ"|"GEN"|"COL"|"REV"|"PASTOR"|"EVANG"|"CHIEF"|"PRINCE"|"PRINCESS"|"HON"|"SEN";
+    use_type:"individual" | "corporate";
+>>>>>>> payment
     first_name:string;
     last_name:string;
     email:string;
@@ -12,7 +20,11 @@ export interface UserFormValues{
 }
 
 export interface VehicleFormValues{
+<<<<<<< HEAD
     user_id:number;
+=======
+    user_id?:number;
+>>>>>>> payment
     vehicle_registration_number:string;
     value_amount:string;
     maker:string;
@@ -37,5 +49,9 @@ export interface DocumentUploadProps{
     user_id:number;
     type:string;
     document_type:string;
+<<<<<<< HEAD
     file:File;
+=======
+    file: File & { type: "image/jpeg" | "image/png" | "application/pdf" };
+>>>>>>> payment
 }
