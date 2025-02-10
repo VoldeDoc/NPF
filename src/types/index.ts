@@ -38,6 +38,6 @@ export interface DocumentFormValues{
 export interface DocumentUploadProps{
     user_id:number;
     type:string;
-    document_type:string;
+    document_type?:string;
     file: File & { type: "image/jpeg" | "image/png" | "application/pdf" };
 }

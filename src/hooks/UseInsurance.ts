@@ -51,7 +51,9 @@ export default function useInsurance() {
             const formData = new FormData();
             formData.append('user_id', data.user_id.toString());
             formData.append('type', data.type);
-            formData.append('document_type', data.document_type);
+            if (data.document_type) {
+                formData.append('document_type', data.document_type);
+            }
     
             if (data.file) {
                 formData.append('file', data.file);
@@ -103,7 +105,6 @@ export default function useInsurance() {
                     document = {
                         user_id: vehicleResponse.vehicle.user_id,
                         type: "utility_bill",
-                        document_type: "driver_license",
                         file: uploadData.utility_bill as File & { type: "application/pdf" | "image/jpeg" | "image/png" }
                     };
                     break;
