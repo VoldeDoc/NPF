@@ -2,7 +2,7 @@ import heroImg from "../../assets/about/hero2.png"
 //import missionImg from "../../assets/about/mission.png"
 import visionImg from "../../assets/about/vision2.png"
 import ahemenImg from "../../assets/about/ahemen.png";
-import temitayoImg from "../../assets/about/temitayo.png";
+import temitayoImg from "../../assets/about/temitayo3.png";
 import juliusImg from "../../assets/about/julius.png"
 import ekechukwuImg from "../../assets/about/ekechukwu.png";
 import objectiveImg from "../../assets/about/objective.png";
@@ -235,11 +235,7 @@ const teamMembers = [
         name: "Temitayo Oke ACIIN",
         position: "Managing Director/ Chief Executive Officer",
         img: temitayoImg,        
-    },
-    {
-        name: "Julius Adedeji Esq",
-        position: "Company Secretary",
-        img: juliusImg
+        border:false
     },
     {
         name: "Mac Ekechukwu FIIN PhD",
@@ -251,7 +247,12 @@ const teamMembers = [
         position: "Executive Director Admin &Corporate Services",
         img: ahemenImg,
         border:true,
-    }
+    },
+    {
+        name: "Julius Adedeji Esq",
+        position: "Company Secretary",
+        img: juliusImg
+    }    
 ]
 
 
