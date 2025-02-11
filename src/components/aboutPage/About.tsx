@@ -244,7 +244,7 @@ const teamMembers = [
     },    
     {
         name: "Ahemen Rose Wende  MBA,PhRI",
-        position: "Executive Director Admin &Corporate Services",
+        position: "Executive Director Admin & Corporate Services",
         img: ahemenImg,
         border:true,
     },
