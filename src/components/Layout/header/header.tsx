@@ -20,7 +20,7 @@ export default function Header() {
           <NavLinks />
         </div>
         <div className="hidden md:flex">
-          <Link to={'/motor-insurance-quote'} /* to={'/motor-insurance-quote'} */>
+          <Link to={'/services/motor-insurance'} /* to={'/motor-insurance-quote'} */>
             <button className="bg-green-900 text-white px-2 py-1 xl:px-4 xl:py-2 rounded-lg md:rounded-full text-sm lg:text-base w-fit">
               Get a Quote
             </button>

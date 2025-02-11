@@ -22,6 +22,10 @@ import Privacy_policy from "./pages/privacy_policy/privacy_policy";
 import Claims_page from "./pages/claims/claims_page";
 import Machinery_Insurance_Service_Landing from "./pages/services/Machinery_Insurance_Service_Landing/Machinery_Insurance_Service_Landing ";
 import Signin from "./pages/auth/Signin";
+import Signup from "./pages/auth/Signup";
+import OtpVerification from "./pages/auth/OtpVerification";
+import ForgotPassword from "./pages/auth/forgotPassword";
+import ResetPassword from "./pages/auth/resetPassword";
 
 
 function App() {
@@ -67,6 +71,10 @@ function App() {
               
               {/* Auth */}
               <Route path="/auth/signin" element={<Signin />} />
+              <Route path="/auth/signup" element={<Signup />} />
+              <Route path="/auth/otp" element={<OtpVerification />} />
+              <Route path="/auth/forgot-password" element={<ForgotPassword />} />
+              <Route path="/auth/reset-password" element={<ResetPassword />} />
             </Routes>
           </>
       </main>

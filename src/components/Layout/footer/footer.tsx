@@ -16,8 +16,8 @@ export default function Footer() {
 
             <div>
 
-              <div className="text-2xl font-bold md:w-[300px]">
-                  <img src={'/assets/logo/logo.svg'} alt="NPF Logo"  />
+              <div className="text-2xl font-bold w-full md:max-w-[350px]">
+                  <img src={'/assets/logo/footer-logo-cropped.png'} alt="NPF Logo"  />
                 </div>
 
 
@@ -54,7 +54,7 @@ export default function Footer() {
               <div className="pt-7">
                 <h1 className="text-gray-100 pb-1 text-xs">CONTACT US</h1>
                 <div className="py-2">
-                  <ul className="text-lg">
+                  <ul className="text-lg font-bold">
                     <li>
                       <a href="tel:+2349054110010">+234-905-411-0010</a>
                     </li>
