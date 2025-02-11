@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { SiInstagram } from "react-icons/si";
 import { TbBrandX } from "react-icons/tb";
 //import Logo from "../../../assets/Logo.png"
-import NPFLogo from "../../../assets/NPFLogo.png";
+//import NPFLogo from "../../../assets/NPFLogo.png";
 
 
 export default function Footer() {
@@ -17,7 +17,7 @@ export default function Footer() {
             <div>
 
               <div className="text-2xl font-bold md:w-[300px]">
-                  <img src={NPFLogo} alt="NPF Logo"  />
+                  <img src={'/assets/logo/logo.svg'} alt="NPF Logo"  />
                 </div>
 
 

@@ -34,11 +34,11 @@ export default function Contact() {
                         <img src={callImg} alt="community img" className="" />
                         <div className="font-medium">
                             <span className="text-sm lg:text-base text-[#383C39] font-bold mb-2" >Enquiry Now</span>
-                            <p className=" text-xl lg:text-2xl font-bold" >
+                            <p className=" text-xl lg:text-2xl font-black" >
                                 +234 905 411 0010 <br />
                                 +234 905 411 0011
                             </p>
-                            <p className="text-base lg:text-lg mt-0.5 font-bold" >
+                            <p className="text-base lg:text-lg mt-0.5 font-black" >
                                 contact@npfinsurance.com
                             </p>
                         </div>

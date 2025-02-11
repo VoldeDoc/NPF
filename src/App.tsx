@@ -21,6 +21,7 @@ import Occupiers_Liability_Service_Landing from "./pages/services/Occupiers_Liab
 import Privacy_policy from "./pages/privacy_policy/privacy_policy";
 import Claims_page from "./pages/claims/claims_page";
 import Machinery_Insurance_Service_Landing from "./pages/services/Machinery_Insurance_Service_Landing/Machinery_Insurance_Service_Landing ";
+import Signin from "./pages/auth/Signin";
 
 
 function App() {
@@ -63,6 +64,9 @@ function App() {
               <Route path="/services/occupiers-liability-insurance" element={<Occupiers_Liability_Service_Landing />} />
               <Route path="/privacy-policy" element={<Privacy_policy />} />
               <Route path="/claims" element={<Claims_page />} />
+              
+              {/* Auth */}
+              <Route path="/auth/signin" element={<Signin />} />
             </Routes>
           </>
       </main>
