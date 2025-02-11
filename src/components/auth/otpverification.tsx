@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import bgImg from "../../assets/auth/bgImg.png";
 import otpImg from "../../assets/auth/otp.svg"
 import OTPInput from 'react-otp-input';
