@@ -6,37 +6,39 @@ import { toast } from "react-toastify";
 const Checkout = ({
   currentStep,
   setCurrentStep,
-  userData,
+  /* userData, */
   vehicleData,
   uploadData,
 }: {
   currentStep: number;
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
-  userData: any;
+  /* userData: any; */
   vehicleData: any;
   uploadData: any;
 }) => {
   const { submitInsuranceDetails, initializePayment, loading } = UseInsurance();
 
   const handlePayNow = async () => {
-    if (!userData || !vehicleData || !uploadData) {
+    if (/* !userData || */ !vehicleData || !uploadData) {
       toast.error("Missing required data. Please go back and complete all steps.");
       return;
     }
-    const response = await submitInsuranceDetails(userData, vehicleData, uploadData);
+    const response = await submitInsuranceDetails(/* userData, */ vehicleData, uploadData);
     if (response && response.message) {
       if (!(response instanceof Error)) {
         toast.success(response.message);
-        const paymentResponse = await initializePayment("25");
+        const paymentResponse = await initializePayment(userData.id);
         if (paymentResponse && paymentResponse.data.authorization_url) {
           toast.success("Redirecting to payment gateway...");
           window.open(paymentResponse.data.authorization_url, "_self");
         } else {
           toast.error("Payment initialization failed");
         }
+      }
     }
-  }
   };
+
+  const userData = JSON.parse(localStorage.getItem("userData") || "{}");
 
   return (
     <section className="">
@@ -56,7 +58,7 @@ const Checkout = ({
           <h3 className="font-semibold text-lg">Personal Details</h3>
           <p className="text-base">
             <span className="font-semibold">Insurance Type:</span>{" "}
-            {userData.insurance_type === "third_party"
+            {vehicleData.insurance_type === "third_party"
               ? "Third Party"
               : "premium"}
           </p>
@@ -64,10 +66,10 @@ const Checkout = ({
             <span className="font-semibold">Use Type:</span> {userData.use_type}
           </p>
           <p className="text-base">
-            <span className="font-semibold">Category:</span> {userData.category}
+            <span className="font-semibold">Category:</span> {vehicleData.category}
           </p>
           <p className="text-base">
-            <span className="font-semibold">Sub Category:</span> {userData.sub_category}
+            <span className="font-semibold">Sub Category:</span> {vehicleData.sub_category}
           </p>
           <p className="text-base">
             <span className="font-semibold">Full Name:</span> {userData.title}{" "}
@@ -82,12 +84,12 @@ const Checkout = ({
           </p>
           <p className="text-base">
             <span className="font-semibold">Drivers License:</span>{" "}
-            {userData.driver_license} (Expires on {userData.license_expire_year}
+            {vehicleData.driver_license} (Expires on {vehicleData.license_expire_year}
             )
           </p>
           <p className="text-base">
             <span className="font-semibold">Years of Driving Experience:</span>{" "}
-            {userData.year_of_driving}
+            {vehicleData.year_of_driving}
           </p>
         </div>
 

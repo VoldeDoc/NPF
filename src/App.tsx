@@ -26,6 +26,10 @@ import Signup from "./pages/auth/Signup";
 import OtpVerification from "./pages/auth/OtpVerification";
 import ForgotPassword from "./pages/auth/forgotPassword";
 import ResetPassword from "./pages/auth/resetPassword";
+import DashboardHomePage from "./pages/Dashboard/DashboardHome/DashboardHome";
+import DashboardCertificatesPage from "./pages/Dashboard/DashboardCertificates/DashboardCertificates";
+import DashboardClaimsPage from "./pages/Dashboard/DashboardClaims/DashboardClaims";
+
 
 
 function App() {
@@ -75,6 +79,12 @@ function App() {
               <Route path="/auth/otp" element={<OtpVerification />} />
               <Route path="/auth/forgot-password" element={<ForgotPassword />} />
               <Route path="/auth/reset-password" element={<ResetPassword />} />
+              
+          
+              {/* Dashboard */}
+              <Route path="/dashboard/home" element={<DashboardHomePage />} />
+              <Route path="/dashboard/certificates" element={<DashboardCertificatesPage />} />
+              <Route path="/dashboard/claims" element={<DashboardClaimsPage />} />
             </Routes>
           </>
       </main>

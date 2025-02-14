@@ -21,7 +21,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ currentStep, totalSteps = 4 }
         if (currentStep === 4) return 100;
     }
     //console.log(progressPercentage2());
-    console.log(totalSteps);
+    //console.log(totalSteps);
 
   return (
     <div className="w-full mt-10 lg:mt-20">

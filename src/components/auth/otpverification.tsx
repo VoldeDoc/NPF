@@ -2,11 +2,16 @@ import { useState, useEffect } from 'react';
 import bgImg from "../../assets/auth/bgImg.png";
 import otpImg from "../../assets/auth/otp.svg"
 import OTPInput from 'react-otp-input';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { baseUrl } from '@/services/axios-client';
 
 const OTPVerificationComponent = () => {
+
+  const navigate = useNavigate();
   const [otp, setOtp] = useState('');
-  const [timer, setTimer] = useState(180);
-  const [resendEnabled, setResendEnabled] = useState(false);
+  const [timer, setTimer] = useState(100);
+  const [resendEnabled, setResendEnabled] = useState(true);
 
   useEffect(() => {
     if (timer > 0) {
@@ -17,22 +22,96 @@ const OTPVerificationComponent = () => {
     }
   }, [timer]);
 
-  const handleResend = () => {
+  const handleResend = async (e:any) => {
+    e.preventDefault();
     if (resendEnabled) {
-      setTimer(180);
-      setResendEnabled(false);
-      // Trigger resend OTP API call here
-      console.log('OTP resent');
+      setTimer(100);
+      setResendEnabled(false);      
+      const toastId = toast.loading("Resending otp...")
+      try {
+          const resendOtpRequest = await fetch(`${baseUrl}/user/resent-otp`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: localStorage.getItem("otpEmail")
+              }),
+          });
+
+          const resendOtpResponse = await resendOtpRequest.json();
+          console.log(resendOtpResponse);
+
+          if (resendOtpRequest.ok) {
+              toast.success(resendOtpResponse.message || "Otp resent successfully");
+          } else {
+              toast.error(resendOtpResponse.message || "otp resend failed");
+          }
+        } catch (error) {
+          console.error("Error during signIn:", error);
+          toast.error("Something went wrong, please try again.");
+        } finally {
+          toast.dismiss(toastId)
+        }      
     }
   };
 
-  const handleSubmit = () => {
-    // Handle OTP verification API call here
-    console.log('OTP submitted:', otp);
-  };
+   const handleVerifyOtp = async (e: any) => {
+        e.preventDefault();
+        const toastId = toast.loading("Processing...")
+
+        if(otp == ''){
+            toast.error("Please fill in otp");
+            toast.dismiss(toastId)
+            return;
+        }
+        try {
+          const otpVerificationRequest = await fetch(`${baseUrl}/user/verifyOtp`, {
+              method: "POST",
+              headers: {
+              "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                otp,
+                email: localStorage.getItem("signupEmail") || localStorage.getItem("otpEmail")
+              }),
+          });
+
+          const otpVerificationResponse = await otpVerificationRequest.json();
+          console.log(otpVerificationResponse);
+
+          if (otpVerificationRequest.ok) {
+              toast.success("User verified successfully");
+
+              // Simulating a response with token and user details
+              //const { token, user } = otpVerificationResponse;
+
+              // Save user data & token to localStorage
+              //localStorage.setItem("authToken", token);
+              //localStorage.setItem("userData", JSON.stringify(user));
+
+              // Redirect based on where the user came from
+              const cameFromMotorInsurance = localStorage.getItem("cameFromMotorInsurance");
+
+              if (cameFromMotorInsurance) {
+                  navigate("/motor-insurance-quote-form")
+                  localStorage.removeItem("cameFromMotorInsurance"); // Remove after detecting it
+              } else {
+                  navigate("/dashboard/home");
+              }
+          } else {
+              toast.error(otpVerificationResponse.message || "otp verification failed");
+          }
+        } catch (error) {
+          console.error("Error during signIn:", error);
+          toast.error("Something went wrong, please try again.");
+        } finally {
+          toast.dismiss(toastId)
+        }
+    };
 
   return (
-        <div className="h-screen md:flex bg-white shadow-lg rounded-2xl overflow-hidden w-full ">          
+        <div className="md:h-screen md:flex bg-white shadow-lg rounded-2xl overflow-hidden w-full ">          
         
             <div className="md:w-1/2 p-8 flex flex-col items-center justify-center text-center">
                 <img src="/assets/logo/logo4.jpg" alt="Company Logo" className="max-w-[50%] mx-auto mb-1" />  
@@ -45,7 +124,7 @@ const OTPVerificationComponent = () => {
                       <OTPInput
                           value={otp}
                           onChange={setOtp}
-                          numInputs={6}
+                          numInputs={4}
                           renderInput = {(props) => <input {...props} /> }
                               renderSeparator = {<span style={{ width: "4px" }}></span>}
                               inputStyle = {{
@@ -75,7 +154,7 @@ const OTPVerificationComponent = () => {
                         )}
                     </div>
                     
-                    <button onClick={handleSubmit} className="mt-8 w-full bg-green-600 text-white py-2.5 md:py-3 rounded-lg hover:bg-green-700 transition">
+                    <button onClick={handleVerifyOtp} className="mt-8 w-full bg-green-600 text-white py-2.5 md:py-3 rounded-lg hover:bg-green-700 transition">
                         Create Account
                     </button>
 

@@ -1,6 +1,7 @@
 import axiosClient from "@/services/axios-client";
 import { DocumentFormValues, DocumentUploadProps, UserFormValues, VehicleFormValues } from "@/types";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function useInsurance() {
     const client = axiosClient();
@@ -8,12 +9,18 @@ export default function useInsurance() {
 
     const submitUserDetails = async (data: UserFormValues) => {
         try {
+            //data.driver_license;
             const response = await client.post('/users', data);
+            localStorage.setItem('userData', JSON.stringify(response.data));
             return response.data;
+            //console.log("This is the response", response.data);
+            
         } catch (error: any) {
+            console.log('user error')
             const resError = error.response?.data;
             const errorMessage = resError?.message || resError?.data;
-            console.log(errorMessage);
+            toast.error(errorMessage);
+            //console.log(errorMessage);
             throw new Error(errorMessage);
         }
     };
@@ -32,15 +39,21 @@ export default function useInsurance() {
         }
     };
 
-    const submitVehicleDetails = async (data: VehicleFormValues) => {
+    const submitVehicleDetails = async (data: VehicleFormValues,) => {
         try {
-            const response = await client.post('/vehicles', data);
+            //const response = await client.post('/vehicles', data);
+            const token = localStorage.getItem("authToken");
+            const response = await client.post('/vehicles', data, {
+                headers: token ? { Authorization: `Bearer ${token}` } : {},
+            });
             console.log("This is the response", response.data);
+            localStorage.setItem('vehicleData', JSON.stringify(response.data));
             return response.data;
         } catch (error: any) {
             console.log(error);
             const resError = error.response?.data;
             const errorMessage = resError?.message || resError?.data;
+            toast.error(errorMessage);
             console.log(errorMessage);
             throw new Error(errorMessage);
         }
@@ -59,9 +72,11 @@ export default function useInsurance() {
                 formData.append('file', data.file);
             }
     
+            const token = localStorage.getItem("authToken");
             const response = await client.post('/documents/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                    ...(token ? { Authorization: `Bearer ${token}` } : {}), // Add token only if it exists
                 },
             });
             console.log("This is the response", response.data);
@@ -74,15 +89,21 @@ export default function useInsurance() {
         }
     };
 
-    const submitInsuranceDetails = async (userData: UserFormValues, vehicleData: VehicleFormValues, uploadData: DocumentFormValues) => {
+    const submitInsuranceDetails = async (/* userData: UserFormValues, */ vehicleData: VehicleFormValues, uploadData: DocumentFormValues) => {
         try {
             setLoading(true);
+            /* //console.log('I am in insurance')
             const userResponse = await submitUserDetails(userData);
+            //console.log('I am in insurance')
             console.log(userResponse);
+            
             if (!userResponse.message.includes("successfully")) {
+                console.log('didnt work')
                 throw new Error("User details not submitted successfully");
-            }
-            vehicleData.user_id = userResponse.data.id;
+            } */
+            const userData = JSON.parse(localStorage.getItem("userData") ?? '');
+            vehicleData.user_id = userData.id;
+            //vehicleData.user_id = userResponse.data.id;
             const vehicleResponse = await submitVehicleDetails(vehicleData);
             console.log(vehicleResponse);
     

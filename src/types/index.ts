@@ -8,7 +8,7 @@ export interface UserFormValues{
     last_name:string;
     email:string;
     phone_number:string;
-    driver_license:string;
+    driver_license?:string;
     license_expire_year:number;
     year_of_driving:number;
 }
@@ -25,7 +25,15 @@ export interface VehicleFormValues{
     car_type:string;
     chassis_number:string;
     engine_number:string;
-    with_effect_from:string;
+    with_effect_from: string;
+    
+    //New additions from personal details
+    insurance_type: "premium" | "third_party";
+    category:string;
+    sub_category: string;
+    driver_license?:string;
+    license_expire_year:number;
+    year_of_driving:number;
 }
 
 export interface DocumentFormValues{

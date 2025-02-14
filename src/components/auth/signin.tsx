@@ -4,16 +4,85 @@ import bgImg from "../../assets/auth/bgImg.png";
 import googleImg from "../../assets/auth/google.svg";
 import linkedinImg from "../../assets/auth/linkedin.svg";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { baseUrl } from "@/services/axios-client";
 
 
 
 export default function SigninComponent() {
 
+    const navigate = useNavigate();
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const [userFormData, setUserFormData] = useState({
+        email: "",
+        password: "",
+    });
+
+    const handleInputChange = (e:any) => {
+        setUserFormData({...userFormData, [e.target.name]: e.target.value });
+    };
+    const handleSignIn = async (e: any) => {
+        e.preventDefault();
+        const toastId = toast.loading("Processing...")
+
+        if(
+            userFormData.email === "" ||
+            userFormData.password === ""
+        ){
+            toast.error("Please fill all the required fields");
+            toast.dismiss(toastId)
+            return;
+        }
+        try {
+        const signInRequest = await fetch(`${baseUrl}/user/login`, {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userFormData),
+        });
+
+        const signInResponse = await signInRequest.json();
+        console.log(signInResponse);
+
+        if (signInRequest.ok) {
+            toast.success("User logged in successfully");
+
+            // Simulating a response with token and user details
+            const { token, user } = signInResponse.data;
+
+            // Save user data & token to localStorage
+            localStorage.setItem("authToken", token);
+            localStorage.setItem("userData", JSON.stringify(user));
+
+            // Redirect based on where the user came from
+            const cameFromMotorInsurance = localStorage.getItem("cameFromMotorInsurance");
+
+            if (cameFromMotorInsurance) {
+                navigate("/motor-insurance-quote-form")
+            localStorage.removeItem("cameFromMotorInsurance"); // Remove after detecting it
+            } else {
+                navigate("/dashboard/home");
+            }
+        } else {
+            toast.error(signInResponse.message || "signIn failed");
+            if (signInResponse.message.includes("Please verify your Account")) {
+                toast.error("Attempt to resend otp")
+                localStorage.setItem("otpEmail", userFormData.email)
+                navigate("/auth/otp")
+            }
+        }
+        } catch (error) {
+        console.error("Error during signIn:", error);
+        toast.error("Something went wrong, please try again.");
+        } finally {
+            toast.dismiss(toastId)
+        }
+    };
+
     return (
-        <div className="h-screen md:flex bg-white shadow-lg rounded-2xl overflow-hidden w-full ">          
-            {/* Left Section - Form */}
-            
+        <div className="md:h-screen md:flex bg-white shadow-lg rounded-2xl overflow-hidden w-full ">        
             <div className="md:w-1/2 p-8 flex flex-col items-center justify-center text-center">
                 <div className="mb-6">
                     <img src="/assets/logo/logo4.jpg" alt="Company Logo" className="max-w-[50%] mx-auto" />
@@ -25,13 +94,17 @@ export default function SigninComponent() {
                     <input
                         type="email"
                         placeholder="Enter your email"
+                        onChange={handleInputChange}
+                        name="email"
                         className="w-full border-2 border-[#D3CDCD] px-4 py-2 lg:py-2.5 mb-5 focus:outline-none"
                     />
                     <div className="relative">
                         <input
-                        type={isPasswordVisible ? "text":"password"}
-                        placeholder="Enter your password"
-                        className="w-full border-2 border-[#D3CDCD] px-4 py-2 lg:py-2.5 pr-10 focus:outline-none"
+                            type={isPasswordVisible ? "text":"password"}
+                            placeholder="Enter your password"
+                            onChange={handleInputChange}
+                            name="password"    
+                            className="w-full border-2 border-[#D3CDCD] px-4 py-2 lg:py-2.5 pr-10 focus:outline-none"
                         />
                         {isPasswordVisible ?              
                         <span className="absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer">
@@ -50,13 +123,15 @@ export default function SigninComponent() {
                         <a href="#" className="text-[#009345] font-bold text-sm">Forgot your password?</a>
                     </div>
 
-                    <button className="mt-8 w-full bg-green-600 text-white py-2.5 rounded-lg hover:bg-green-700 transition">
+                    <button
+                        onClick={handleSignIn}
+                        className="mt-8 w-full bg-green-600 text-white py-2.5 rounded-lg hover:bg-green-700 transition">
                         Sign in
                     </button>
                 </form>
 
                 <p className="mt-4 text-center text-sm">
-                    Don’t have a PHC account? <a href="/auth/signup" className="text-[#009345] font-bold">Sign up</a>
+                    Don’t have a PHC account? <a href="/auth/signIn" className="text-[#009345] font-bold">Sign up</a>
                 </p>
 
                 <div className="flex items-center my-7">

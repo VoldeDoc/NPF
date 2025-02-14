@@ -92,6 +92,7 @@ const PersonalDetails = ({
   const onSubmit: SubmitHandler<UserFormValues> = (data) => {
     setUserData({ ...data, selectedIdType });
     setCurrentStep(currentStep + 1);
+    //localStorage.setItem('userData', JSON.stringify({...data, selectedIdType}));
   };
 
 
