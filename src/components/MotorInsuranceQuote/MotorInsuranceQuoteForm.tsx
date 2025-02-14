@@ -1,6 +1,6 @@
 import heroImg from "../../assets/insurance/hero.png";
 import { useEffect, useState } from "react";
-import PersonalDetails from "./Tools/PersonalDetails";
+//import PersonalDetails from "./Tools/PersonalDetails";
 import VehicleDetails from "./Tools/VehicleDetails";
 import UploadDetails from "./Tools/UploadDetails";
 import Checkout from "./Tools/Checkout";
@@ -11,6 +11,7 @@ export default function MotorInsuranceQuote() {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(2);
   const [userData, setUserData] = useState(null);
+  console.log(userData)
   const [vehicleData, setVehicleData] = useState(null);
   const [uploadData, setUploadData] = useState<{ validId: File | null; vehicleLicense: File | null; utilityBill: File | null; } | null>({
     validId: null,

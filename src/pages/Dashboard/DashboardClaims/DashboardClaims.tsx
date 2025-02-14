@@ -24,7 +24,7 @@ const ClaimForm = () => {
     );
 };
 
-const ClaimProcessSteps = () => {
+/* const ClaimProcessSteps = () => {
   return (
     <div className="mt-6 text-sm">
       <p className="text-red-600 font-semibold">Registration: <span className="text-black">Notify us of the accident, theft, or claim by filling the form above.</span></p>
@@ -33,7 +33,7 @@ const ClaimProcessSteps = () => {
       <p className="text-red-600 font-semibold mt-2">Settlement: <span className="text-black">Claim is settled on confirmation.</span></p>
     </div>
   );
-};
+}; */
 
 export default function DashboardClaimsPage() {
   return (

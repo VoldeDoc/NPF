@@ -1,6 +1,6 @@
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import bgImg from "../../assets/auth/bgImg.png";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { baseUrl } from "@/services/axios-client";
 import { useNavigate } from "react-router-dom";

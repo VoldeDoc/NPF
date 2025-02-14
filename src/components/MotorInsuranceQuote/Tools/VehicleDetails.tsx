@@ -1,7 +1,7 @@
 import ProgressBar from "./ProgressBar";
-import { BackButton } from "./NextButton";
+//import { BackButton } from "./NextButton";
 import downArrow from "../../../assets/insurance/down-arrow.svg";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Resolver } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { VehicleFormValues } from "@/types";
@@ -61,7 +61,7 @@ const VehicleDetails = ({
     handleSubmit,
     formState: { errors },
   } = useForm<VehicleFormValues>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema) as Resolver<VehicleFormValues>,
     defaultValues: initialValues,
   });
 
