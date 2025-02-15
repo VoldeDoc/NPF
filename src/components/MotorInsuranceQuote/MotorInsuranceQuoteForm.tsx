@@ -13,8 +13,8 @@ export default function MotorInsuranceQuote() {
   const [userData, setUserData] = useState(null);
   console.log(userData)
   const [vehicleData, setVehicleData] = useState(null);
-  const [uploadData, setUploadData] = useState<{ validId: File | null; vehicleLicense: File | null; utilityBill: File | null; } | null>({
-    validId: null,
+  const [uploadData, setUploadData] = useState<{ nin: File | null; vehicleLicense: File | null; utilityBill: File | null; } | null>({
+    nin: null,
     vehicleLicense: null,
     utilityBill: null,
   });
@@ -64,7 +64,7 @@ export default function MotorInsuranceQuote() {
             currentStep={currentStep}
             setCurrentStep={setCurrentStep}
             setUploadData={setUploadData}
-            initialValues={uploadData || { validId: null, vehicleLicense: null, utilityBill: null }}
+            initialValues={uploadData || { nin: null, vehicleLicense: null, utilityBill: null }}
             selectedIdType={selectedIdType} 
           />
         )}

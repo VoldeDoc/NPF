@@ -32,13 +32,13 @@ export interface VehicleFormValues{
     category:string;
     sub_category: string;
     driver_license?:string;
-    license_expire_year:number;
-    year_of_driving:number;
+    license_expire_year: Date; // Now a Date object
+    year_of_driving:number | string;
 }
 
 export interface DocumentFormValues{
     user_id:number;
-    validId:File;
+    nin:File;
     vehicleLicense:File;
     utility_bill:File;
 }

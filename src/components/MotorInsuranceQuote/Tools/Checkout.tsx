@@ -2,6 +2,7 @@ import ProgressBar from "./ProgressBar";
 import { BackButton } from "./NextButton";
 import UseInsurance from "@/hooks/UseInsurance";
 import { toast } from "react-toastify";
+import useFetchPaymentAmount from "@/hooks/UseFetchPaymentAmount";
 
 const Checkout = ({
   currentStep,
@@ -18,12 +19,13 @@ const Checkout = ({
 }) => {
   const { submitInsuranceDetails, initializePayment, loading } = UseInsurance();
 
-  const handlePayNow = async () => {
-    if (/* !userData || */ !vehicleData || !uploadData) {
+  const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+  /* const handlePayNow = async () => {
+    if (!userData || !vehicleData || !uploadData) {
       toast.error("Missing required data. Please go back and complete all steps.");
       return;
     }
-    const response = await submitInsuranceDetails(/* userData, */ vehicleData, uploadData);
+    const response = await submitInsuranceDetails( vehicleData, uploadData);
     if (response && response.message) {
       if (!(response instanceof Error)) {
         toast.success(response.message);
@@ -36,9 +38,38 @@ const Checkout = ({
         }
       }
     }
+  }; */
+
+  // Get Amount User is meant to pay
+
+
+  const handlePayNow = async () => {
+    if (!vehicleData || !uploadData) {
+        toast.error("Missing required data. Please go back and complete all steps.");
+        return;
+    }
+
+    const response = await submitInsuranceDetails(vehicleData, uploadData);
+    
+    if (!response) {
+        toast.error("Failed to submit insurance details. Please try again.");
+        return;
+    }
+
+    toast.success(response.message);
+    const paymentResponse = await initializePayment(response.userId);
+
+    if (paymentResponse && paymentResponse.data.authorization_url) {
+        toast.success("Redirecting to payment gateway...");
+        window.open(paymentResponse.data.authorization_url, "_self");
+    } else {
+        toast.error("Payment initialization failed");
+    }        
   };
 
-  const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+  const { amount, loadingAmount } = useFetchPaymentAmount(userData.id);
+
+  
 
   return (
     <section className="">
@@ -138,10 +169,10 @@ const Checkout = ({
 
         <div>
           <h3 className="font-semibold text-lg">Uploaded Documents</h3>
-          {uploadData.validId?.name && (
+          {uploadData.nin?.name && (
             <div className="text-base">
-              <span className="font-semibold">Valid ID:</span>{" "}
-              {uploadData.validId.name}
+              <span className="font-semibold">NIN:</span>{" "}
+              {uploadData.nin.name}
             </div>
           )}
           {uploadData.vehicleLicense?.name && (
@@ -168,12 +199,19 @@ const Checkout = ({
         </p>
 
         <p className="font-semibold text-sm md:text-xl text-[#000000CC]">
-          Third Party Insurance -{" "}
-          {(20000).toLocaleString("en-NG", {
-            style: "currency",
-            currency: "NGN",
-          })}
+          {vehicleData.insurance_type} -{" "}
+          {loadingAmount ? (
+            "Loading..."
+          ) : amount ? (
+            amount.toLocaleString("en-NG", {
+              style: "currency",
+              currency: "NGN",
+            })
+          ) : (
+            "Not available"
+          )}
         </p>
+
       </div>
 
       <hr className="my-5" />

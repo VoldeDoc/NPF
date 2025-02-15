@@ -120,38 +120,39 @@ const OTPVerificationComponent = () => {
                     <h2 className="text-xl font-semibold mb-2">OTP Verification</h2>
                     <p className="text-sm text-gray-600 mb-4">We sent a code to {localStorage.getItem("signupEmail") || localStorage.getItem("otpEmail")}</p>
 
-                    <div className="md:max-w-[100%] mx-auto">
-                      <OTPInput
-                          value={otp}
-                          onChange={setOtp}
-                          numInputs={4}
-                          renderInput = {(props) => <input {...props} /> }
-                              renderSeparator = {<span style={{ width: "4px" }}></span>}
-                              inputStyle = {{
-                                  marginBottom:"",
-                                  width: "50px",
-                                  marginInline:"auto",
-                                  height: "50px",
-                                  border: "2px solid #D3CDCD",
-                                  /* borderRadius:"5.3px", */
-                                  //padding: "13px 20px",
-                                  outline: "none",
-                                  textAlign: "center",
-                                  fontSize:  "14px",
-                                  fontWeight: "700",
-                                  background: "#FFFFFF",
-                                  caretColor: "#38CB89"
-                              }}
-                      />
-                    </div>
-
-                    <div className="flex justify-between items-center mt-4">
-                        <span className="text-green-600">{Math.floor(timer / 60)}:{('0' + (timer % 60)).slice(-2)}</span>
-                        {!resendEnabled ? (
-                        <span className="text-gray-400">Didn't get a code?</span>
-                        ) : (
-                        <button onClick={handleResend} className="text-green-600 font-medium">Resend</button>
-                        )}
+                    <div className="sm:max-w-[50%] mx-auto">
+                      <div className="mx-auto">
+                        <OTPInput
+                            value={otp}
+                            onChange={setOtp}
+                            numInputs={4}
+                            renderInput = {(props) => <input {...props} /> }
+                                renderSeparator = {<span style={{ width: "4px" }}></span>}
+                                inputStyle = {{
+                                    marginBottom:"",
+                                    width: "50px",
+                                    marginInline:"auto",
+                                    height: "50px",
+                                    border: "2px solid #D3CDCD",
+                                    /* borderRadius:"5.3px", */
+                                    //padding: "13px 20px",
+                                    outline: "none",
+                                    textAlign: "center",
+                                    fontSize:  "14px",
+                                    fontWeight: "700",
+                                    background: "#FFFFFF",
+                                    caretColor: "#38CB89"
+                                }}
+                        />
+                      </div>
+                      <div className="flex justify-between items-center mt-4">
+                          <span className="text-green-600">{Math.floor(timer / 60)}:{('0' + (timer % 60)).slice(-2)}</span>
+                          {!resendEnabled ? (
+                          <span className="text-gray-400">Didn't get a code?</span>
+                          ) : (
+                          <button onClick={handleResend} className="text-green-600 font-medium">Resend</button>
+                          )}
+                      </div>
                     </div>
                     
                     <button onClick={handleVerifyOtp} className="mt-8 w-full bg-green-600 text-white py-2.5 md:py-3 rounded-lg hover:bg-green-700 transition">

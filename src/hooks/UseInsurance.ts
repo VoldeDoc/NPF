@@ -129,13 +129,13 @@ export default function useInsurance() {
                         file: uploadData.utility_bill as File & { type: "application/pdf" | "image/jpeg" | "image/png" }
                     };
                     break;
-                case !!uploadData.validId?.name:
-                    validateFile(uploadData.validId);
+                case !!uploadData.nin?.name:
+                    validateFile(uploadData.nin);
                     document = {
                         user_id: vehicleResponse.vehicle.user_id,
                         type: "government_id",
                         document_type: "international_passport",
-                        file: uploadData.validId as File & { type: "image/jpeg" | "image/png" | "application/pdf" }
+                        file: uploadData.nin as File & { type: "image/jpeg" | "image/png" | "application/pdf" }
                     };
                     break;
                 case !!uploadData.vehicleLicense?.name:
@@ -164,8 +164,11 @@ export default function useInsurance() {
     
             const errorMessage = resError?.message || resError?.data || error.message;
             console.log(errorMessage);
+            toast.error(errorMessage);
+
             setLoading(false);
-            return { message: errorMessage };
+            return null;
+            //return { message: errorMessage };
         }
     };
 

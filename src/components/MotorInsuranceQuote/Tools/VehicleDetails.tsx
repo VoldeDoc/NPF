@@ -19,9 +19,12 @@ const schema = yup.object().shape({
   motor_type: yup.string().required("Motor Type is required"),
   model: yup.string().required("Model is required"),
   body_color: yup.string().required("Body Color is required"),
-  year: yup
+  /* year: yup
     .number()
     .min(1980, "The car year field must be at least 1980.")
+    .required("Car Year is required"), */
+  year: yup
+    .string() // Now a string
     .required("Car Year is required"),
   car_type: yup.string().required("Car Type is required"),
   chassis_number: yup.string().required("Chassis Number is required"),
@@ -37,13 +40,13 @@ const schema = yup.object().shape({
   sub_category: yup.string().required("Subcategory is required"),
   driver_license: yup.string().required("Driver licence number is required"),
   license_expire_year: yup
-    .number()
-    .min(2025, "The license expire year field must be at least 2025.")
-    .required("Driver license expiry date is required"),
+      .date()
+      .min(new Date(), "License expiry date must be in the future.") // Min date is now
+      .required("Driver license expiry date is required"),
   year_of_driving: yup
     .number()
-    .min(1, "Years of driving must be at least 1.")
-    .required("Years of driving is required"),
+    .required("Years of driving is required")
+    .min(1, "Years of driving must be at least 1."),
 });
 
 const VehicleDetails = ({
@@ -69,7 +72,14 @@ const VehicleDetails = ({
   });
 
   const onSubmit: SubmitHandler<VehicleFormValues> = (data) => {
-    setVehicleData(data);
+    // Extract only year out of the license_expire_year
+    const yearToSend = data.license_expire_year.getFullYear().toString(); // Extract year
+    const dataToSend = {
+        ...data,
+        license_expire_year: yearToSend, // Send only the year string
+    };
+
+    setVehicleData(dataToSend);
     setCurrentStep((prev) => prev + 1)
     //localStorage.setItem('vehicleData', JSON.stringify(data));
   };
@@ -121,6 +131,16 @@ const VehicleDetails = ({
       }
     };
     fetchCarModels();
+  }, []);
+
+  const [carYears, setCarYears] = useState<any>([]);
+
+  useEffect(() => {
+    const years = [];
+    for (let i = 2001; i <= 2040; i++) {
+      years.push({ id: i, name: i.toString() }); // Store as strings
+    }
+    setCarYears(years);
   }, []);
 
 
@@ -180,58 +200,61 @@ const VehicleDetails = ({
         id="vehicle-details"
         className="mt-8 lg:mt-14 py-5 space-y-6 md:space-y-12 text-[#00000080] font-medium text-sm md:text-base"
       >
-        <div className="flex flex-col gap-3 md:gap-4 w-full">
-          <label htmlFor="insurance_type">INSURANCE TYPE *</label>
-          <div className="relative">
-            <select
-              {...register("insurance_type")}
-              className="bg-[#F4F4F4] border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full appearance-none text-[#7A7575]"
-            >
-              <option value="">Select Insurance Type</option>
-              <option value="premium">Premium</option>
-              <option value="third_party">Third Party</option>
-            </select>
-            <img src={downArrow} alt="down-arrow" className="w-10 h-10 absolute transform right-2 top-1/2 -translate-y-1/2" />
-            {errors.insurance_type && <p className="text-red-500 text-xs mt-1">{errors.insurance_type.message}</p>}
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-3 md:gap-4 w-full">
-            <label htmlFor="category">CATEGORY *</label>
+        <div className="flex flex-col md:flex-row gap-6 md:gap-12">
+          <div className="flex flex-col gap-3 md:gap-4 w-full">
+            <label htmlFor="insurance_type">INSURANCE TYPE *</label>
             <div className="relative">
               <select
-                {...register("category")}
+                {...register("insurance_type")}
                 className="bg-[#F4F4F4] border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full appearance-none text-[#7A7575]"
-                onChange={handleCategoryChange}
               >
-                <option value="">Select Category</option>
-                {categories.map(category => (
-                  <option key={category.id} value={category.name}>{category.name}</option>
-                ))}
+                <option value="">Select Insurance Type</option>
+                <option value="premium">Premium</option>
+                <option value="third_party">Third Party</option>
               </select>
               <img src={downArrow} alt="down-arrow" className="w-10 h-10 absolute transform right-2 top-1/2 -translate-y-1/2" />
-              {errors.category && <p className="text-red-500 text-xs mt-1">{errors.category.message}</p>}
+              {errors.insurance_type && <p className="text-red-500 text-xs mt-1">{errors.insurance_type.message}</p>}
             </div>
           </div>
-
-          {selectedCategory && (
-            <div className="flex flex-col gap-3 md:gap-4 w-full">
-              <label htmlFor="sub_category">SUBCATEGORY *</label>
+          <div className="flex flex-col gap-3 md:gap-4 w-full">
+              <label htmlFor="category">CATEGORY *</label>
               <div className="relative">
                 <select
-                  {...register("sub_category")}
+                  {...register("category")}
                   className="bg-[#F4F4F4] border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full appearance-none text-[#7A7575]"
+                  onChange={handleCategoryChange}
                 >
-                  <option value="">Select Subcategory</option>
-                  {subCategories.map(subCategory => (
-                    <option key={subCategory.id} value={subCategory.name}>{subCategory.name}</option>
+                  <option value="">Select Category</option>
+                  {categories.map(category => (
+                    <option key={category.id} value={category.name}>{category.name}</option>
                   ))}
                 </select>
                 <img src={downArrow} alt="down-arrow" className="w-10 h-10 absolute transform right-2 top-1/2 -translate-y-1/2" />
-                {errors.sub_category && <p className="text-red-500 text-xs mt-1">{errors.sub_category.message}</p>}
+                {errors.category && <p className="text-red-500 text-xs mt-1">{errors.category.message}</p>}
               </div>
+          </div>
+        </div>
+
+        {selectedCategory && (
+          <div className="flex flex-col gap-3 md:gap-4 w-full">
+            <label htmlFor="sub_category">SUBCATEGORY *</label>
+            <div className="relative">
+              <select
+                {...register("sub_category")}
+                className="bg-[#F4F4F4] border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full appearance-none text-[#7A7575]"
+              >
+                <option value="">Select Subcategory</option>
+                {subCategories.map(subCategory => (
+                  <option key={subCategory.id} value={subCategory.name}>{subCategory.name}</option>
+                ))}
+              </select>
+              <img src={downArrow} alt="down-arrow" className="w-10 h-10 absolute transform right-2 top-1/2 -translate-y-1/2" />
+              {errors.sub_category && <p className="text-red-500 text-xs mt-1">{errors.sub_category.message}</p>}
             </div>
-          )}
+          </div>
+        )}        
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
           <div className="flex flex-col gap-3 md:gap-4 w-full">
             <label htmlFor="id_type">Select an ID type *</label>
             <div className="relative">
@@ -243,39 +266,39 @@ const VehicleDetails = ({
                 required
               >
                 <option value="">Select ID type</option>
-                <option value="validId">Valid ID</option>
+                <option value="nin">NIN</option>
                 <option value="vehicleLicense">Vehicle License</option>
                 <option value="utilityBill">Utility Bill</option>
               </select>
               <img src={downArrow} alt="down-arrow" className="w-10 h-10 absolute transform right-2 top-1/2 -translate-y-1/2" />
             </div>
           </div>
-        
-          <div className="flex flex-col md:flex-row gap-6 md:gap-12">
-            <div className="flex flex-col gap-3 md:gap-4 w-full">
-              <label htmlFor="driver_license">Driver licence Number*</label>
-              <input
-                {...register("driver_license")}
-                placeholder="Driver licence Number"
-                type="text"
-                className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full text-black"
-              />
-              {errors.driver_license && <p className="text-red-500 text-xs mt-1">{errors.driver_license.message}</p>}
-            </div>
-            <div className="flex flex-col gap-3 md:gap-4 w-full">
+          <div className="flex flex-col gap-3 md:gap-4 w-full">
+            <label htmlFor="driver_license">Driver licence Number*</label>
+            <input
+              {...register("driver_license")}
+              placeholder="Driver licence Number"
+              type="text"
+              className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full text-black"
+            />
+            {errors.driver_license && <p className="text-red-500 text-xs mt-1">{errors.driver_license.message}</p>}
+          </div>
+          <div className="flex flex-col gap-3 md:gap-4 w-full">
               <label htmlFor="license_expire_year">Driver Licence Expiry Date *</label>
               <input
-                {...register("license_expire_year")}
-                placeholder=""
-                type="number"
-                min={new Date().getFullYear()}
-                className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full text-black"
+                  {...register("license_expire_year")}
+                  type="date" // Input type is now "date"
+                  min={new Date().toISOString().split('T')[0]} // Set min attribute
+                  className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full text-black"
               />
               {errors.license_expire_year && <p className="text-red-500 text-xs mt-1">{errors.license_expire_year.message}</p>}
-            </div>
           </div>
+        </div>
 
-          <div className="flex flex-col gap-3 md:gap-4 w-full">
+        
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12">
+          {/* <div className="flex flex-col gap-3 md:gap-4 w-full">
             <label htmlFor="year_of_driving">Years of Driving*</label>
             <div className="relative">
               <input
@@ -287,9 +310,26 @@ const VehicleDetails = ({
               <img src={downArrow} alt="down-arrow" className="w-10 h-10 absolute transform right-2 top-1/2 -translate-y-1/2" />
               {errors.year_of_driving && <p className="text-red-500 text-xs mt-1">{errors.year_of_driving.message}</p>}
             </div>
+          </div> */}
+
+          <div className="flex flex-col gap-3 md:gap-4 w-full">
+            <label htmlFor="year_of_driving">Years of Driving*</label>
+            <div className="relative">
+              <select
+                id="year_of_driving"
+                {...register("year_of_driving")}
+                className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full appearance-none text-black"
+              >
+                <option value="">Years of Driving*</option>
+                <option value={1}>1 year</option>
+                <option value={2}>2 years</option>
+                <option value={3}>3+ years</option>
+              </select>
+              <FaChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
+              {errors.year_of_driving && <p className="text-red-500 text-xs mt-1">{errors.year_of_driving.message}</p>}
+            </div>
           </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
           <div className="flex flex-col gap-3 md:gap-4 w-full">
             <label htmlFor="vehicle_registration_number">
               Vehicle Registration Number *
@@ -381,7 +421,7 @@ const VehicleDetails = ({
             {errors.body_color && <p className="text-red-500">{errors.body_color.message}</p>}
           </div>
 
-          <div className="flex flex-col gap-4 w-full">
+          {/* <div className="flex flex-col gap-4 w-full">
             <label htmlFor="year">Select Year *</label>
             <input
               id="year"
@@ -389,6 +429,25 @@ const VehicleDetails = ({
               {...register("year")}
               className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full text-black"
             />
+            {errors.year && <p className="text-red-500">{errors.year.message}</p>}
+          </div>  */}
+          <div className="flex flex-col gap-4 w-full">
+            <label htmlFor="year">Select Year *</label>
+            <div className="relative">
+              <select
+                id="year"
+                {...register("year")}
+                className="bg-inherit border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full appearance-none text-black"
+              >
+                <option value="">Select Year</option>
+                {carYears.map((year: any, index:number) => (
+                  <option key={year.id || index } value={year.name}>
+                    {year.name}
+                  </option>
+                ))}
+              </select>
+              <FaChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none" />
+            </div>
             {errors.year && <p className="text-red-500">{errors.year.message}</p>}
           </div>
 
