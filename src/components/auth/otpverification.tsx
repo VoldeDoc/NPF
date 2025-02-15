@@ -118,7 +118,7 @@ const OTPVerificationComponent = () => {
                 <div className="text-center">
                     <img src={otpImg} alt="otp key" className="max-w-16 lg:max-w-20 mx-auto mb-4" />
                     <h2 className="text-xl font-semibold mb-2">OTP Verification</h2>
-                    <p className="text-sm text-gray-600 mb-4">We sent a code to joel@silexsecure.com</p>
+                    <p className="text-sm text-gray-600 mb-4">We sent a code to {localStorage.getItem("signupEmail") || localStorage.getItem("otpEmail")}</p>
 
                     <div className="md:max-w-[100%] mx-auto">
                       <OTPInput

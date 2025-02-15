@@ -21,7 +21,7 @@ export interface VehicleFormValues{
     motor_type:string;
     model:string;
     body_color:string;
-    year:string;
+    year:string | number;
     car_type:string;
     chassis_number:string;
     engine_number:string;

@@ -172,12 +172,15 @@ export default function useInsurance() {
     const initializePayment = async (userId: number | string) => {
         try {
             setLoading(true);
+            
             console.log(userId)
             console.log(`${window.location.origin}/payments/callback`);
-            
+            const token = localStorage.getItem("authToken");
             const response = await client.post('/payments/initialize', {
                 user_id: userId,
                 callbackurl: `${window.location.origin}/payments/callback`
+            },{
+                headers: token ? { Authorization: `Bearer ${token}` } : {},
             });             
             setLoading(false);
             return response.data;

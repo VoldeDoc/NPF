@@ -19,7 +19,10 @@ const schema = yup.object().shape({
   motor_type: yup.string().required("Motor Type is required"),
   model: yup.string().required("Model is required"),
   body_color: yup.string().required("Body Color is required"),
-  year: yup.string().required("Car Year is required"),
+  year: yup
+    .number()
+    .min(1980, "The car year field must be at least 1980.")
+    .required("Car Year is required"),
   car_type: yup.string().required("Car Type is required"),
   chassis_number: yup.string().required("Chassis Number is required"),
   engine_number: yup.string().required("Engine Number is required"),

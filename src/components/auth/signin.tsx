@@ -61,7 +61,7 @@ export default function SigninComponent() {
 
             if (cameFromMotorInsurance) {
                 navigate("/motor-insurance-quote-form")
-            localStorage.removeItem("cameFromMotorInsurance"); // Remove after detecting it
+                localStorage.removeItem("cameFromMotorInsurance"); // Remove after detecting it
             } else {
                 navigate("/dashboard/home");
             }
@@ -70,6 +70,7 @@ export default function SigninComponent() {
             if (signInResponse.message.includes("Please verify your Account")) {
                 toast.error("Attempt to resend otp")
                 localStorage.setItem("otpEmail", userFormData.email)
+                localStorage.removeItem("signupEmail");
                 navigate("/auth/otp")
             }
         }

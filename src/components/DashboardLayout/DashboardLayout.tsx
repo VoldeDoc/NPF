@@ -65,6 +65,7 @@ const Sidebar = ({ isOpen, toggleSidebar }: { isOpen: boolean, toggleSidebar: ()
 
 
 const Header = ({ isOpen, toggleSidebar }: { isOpen: boolean, toggleSidebar: () => void }) => {
+  const userData = JSON.parse(localStorage.getItem("userData") || "{}");
   return (
     <header className="fixed top-0 left-0 md:left-64 w-full md:w-[calc(100vw-256px)] bg-white text-black px-6 md:px-16 
       flex justify-between items-center z-10 shadow h-16"
@@ -97,14 +98,14 @@ const Header = ({ isOpen, toggleSidebar }: { isOpen: boolean, toggleSidebar: () 
         
         {/* Profile Section */}
         <div className="flex items-center space-x-2">
-          <img
+          {/* <img
             src="/assets/images/profile.png"
             alt="Profile"
             className="w-8 h-8 rounded-full"
-          />
+          /> */}
           <div className="hidden md:block">
-            <p className="text-sm font-semibold">Mac Ekechukwu FIIN PhD</p>
-            <p className="text-xs text-gray-500">mac@pfninsurance.com</p>
+            <p className="text-sm font-semibold">{userData.first_name} {userData.last_name}</p>
+            <p className="text-xs text-gray-500">{userData.email}</p>
           </div>
         </div>
         {/* Mobile Menu Button */}
