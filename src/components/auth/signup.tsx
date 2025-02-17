@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { baseUrl } from "@/services/axios-client";
 import { useNavigate } from "react-router-dom";
 import downArrow from "../../assets/insurance/down-arrow.svg";
+import { getFirstErrorMessage } from "@/services/utils";
 
 export default function SignupComponent() {
   const navigate = useNavigate();
@@ -28,9 +29,9 @@ export default function SignupComponent() {
 
   /* useEffect(() => {
     // Check if the user came from the motor insurance page
-    const cameFromMotorInsurance = localStorage.getItem("cameFromMotorInsurance");
+    const cameFromMotorInsurance = sessionStorage.getItem("cameFromMotorInsurance");
     if (cameFromMotorInsurance) {
-      localStorage.removeItem("cameFromMotorInsurance"); // Remove after detecting it
+      sessionStorage.removeItem("cameFromMotorInsurance"); // Remove after detecting it
     }
   }, []); */
 
@@ -74,27 +75,16 @@ export default function SignupComponent() {
 
       if (signUpRequest.ok) {
         toast.success(signUpResponse.message || "User signed up successfully");
-        localStorage.setItem("signupEmail", userFormData.email);
-        navigate("/auth/otp")
-        localStorage.setItem("userData", JSON.stringify(signUpResponse.data));
-        /* // Simulating a response with token and user details
-        const { token, user } = signUpResponse;
-
-        // Save user data & token to localStorage
-        localStorage.setItem("authToken", token);
-        localStorage.setItem("userData", JSON.stringify(user));
-
-        // Redirect based on where the user came from
-        const cameFromMotorInsurance = localStorage.getItem("cameFromMotorInsurance");
-
-        if (cameFromMotorInsurance) {
-          navigate("/motor-insurance-form")
-          localStorage.removeItem("cameFromMotorInsurance"); // Remove after detecting it
-        } else {
-          navigate("/dashboard");
-        } */
+        sessionStorage.setItem("signupEmail", userFormData.email);
+        navigate("/auth/otp")        
       } else {
-        toast.error(signUpResponse.message || "Signup failed");
+        //signUpResponse.message == 'Validation error' ? toast.error(signUpResponse.errors[0]) : toast.error(signUpResponse.message || "Signup failed");         
+        if (signUpResponse.message === 'Validation error') {
+            const firstError = getFirstErrorMessage(signUpResponse.errors);
+            toast.error(firstError || "Validation error occurred."); // Display first error or generic message
+        } else {
+            toast.error(signUpResponse.message || "Signup failed");
+        }
       }
     } catch (error) {
       console.error("Error during signup:", error);
@@ -235,7 +225,7 @@ export default function SignupComponent() {
         </form>
 
         <p className="mt-4 text-center text-sm">
-          Already have a PHC account? <a href="/auth/signin" className="text-[#009345] font-bold">Login</a>
+          Already have an Npf Insurance account? <a href="/auth/signin" className="text-[#009345] font-bold">Login</a>
         </p>
       </div>
 

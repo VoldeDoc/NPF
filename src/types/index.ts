@@ -28,7 +28,7 @@ export interface VehicleFormValues{
     with_effect_from: string;
     
     //New additions from personal details
-    insurance_type: "premium" | "third_party";
+    insurance_package: "premium" | "third_party";
     category:string;
     sub_category: string;
     driver_license?:string;
@@ -40,7 +40,7 @@ export interface DocumentFormValues{
     user_id:number;
     nin:File;
     vehicleLicense:File;
-    utility_bill:File;
+    utilityBill:File;
 }
 
 export interface DocumentUploadProps{

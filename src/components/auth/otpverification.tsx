@@ -35,7 +35,7 @@ const OTPVerificationComponent = () => {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                email: localStorage.getItem("otpEmail")
+                email: sessionStorage.getItem("otpEmail")
               }),
           });
 
@@ -73,7 +73,7 @@ const OTPVerificationComponent = () => {
               },
               body: JSON.stringify({
                 otp,
-                email: localStorage.getItem("signupEmail") || localStorage.getItem("otpEmail")
+                email: sessionStorage.getItem("signupEmail") || sessionStorage.getItem("otpEmail")
               }),
           });
 
@@ -82,23 +82,7 @@ const OTPVerificationComponent = () => {
 
           if (otpVerificationRequest.ok) {
               toast.success("User verified successfully");
-
-              // Simulating a response with token and user details
-              //const { token, user } = otpVerificationResponse;
-
-              // Save user data & token to localStorage
-              //localStorage.setItem("authToken", token);
-              //localStorage.setItem("userData", JSON.stringify(user));
-
-              // Redirect based on where the user came from
-              const cameFromMotorInsurance = localStorage.getItem("cameFromMotorInsurance");
-
-              if (cameFromMotorInsurance) {
-                  navigate("/motor-insurance-quote-form")
-                  localStorage.removeItem("cameFromMotorInsurance"); // Remove after detecting it
-              } else {
-                  navigate("/dashboard/home");
-              }
+              navigate('/auth/signin')
           } else {
               toast.error(otpVerificationResponse.message || "otp verification failed");
           }
@@ -118,7 +102,7 @@ const OTPVerificationComponent = () => {
                 <div className="text-center">
                     <img src={otpImg} alt="otp key" className="max-w-16 lg:max-w-20 mx-auto mb-4" />
                     <h2 className="text-xl font-semibold mb-2">OTP Verification</h2>
-                    <p className="text-sm text-gray-600 mb-4">We sent a code to {localStorage.getItem("signupEmail") || localStorage.getItem("otpEmail")}</p>
+                    <p className="text-sm text-gray-600 mb-4">We sent a code to {sessionStorage.getItem("signupEmail") || sessionStorage.getItem("otpEmail")}</p>
 
                     <div className="sm:max-w-[50%] mx-auto">
                       <div className="mx-auto">

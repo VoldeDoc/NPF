@@ -1,4 +1,5 @@
 import axiosClient from "@/services/axios-client";
+import { getFirstErrorMessage } from "@/services/utils";
 import { DocumentFormValues, DocumentUploadProps, UserFormValues, VehicleFormValues } from "@/types";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -11,7 +12,7 @@ export default function useInsurance() {
         try {
             //data.driver_license;
             const response = await client.post('/users', data);
-            localStorage.setItem('userData', JSON.stringify(response.data));
+            sessionStorage.setItem('userData', JSON.stringify(response.data));
             return response.data;
             //console.log("This is the response", response.data);
             
@@ -19,8 +20,7 @@ export default function useInsurance() {
             console.log('user error')
             const resError = error.response?.data;
             const errorMessage = resError?.message || resError?.data;
-            toast.error(errorMessage);
-            //console.log(errorMessage);
+            toast.error(errorMessage);            
             throw new Error(errorMessage);
         }
     };
@@ -42,19 +42,25 @@ export default function useInsurance() {
     const submitVehicleDetails = async (data: VehicleFormValues,) => {
         try {
             //const response = await client.post('/vehicles', data);
-            const token = localStorage.getItem("authToken");
+            const token = sessionStorage.getItem("authToken");
             const response = await client.post('/vehicles', data, {
                 headers: token ? { Authorization: `Bearer ${token}` } : {},
             });
             console.log("This is the response", response.data);
-            localStorage.setItem('vehicleData', JSON.stringify(response.data));
-            return response.data;
+            sessionStorage.setItem('vehicleData', JSON.stringify(response.data.vehicle));
+            return response.data.vehicle;
         } catch (error: any) {
             console.log(error);
             const resError = error.response?.data;
             const errorMessage = resError?.message || resError?.data;
-            toast.error(errorMessage);
-            console.log(errorMessage);
+            //toast.error(errorMessage);
+            //console.log(errorMessage);
+            if (resError.message === 'validation error') {
+                const firstError = getFirstErrorMessage(resError.errors);
+                toast.error(firstError || "Validation error occurred."); // Display first error or generic message
+            } else {
+                toast.error(resError.message || "Vehicle details not submitted successfully");
+            }
             throw new Error(errorMessage);
         }
     };
@@ -72,7 +78,7 @@ export default function useInsurance() {
                 formData.append('file', data.file);
             }
     
-            const token = localStorage.getItem("authToken");
+            const token = sessionStorage.getItem("authToken");
             const response = await client.post('/documents/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -80,6 +86,7 @@ export default function useInsurance() {
                 },
             });
             console.log("This is the response", response.data);
+            sessionStorage.setItem('documentData', JSON.stringify(response.data.data));
             return response.data;
         } catch (error: any) {
             const resError = error.response?.data;
@@ -101,11 +108,28 @@ export default function useInsurance() {
                 console.log('didnt work')
                 throw new Error("User details not submitted successfully");
             } */
-            const userData = JSON.parse(localStorage.getItem("userData") ?? '');
+            const userData = JSON.parse(sessionStorage.getItem("userData") ?? '');
             vehicleData.user_id = userData.id;
-            //vehicleData.user_id = userResponse.data.id;
-            const vehicleResponse = await submitVehicleDetails(vehicleData);
-            console.log(vehicleResponse);
+            
+                    
+            /* const vehicleResponse = await submitVehicleDetails(vehicleData);
+            console.log(vehicleResponse); */
+
+            let vehicleResponse;
+
+            // Check if vehicle data already exists in sessionStorage
+            const storedVehicleData = sessionStorage.getItem("vehicleData");
+            if (storedVehicleData) {
+                console.log("Skipping vehicle submission, using stored data...");
+                vehicleResponse = JSON.parse(storedVehicleData);
+            } else {
+                // Submit vehicle details if not found in sessionStorage
+                vehicleResponse = await submitVehicleDetails(vehicleData);
+                console.log(vehicleResponse);
+
+                // Store vehicle data in sessionStorage for future use
+                //sessionStorage.setItem("vehicleData", JSON.stringify(vehicleResponse));
+            }
     
             let document: DocumentUploadProps | undefined = undefined;
             const validTypes = ["application/pdf", "image/jpeg", "image/png", "image/jpg"];
@@ -121,18 +145,18 @@ export default function useInsurance() {
             };
     
             switch (true) {
-                case !!uploadData.utility_bill?.name:
-                    validateFile(uploadData.utility_bill);
+                case !!uploadData.utilityBill?.name:
+                    validateFile(uploadData.utilityBill);
                     document = {
-                        user_id: vehicleResponse.vehicle.user_id,
+                        user_id: vehicleResponse.user_id,
                         type: "utility_bill",
-                        file: uploadData.utility_bill as File & { type: "application/pdf" | "image/jpeg" | "image/png" }
+                        file: uploadData.utilityBill as File & { type: "application/pdf" | "image/jpeg" | "image/png" }
                     };
                     break;
                 case !!uploadData.nin?.name:
                     validateFile(uploadData.nin);
                     document = {
-                        user_id: vehicleResponse.vehicle.user_id,
+                        user_id: vehicleResponse.user_id,
                         type: "government_id",
                         document_type: "international_passport",
                         file: uploadData.nin as File & { type: "image/jpeg" | "image/png" | "application/pdf" }
@@ -141,7 +165,7 @@ export default function useInsurance() {
                 case !!uploadData.vehicleLicense?.name:
                     validateFile(uploadData.vehicleLicense);
                     document = {
-                        user_id: vehicleResponse.vehicle.user_id,
+                        user_id: vehicleResponse.user_id,
                         type: "vehicle_license",
                         document_type: "driver_license",
                         file: uploadData.vehicleLicense as File & { type: "application/pdf" | "image/jpeg" | "image/png" }
@@ -178,10 +202,11 @@ export default function useInsurance() {
             
             console.log(userId)
             console.log(`${window.location.origin}/payments/callback`);
-            const token = localStorage.getItem("authToken");
+            const token = sessionStorage.getItem("authToken");
             const response = await client.post('/payments/initialize', {
                 user_id: userId,
-                callbackurl: `${window.location.origin}/payments/callback`
+                //callbackurl: `${window.location.origin}/payments/callback`
+                callbackurl: `${window.location.origin}/motor-insurance-quote-form`
             },{
                 headers: token ? { Authorization: `Bearer ${token}` } : {},
             });             

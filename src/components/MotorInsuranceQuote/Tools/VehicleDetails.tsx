@@ -32,7 +32,7 @@ const schema = yup.object().shape({
   with_effect_from: yup.string().required("Effect From date is required"),
 
   //New additions from personal details
-  insurance_type: yup
+  insurance_package: yup
     .string()
     .oneOf(["premium", "third_party"], "The selected insurance type is invalid.")
     .required("Field is required"),
@@ -81,11 +81,11 @@ const VehicleDetails = ({
 
     setVehicleData(dataToSend);
     setCurrentStep((prev) => prev + 1)
-    //localStorage.setItem('vehicleData', JSON.stringify(data));
+    //sessionStorage.setItem('vehicleData', JSON.stringify(data));
   };
 
   const { getCarType, getCarMakers, getCarModels } = useInsurance();
-  const [carType, setCarType] = useState([]);
+  const [carType, setCarType] = useState<any>([]);
   const [carMakers, setCarMakers] = useState([]);
   const [carModels, setCarModels] = useState([]);
 
@@ -95,7 +95,7 @@ const VehicleDetails = ({
         const response = await getCarType();
         console.log('car types');
         console.log(response);
-        setCarType(response);
+        //setCarType(response); //Backend has removed this route for now, so stop setting it atm
       } catch (error) {
         console.error("Error fetching car types:", error);
       }
@@ -103,6 +103,20 @@ const VehicleDetails = ({
 
     fetchCarTypes();
   }, []);
+
+  useEffect(() => {
+    setCarType([
+    { id: 1, name: "COUPE" },
+    { id: 2, name: "SEDAN" },
+    { id: 3, name: "SPORTS CAR" },
+    { id: 4, name: "STATION WAGON" },
+    { id: 5, name: "HATCHBACK" },
+    { id: 6, name: "CONVERTIBLE" },
+    { id: 7, name: "SPORT-UTILITY VEHICLE (SUV)" },
+    { id: 8, name: "MINIVAN" },
+    {id: 9, name: "PICKUP TRUCK"},
+  ])
+  },[])
 
 
   useEffect(() => {
@@ -202,10 +216,10 @@ const VehicleDetails = ({
       >
         <div className="flex flex-col md:flex-row gap-6 md:gap-12">
           <div className="flex flex-col gap-3 md:gap-4 w-full">
-            <label htmlFor="insurance_type">INSURANCE TYPE *</label>
+            <label htmlFor="insurance_package">INSURANCE TYPE *</label>
             <div className="relative">
               <select
-                {...register("insurance_type")}
+                {...register("insurance_package")}
                 className="bg-[#F4F4F4] border border-[#BBBFBD] py-2.5 px-3.5 outline-none w-full appearance-none text-[#7A7575]"
               >
                 <option value="">Select Insurance Type</option>
@@ -213,7 +227,7 @@ const VehicleDetails = ({
                 <option value="third_party">Third Party</option>
               </select>
               <img src={downArrow} alt="down-arrow" className="w-10 h-10 absolute transform right-2 top-1/2 -translate-y-1/2" />
-              {errors.insurance_type && <p className="text-red-500 text-xs mt-1">{errors.insurance_type.message}</p>}
+              {errors.insurance_package && <p className="text-red-500 text-xs mt-1">{errors.insurance_package.message}</p>}
             </div>
           </div>
           <div className="flex flex-col gap-3 md:gap-4 w-full">

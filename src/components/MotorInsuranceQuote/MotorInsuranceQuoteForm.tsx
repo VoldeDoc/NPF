@@ -5,12 +5,14 @@ import VehicleDetails from "./Tools/VehicleDetails";
 import UploadDetails from "./Tools/UploadDetails";
 import Checkout from "./Tools/Checkout";
 import SuccessfulPayment from "./Tools/SuccessfulPayment";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { baseUrl } from "@/services/axios-client";
 
 export default function MotorInsuranceQuote() {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(2);
   const [userData, setUserData] = useState(null);
+  const [searchParams] = useSearchParams(); // Get search params from URL
   console.log(userData)
   const [vehicleData, setVehicleData] = useState(null);
   const [uploadData, setUploadData] = useState<{ nin: File | null; vehicleLicense: File | null; utilityBill: File | null; } | null>({
@@ -23,16 +25,49 @@ export default function MotorInsuranceQuote() {
 
 
   useEffect(() => {
-    const storedUserData = localStorage.getItem("userData");
+    const storedUserData = sessionStorage.getItem("userData");
 
     if (!storedUserData) {
       // User is not authenticated, store redirection flag
-      localStorage.setItem("cameFromMotorInsurance", "true");
+      sessionStorage.setItem("cameFromMotorInsurance", "true");
       navigate("/auth/signup"); // Redirect to signup/login
     } else {
       setUserData(JSON.parse(storedUserData));
     }
   }, [navigate]);
+
+  //For reference after payment
+  useEffect(() => {
+    const paymentReference = searchParams.get("reference");
+    
+    let retries = 0;
+    const maxRetries = 10;
+
+    if (paymentReference) {
+      // Call backend to verify payment
+      const verifyPayment = async () => {
+        try {
+          const response = await fetch(`${baseUrl}/payments/callback?reference=${paymentReference}`);
+          const result = await response.json();
+          console.log(result);
+          if (result.success) {
+            // Payment was successful, navigate to dashboard
+            navigate("/dashboard/home");
+          } else if(result.status == "pending" && retries < maxRetries){
+            verifyPayment();
+            retries++;
+          } else {
+            // Payment failed, take user back to checkout (step 4), before doing this, setVehicleData and the document also
+            //setCurrentStep(4);
+          }
+        } catch (error) {
+          console.error("Error verifying payment:", error);
+          setCurrentStep(4); // Handle failure case
+        }
+      };
+      verifyPayment();
+    }
+  }, [searchParams, navigate]);
 
   return (
     <>
@@ -73,6 +108,7 @@ export default function MotorInsuranceQuote() {
             currentStep={currentStep}
             setCurrentStep={setCurrentStep}
             /* userData={userData} */
+            setVehicleData={setVehicleData}
             vehicleData={vehicleData}
             uploadData={uploadData}
           />

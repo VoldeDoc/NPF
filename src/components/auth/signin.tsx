@@ -52,16 +52,16 @@ export default function SigninComponent() {
             // Simulating a response with token and user details
             const { token, user } = signInResponse.data;
 
-            // Save user data & token to localStorage
-            localStorage.setItem("authToken", token);
-            localStorage.setItem("userData", JSON.stringify(user));
+            // Save user data & token to sessionStorage
+            sessionStorage.setItem("authToken", token);
+            sessionStorage.setItem("userData", JSON.stringify(user));
 
             // Redirect based on where the user came from
-            const cameFromMotorInsurance = localStorage.getItem("cameFromMotorInsurance");
+            const cameFromMotorInsurance = sessionStorage.getItem("cameFromMotorInsurance");
 
             if (cameFromMotorInsurance) {
                 navigate("/motor-insurance-quote-form")
-                localStorage.removeItem("cameFromMotorInsurance"); // Remove after detecting it
+                sessionStorage.removeItem("cameFromMotorInsurance"); // Remove after detecting it
             } else {
                 navigate("/dashboard/home");
             }
@@ -69,8 +69,8 @@ export default function SigninComponent() {
             toast.error(signInResponse.message || "signIn failed");
             if (signInResponse.message.includes("Please verify your Account")) {
                 toast.error("Attempt to resend otp")
-                localStorage.setItem("otpEmail", userFormData.email)
-                localStorage.removeItem("signupEmail");
+                sessionStorage.setItem("otpEmail", userFormData.email)
+                sessionStorage.removeItem("signupEmail");
                 navigate("/auth/otp")
             }
         }

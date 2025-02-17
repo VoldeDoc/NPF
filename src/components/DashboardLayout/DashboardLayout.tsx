@@ -6,10 +6,10 @@ import { Bell } from "lucide-react";
 
 const menuItems = [
   { name: "Home", icon: <Home size={20} />, path: "/dashboard/home" },
-  { name: "Claims", icon: <FileText size={20} />, path: "/dashboard/claims" },
-  { name: "Payment", icon: <CreditCard size={20} />, path: "/dashboard/payment" },
+  { name: "Claims", icon: <FileText size={20} />, path: /* "/dashboard/claims" */"#" },
+  { name: "Payment", icon: <CreditCard size={20} />, path: /* "/dashboard/payment"*/ "#" },
   { name: "Certificates", icon: <Award size={20} />, path: "/dashboard/certificates" },
-  { name: "Training", icon: <BookOpen size={20} />, path: "/dashboard/training" },
+  { name: "Training", icon: <BookOpen size={20} />, path:/*  "/dashboard/training" */ "#" },
 ];
 
 const Sidebar = ({ isOpen, toggleSidebar }: { isOpen: boolean, toggleSidebar: () => void }) => (
@@ -39,7 +39,7 @@ const Sidebar = ({ isOpen, toggleSidebar }: { isOpen: boolean, toggleSidebar: ()
             to={item.path}
             className={({ isActive }) =>
               `flex items-center px-4 py-3 text-gray-700 transition rounded ${
-                isActive ? "bg-[#009345] text-white" : "hover:bg-green-100"
+                isActive && item.path !== "#" ? "bg-[#009345] text-white" : "hover:bg-green-100"
               }`
             }
             onClick={toggleSidebar} // Close sidebar when a link is clicked on mobile
@@ -52,7 +52,7 @@ const Sidebar = ({ isOpen, toggleSidebar }: { isOpen: boolean, toggleSidebar: ()
 
       <div className="mt-auto p-4">
         <NavLink
-          to="/help"
+          to="#"
           className="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-200 rounded-md"
         >
           <HelpCircle size={20} className="mr-2" />
