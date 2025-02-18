@@ -93,7 +93,7 @@ const VehicleDetails = ({
     const fetchCarTypes = async () => {
       try {
         const response = await getCarType();
-        console.log('car types');
+        //console.log('car types');
         console.log(response);
         //setCarType(response); //Backend has removed this route for now, so stop setting it atm
       } catch (error) {
@@ -123,8 +123,8 @@ const VehicleDetails = ({
     const fetchCarMakers = async () => {
       try {
         const makers = await getCarMakers();
-        console.log('car makers');
-        console.log(makers);
+        //console.log('car makers');
+        //console.log(makers);
 
         setCarMakers(makers);
       } catch (error) {
@@ -138,7 +138,7 @@ const VehicleDetails = ({
     const fetchCarModels = async () => {
       try {
         const models = await getCarModels();
-        console.log(models);
+        //console.log(models);
         setCarModels(models);
       } catch (error) {
         console.log(error);
@@ -171,7 +171,7 @@ const VehicleDetails = ({
       try {
         const categories = await getCategories();
         setCategories(categories);
-        console.log(categories);
+        //console.log(categories);
       } catch (error) {
         console.log(error);
       }
