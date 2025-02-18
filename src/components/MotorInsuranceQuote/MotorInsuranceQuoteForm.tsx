@@ -36,6 +36,8 @@ export default function MotorInsuranceQuote() {
     }
   }, [navigate]);
 
+
+  const [pageDisplay, setPageDisplay] = useState<string>('normal');
   //For reference after payment
   useEffect(() => {
     const token = sessionStorage.getItem("authToken")
@@ -45,7 +47,9 @@ export default function MotorInsuranceQuote() {
     const maxRetries = 10;
 
     if (paymentReference) {
+      setPageDisplay('processingPayment');
       // Call backend to verify payment
+
       const verifyPayment = async () => {
         try {
           const response = await fetch(`${baseUrl}/payment/callbacks?reference=${paymentReference}`, {
@@ -59,16 +63,18 @@ export default function MotorInsuranceQuote() {
           console.log(result);
           if (result.payment.status == "success") {
             // Payment was successful, navigate to dashboard
+            setPageDisplay('normal');
             navigate("/dashboard/home");
           } else if (result.payment.status == "pending" && retries < maxRetries) {
             setTimeout(verifyPayment, 5000)
-            //verifyPayment();
             retries++;
           } else {
-            // Payment failed, take user back to checkout (step 4), before doing this, setVehicleData and the document also
+            setPageDisplay('normal');
             setCurrentStep(4);
+            
           }
         } catch (error) {
+          setPageDisplay('normal');
           console.error("Error verifying payment:", error);
           setCurrentStep(4); // Handle failure case
         }
@@ -77,6 +83,23 @@ export default function MotorInsuranceQuote() {
     }
   }, [searchParams, navigate]);
 
+  if (pageDisplay === 'processingPayment') {
+    return (
+      <>
+        <div className="w-full">
+          <img src={heroImg} alt="Hero img" className="w-full max-h-[300px] md:max-h-[500px]" />
+        </div>
+        <section className="flex flex-col gap-4 justify-center items-center h-full py-20">          
+          <h3 className="font-semibold text-lg text-red-500">
+            PROCESSING PAYMENT, PLEASE DON'T CLOSE OR REFRESH THIS PAGE WHILE PAYMENT IS IN PROGRESS...
+          </h3>
+          <p className="font-medium text-base text-[#2F2F2F] px-3" >
+            Your payment is being processed, please wait...
+          </p>
+        </section>
+      </>
+    );
+  }
   return (
     <>
       {/* <!-- Hero section --> */}

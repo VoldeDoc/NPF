@@ -1,5 +1,8 @@
 import DashboardLayout from "@/components/DashboardLayout/DashboardLayout";
-import { useNavigate } from "react-router-dom";
+import { baseUrl } from "@/services/axios-client";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { format } from "date-fns";
 /* import OverviewCard from "@/components/OverviewCard";
 import StatsCard from "@/components/StatsCard";
 import TransactionTable from "@/components/TransactionTable"; */
@@ -42,7 +45,7 @@ const StatsCard = ({ title, value, icon }: {title:any,value:any,icon:any}) => (
   </div>
 );
 
-const TransactionTable = () => (
+/* const TransactionTable = () => (
   <div className="bg-white p-4 rounded-lg shadow overflow-x-scroll">
     <h3 className="text-lg font-semibold mb-4">Recent Online Transactions</h3>
     <table className="w-full text-left border-collapse overflow-x-scroll">
@@ -66,9 +69,102 @@ const TransactionTable = () => (
       </tbody>
     </table>
   </div>
-);
+); */
+
+
+
+const TransactionTable = ({ transactions }:{transactions:any}) => {
+  return (
+    <div className="bg-white p-4 rounded-lg shadow overflow-x-scroll">
+      <h3 className="text-lg font-semibold mb-4">Recent Online Transactions</h3>
+      <table className="w-full text-left border-collapse">
+        <thead>
+          <tr className="border-b">
+            <th className="p-2">Date</th>
+            <th className="p-2">Subsidiary</th>
+            <th className="p-2">Activity</th>
+            <th className="p-2">Amount (₦)</th>
+            <th className="p-2">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {transactions.map((transaction:any) => (
+            <tr key={transaction.id} className="border-b">
+              <td className="p-2">
+                {format(new Date(transaction.payment.created_at), "dd MMM, yyyy")}
+              </td>
+              <td className="p-2">{transaction.sub_category}</td>
+              <td className="p-2 capitalize">{transaction.insurance_package}</td>
+              <td className="p-2">
+                {parseFloat(transaction.payment.amount).toLocaleString("en-NG", {
+                  minimumFractionDigits: 2,
+                })}
+              </td>
+              <td
+                className={`py-2 flex items-center gap-1 lg:gap-2 ${
+                  transaction.payment.status === "successful"
+                    ? "text-green-600"
+                    : "text-yellow-600"
+                }`}
+              >
+                {transaction.payment.status.charAt(0).toUpperCase() +
+                  transaction.payment.status.slice(1)}
+                
+                {
+                  transaction.payment.status == "pending" && (
+                    //navigate to motor-insurance-quote-form to reverify payemnt
+                    <Link
+                      className="p-1 bg-blue-500 block text-white text-sm rounded"
+                      to={`/motor-insurance-quote-form?reference=${transaction.payment.reference}`} >
+                      Reverify Payment
+                    </Link>
+                  )
+                }
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
 
 export default function DashboardHomePage() {
+
+    const userData = JSON.parse(sessionStorage.getItem("userData") || "{}");
+    const token = sessionStorage.getItem("authToken");
+    //console.log(token)
+    //Fetch the transaction history from the API
+    const [transactionHistory, setTransactionHistory] = useState([]);
+    useEffect(() => {
+
+        const fetchTransactionHistory = async () => {
+            try {
+                const response = await fetch(`${baseUrl}/payments/${userData.id}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
+                        "accept": "application/json",
+                    },
+                });
+                //setTransactionHistory(response.data);
+                const result = await response.json();
+                console.log(result);
+
+                if (response.ok) {
+                    setTransactionHistory(result.payments.filter((item:any) => item.payment != null && item.payment));
+                }
+                //setTransactionHistory(result.data);
+            } catch (error) {
+                console.error('Error fetching transaction history:', error);
+            }
+        }
+
+        fetchTransactionHistory();
+    },[])
+
     const navigate = useNavigate();
     const handleBuyMotorInsurance = () => {
         // Remove vehicleData and documentData from session storage so you can add new vehicle
@@ -137,7 +233,7 @@ export default function DashboardHomePage() {
                     <StatsCard title="Total Passed" value={1} /* icon="✅" */ icon="/assets/images/rectangle-2.svg" />
                 </div>
 
-                <TransactionTable />
+                <TransactionTable transactions={transactionHistory} />
             </div>
         </DashboardLayout>
     );

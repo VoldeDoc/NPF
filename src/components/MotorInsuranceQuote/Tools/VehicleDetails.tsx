@@ -505,7 +505,7 @@ const VehicleDetails = ({
             >
               <option value="">Select Type</option>
               <option value="private">Private</option>
-              <option value="public">Public</option>
+              <option value="commercial">Commercial</option>
             </select>
             {errors.motor_type && <p className="text-red-500">{errors.motor_type.message}</p>}
           </div>

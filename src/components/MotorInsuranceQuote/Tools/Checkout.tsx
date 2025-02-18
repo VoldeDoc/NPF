@@ -91,7 +91,9 @@ const Checkout = ({
   };
 
   const handlePayNow = async () => {
-    const paymentResponse = await initializePayment(userData.id, vehicleData.id);
+    //console.log(vehicleData)
+    const storedVehicleData = JSON.parse(sessionStorage.getItem("vehicleData") as string);
+    const paymentResponse = await initializePayment(userData.id, storedVehicleData.id);
 
     if (paymentResponse?.data?.authorization_url) {
       toast.success("Redirecting to payment gateway...");

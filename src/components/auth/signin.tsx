@@ -7,6 +7,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { baseUrl } from "@/services/axios-client";
+import { getFirstErrorMessage } from "@/services/utils";
 
 
 
@@ -66,17 +67,23 @@ export default function SigninComponent() {
                 navigate("/dashboard/home");
             }
         } else {
-            toast.error(signInResponse.message || "signIn failed");
+            
             if (signInResponse.message.includes("Please verify your Account")) {
+                //toast.error(signInResponse.message || "signIn failed");
                 toast.error("Attempt to resend otp")
                 sessionStorage.setItem("otpEmail", userFormData.email)
                 sessionStorage.removeItem("signupEmail");
                 navigate("/auth/otp")
+            }else if (signInResponse.message === "Validation failed") {
+                const firstError = getFirstErrorMessage(signInResponse.errors);
+                toast.error(firstError || "Validation error occurred."); // Display first error or generic message
+            } else {
+                toast.error(signInResponse.message || "Signin failed");
             }
         }
         } catch (error) {
-        console.error("Error during signIn:", error);
-        toast.error("Something went wrong, please try again.");
+            console.error("Error during signIn:", error);
+            toast.error("Something went wrong, please try again.");
         } finally {
             toast.dismiss(toastId)
         }
