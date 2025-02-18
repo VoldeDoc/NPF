@@ -26,7 +26,8 @@ const Sidebar = ({ isOpen, toggleSidebar }: { isOpen: boolean, toggleSidebar: ()
         transition-transform md:translate-x-0`}
     >
       <div className="flex justify-between items-center">
-        <img src="/assets/logo/logo4.jpg" alt="Company Logo" className="max-w-[50%] mx-auto mb-1" />
+        {/* <img src="/assets/logo/logo4.jpg" alt="Company Logo" className="max-w-[50%] mx-auto mb-1" /> */}
+        <img src="/assets/logo/npf_logo.svg" alt="Company Logo" className="max-w-[80%] mx-auto" />
         <button className="md:hidden text-gray-700" onClick={toggleSidebar}>
           <MdClose size={24} />
         </button>

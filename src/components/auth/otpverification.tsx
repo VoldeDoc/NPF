@@ -98,7 +98,8 @@ const OTPVerificationComponent = () => {
         <div className="md:h-screen md:flex bg-white shadow-lg rounded-2xl overflow-hidden w-full ">          
         
             <div className="md:w-1/2 p-8 flex flex-col items-center justify-center text-center">
-                <img src="/assets/logo/logo4.jpg" alt="Company Logo" className="max-w-[50%] mx-auto mb-1" />  
+                {/* <img src="/assets/logo/logo4.jpg" alt="Company Logo" className="max-w-[50%] mx-auto mb-1" />   */}
+                <img src="/assets/logo/npf_logo.svg" alt="Company Logo" className="max-w-[80%] mx-auto mb-1" />
                 <div className="text-center">
                     <img src={otpImg} alt="otp key" className="max-w-16 lg:max-w-20 mx-auto mb-4" />
                     <h2 className="text-xl font-semibold mb-2">OTP Verification</h2>

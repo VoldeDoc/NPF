@@ -98,14 +98,15 @@ export default function SignupComponent() {
   return (
     <div className="md:h-screen md:flex bg-white shadow-lg rounded-2xl overflow-hidden w-full">
       {/* Left Section - Form */}
-      <div className="md:w-1/2 p-8 flex flex-col items-center justify-center text-center">
-        <div className="mb-6">
-          <img src="/assets/logo/logo4.jpg" alt="Company Logo" className="max-w-[50%] mx-auto" />
+      <div className="md:w-1/2 p-8 lg:py-3 flex flex-col items-center justify-center text-center">
+        <div className="mb-6 lg:mb-3">
+          {/* <img src="/assets/logo/logo4.jpg" alt="Company Logo" className="max-w-[50%] mx-auto" /> */}
+          <img src="/assets/logo/npf_logo.svg" alt="Company Logo" className="max-w-[80%] mx-auto" />
           <h2 className="text-2xl md:text-3xl font-semibold mb-2">Welcome Onboard!</h2>
           <p className="text-[#4D4E50] md:text-lg">Please enter your details</p>
         </div>
 
-        <form className='w-full md:max-w-[65%] space-y-4'>
+        <form className='w-full md:max-w-[65%] space-y-4 lg:space-y-2'>
           <input
             type="text"
             placeholder="First Name"
@@ -225,7 +226,7 @@ export default function SignupComponent() {
         </form>
 
         <p className="mt-4 text-center text-sm">
-          Already have an Npf Insurance account? <a href="/auth/signin" className="text-[#009345] font-bold">Login</a>
+          Already have an NPF INSURANCE ACCOUNT? <a href="/auth/signin" className="text-[#009345] font-bold">Login</a>
         </p>
       </div>
 

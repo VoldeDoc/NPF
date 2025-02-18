@@ -206,7 +206,7 @@ export default function useInsurance() {
             const response = await client.post('/payments/initialize', {
                 user_id: userId,
                 //callbackurl: `${window.location.origin}/payments/callback`
-                callbackurl: `${window.location.origin}/motor-insurance-quote-form`
+                callbackurl: `${window.location.origin}/dashboard/home`
             },{
                 headers: token ? { Authorization: `Bearer ${token}` } : {},
             });             

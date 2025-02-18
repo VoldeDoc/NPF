@@ -38,6 +38,7 @@ export default function MotorInsuranceQuote() {
 
   //For reference after payment
   useEffect(() => {
+    const token = sessionStorage.getItem("authToken")
     const paymentReference = searchParams.get("reference");
     
     let retries = 0;
@@ -47,18 +48,25 @@ export default function MotorInsuranceQuote() {
       // Call backend to verify payment
       const verifyPayment = async () => {
         try {
-          const response = await fetch(`${baseUrl}/payments/callback?reference=${paymentReference}`);
+          const response = await fetch(`${baseUrl}/payment/callbacks?reference=${paymentReference}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`,
+            },
+          });
           const result = await response.json();
           console.log(result);
-          if (result.success) {
+          if (result.payment.status == "success") {
             // Payment was successful, navigate to dashboard
             navigate("/dashboard/home");
-          } else if(result.status == "pending" && retries < maxRetries){
-            verifyPayment();
+          } else if (result.payment.status == "pending" && retries < maxRetries) {
+            setTimeout(verifyPayment, 5000)
+            //verifyPayment();
             retries++;
           } else {
             // Payment failed, take user back to checkout (step 4), before doing this, setVehicleData and the document also
-            //setCurrentStep(4);
+            setCurrentStep(4);
           }
         } catch (error) {
           console.error("Error verifying payment:", error);

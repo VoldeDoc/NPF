@@ -86,7 +86,7 @@ export default function SigninComponent() {
         <div className="md:h-screen md:flex bg-white shadow-lg rounded-2xl overflow-hidden w-full ">        
             <div className="md:w-1/2 p-8 flex flex-col items-center justify-center text-center">
                 <div className="mb-6">
-                    <img src="/assets/logo/logo4.jpg" alt="Company Logo" className="max-w-[50%] mx-auto" />
+                    <img src="/assets/logo/npf_logo.svg" alt="Company Logo" className="max-w-[80%] mx-auto" />
                     <h2 className="text-2xl md:text-3xl font-semibold mb-2">Welcome back!</h2>
                     <p className="text-[#4D4E50] md:text-lg">Please enter your details</p>
                 </div>
@@ -132,7 +132,7 @@ export default function SigninComponent() {
                 </form>
 
                 <p className="mt-4 text-center text-sm">
-                    Don’t have a PHC account? <a href="/auth/signIn" className="text-[#009345] font-bold">Sign up</a>
+                    Don’t have a NPF account? <a href="/auth/signup" className="text-[#009345] font-bold">Sign up</a>
                 </p>
 
                 <div className="flex items-center my-7">
