@@ -171,7 +171,7 @@ export default function DashboardHomePage() {
         sessionStorage.removeItem("vehicleData");
         sessionStorage.removeItem("documentData");
         // Navigate to motor insurance quote landing page
-        navigate("/motor-insurance-quote");
+        navigate("/services/motor-insurance");
     }
     return (
         <DashboardLayout>

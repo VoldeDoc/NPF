@@ -1,8 +1,8 @@
 
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import bgImg from "../../assets/auth/bgImg.png";
-import googleImg from "../../assets/auth/google.svg";
-import linkedinImg from "../../assets/auth/linkedin.svg";
+//import googleImg from "../../assets/auth/google.svg";
+//import linkedinImg from "../../assets/auth/linkedin.svg";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -142,7 +142,7 @@ export default function SigninComponent() {
                     Don’t have a NPF account? <a href="/auth/signup" className="text-[#009345] font-bold">Sign up</a>
                 </p>
 
-                <div className="flex items-center my-7">
+                {/* <div className="flex items-center my-7">
                     <div className="flex-grow h-px w-full bg-gray-300"></div>
                     <span className="mx-2 text-[#151417] text-sm w-full flex-shrink-0">Or sign in with your work email</span>
                     <div className="flex-grow h-px w-full bg-gray-300"></div>
@@ -162,7 +162,7 @@ export default function SigninComponent() {
                     This site is protected by reCAPTCHA and the Google <a href="#" className="underline">Privacy Policy</a> and
                     <a href="#" className="underline"> Terms of Service</a> | <a href="#" className="underline">Contact us</a>
                     </p>
-                </div>
+                </div> */}
             </div>
 
             {/* Right Section - Image */}
