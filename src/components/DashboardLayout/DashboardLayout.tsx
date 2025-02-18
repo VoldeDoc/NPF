@@ -8,7 +8,7 @@ const menuItems = [
   { name: "Home", icon: <Home size={20} />, path: "/dashboard/home" },
   { name: "Claims", icon: <FileText size={20} />, path: /* "/dashboard/claims" */"#" },
   { name: "Payment", icon: <CreditCard size={20} />, path: /* "/dashboard/payment"*/ "#" },
-  { name: "Certificates", icon: <Award size={20} />, path: "/dashboard/certificates" },
+  { name: "Certificates", icon: <Award size={20} />, path: /* "/dashboard/certificates" */ "#" },
   { name: "Training", icon: <BookOpen size={20} />, path:/*  "/dashboard/training" */ "#" },
 ];
 
