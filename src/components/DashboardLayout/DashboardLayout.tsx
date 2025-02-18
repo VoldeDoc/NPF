@@ -1,8 +1,10 @@
-import { ReactNode, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { ReactNode, useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Home, FileText, CreditCard, Award, BookOpen, HelpCircle } from "lucide-react";
 import { MdMenu, MdClose } from 'react-icons/md';
 import { Bell } from "lucide-react";
+import { toast } from "react-toastify";
+import { baseUrl } from "@/services/axios-client";
 
 const menuItems = [
   { name: "Home", icon: <Home size={20} />, path: "/dashboard/home" },
@@ -12,57 +14,98 @@ const menuItems = [
   { name: "Training", icon: <BookOpen size={20} />, path:/*  "/dashboard/training" */ "#" },
 ];
 
-const Sidebar = ({ isOpen, toggleSidebar }: { isOpen: boolean, toggleSidebar: () => void }) => (
-  <>
-    {/* Overlay */}
-    {isOpen && (
-      <div className="fixed inset-0 bg-black opacity-40 md:hidden z-40" onClick={toggleSidebar}></div>
-    )}
+const Sidebar = ({ isOpen, toggleSidebar }: { isOpen: boolean, toggleSidebar: () => void }) => {
 
-    {/* Sidebar */}
-    <aside
-      className={`fixed top-0 left-0 h-screen w-64 bg-white shadow-lg p-5 lg:p-8 z-50 
-        transform ${isOpen ? "translate-x-0" : "-translate-x-full"} 
-        transition-transform md:translate-x-0`}
-    >
-      <div className="flex justify-between items-center">
-        {/* <img src="/assets/logo/logo4.jpg" alt="Company Logo" className="max-w-[50%] mx-auto mb-1" /> */}
-        <img src="/assets/logo/npf_logo.svg" alt="Company Logo" className="max-w-[80%] mx-auto" />
-        <button className="md:hidden text-gray-700" onClick={toggleSidebar}>
-          <MdClose size={24} />
-        </button>
-      </div>
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+  
+    const token = sessionStorage.getItem("authToken");
+    const toastId = toast.loading('Logging out...');
+    try {      
+      const response = await fetch(`${baseUrl}/user/logout`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })      
+      if (response.ok) {
+        toast.success('Logged out successfully');
+        localStorage.clear();
+        sessionStorage.clear();
+        //window.location.href = "/auth/signin";
+        setTimeout(() => {
+          navigate("/auth/signin");
+        },500)
+      } else {
+        const data = await response.json();
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+      toast.error("Something went wrong, please try again.");
+    } finally {
+      toast.dismiss(toastId);
+    }
+  }
+  
+  return (
+    <>
+      {/* Overlay */}
+      {isOpen && (
+        <div className="fixed inset-0 bg-black opacity-40 md:hidden z-40" onClick={toggleSidebar}></div>
+      )}
 
-      <nav className="mt-4 lg:mt-8 space-y-3">
-        {menuItems.map((item) => (
+      {/* Sidebar */}
+      <aside
+        className={`fixed top-0 left-0 h-screen w-64 bg-white shadow-lg p-5 lg:p-8 z-50 
+          transform ${isOpen ? "translate-x-0" : "-translate-x-full"} 
+          transition-transform md:translate-x-0`}
+      >
+        <div className="flex justify-between items-center">
+          {/* <img src="/assets/logo/logo4.jpg" alt="Company Logo" className="max-w-[50%] mx-auto mb-1" /> */}
+          <img src="/assets/logo/npf_logo.svg" alt="Company Logo" className="max-w-[80%] mx-auto" />
+          <button className="md:hidden text-gray-700" onClick={toggleSidebar}>
+            <MdClose size={24} />
+          </button>
+        </div>
+
+        <nav className="mt-4 lg:mt-8 space-y-3">
+          {menuItems.map((item) => (
+            <NavLink
+              key={item.name}
+              to={item.path}
+              className={({ isActive }) =>
+                `flex items-center px-4 py-3 text-gray-700 transition rounded ${isActive && item.path !== "#" ? "bg-[#009345] text-white" : "hover:bg-green-100"
+                }`
+              }
+              onClick={toggleSidebar} // Close sidebar when a link is clicked on mobile
+            >
+              <span className="mr-3">{item.icon}</span>
+              {item.name}
+            </NavLink>
+          ))}
+        </nav>
+
+        <div className="mt-auto py-4 space-y-3">
           <NavLink
-            key={item.name}
-            to={item.path}
-            className={({ isActive }) =>
-              `flex items-center px-4 py-3 text-gray-700 transition rounded ${
-                isActive && item.path !== "#" ? "bg-[#009345] text-white" : "hover:bg-green-100"
-              }`
-            }
-            onClick={toggleSidebar} // Close sidebar when a link is clicked on mobile
+            to="#"
+            className="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-200 rounded-md"
           >
-            <span className="mr-3">{item.icon}</span>
-            {item.name}
+            <HelpCircle size={20} className="mr-2" />
+            Get Help
           </NavLink>
-        ))}
-      </nav>
-
-      <div className="mt-auto p-4">
-        <NavLink
-          to="#"
-          className="flex items-center px-4 py-2 text-gray-600 hover:bg-gray-200 rounded-md"
-        >
-          <HelpCircle size={20} className="mr-2" />
-          Get Help
-        </NavLink>
-      </div>
-    </aside>
-  </>
-);
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center px-4 py-2 text-gray-600 hover:bg-gray-200 rounded-md"
+          >
+            Logout
+          </button>
+        </div>
+      </aside>
+    </>
+  )
+};
 
 
 const Header = ({ isOpen, toggleSidebar }: { isOpen: boolean, toggleSidebar: () => void }) => {
@@ -127,6 +170,16 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+  
+  const navigate = useNavigate()  
+  // Redirect to login page if not authenticated
+  useEffect(() => { 
+    const userData = JSON.parse(sessionStorage.getItem("userData") || "{}");
+    const isAuthenticated = !!userData.id;
+    if (!isAuthenticated) {
+      navigate("/auth/signin");
+    }
+  },[])
 
   return (
     <div className="flex">
