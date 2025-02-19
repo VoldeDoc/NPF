@@ -52,6 +52,7 @@ const useFetchPaymentAmount = () => {
                     headers: token ? { Authorization: `Bearer ${token}` } : {},
                 }
             );
+            console.log(response);
             setAmount(response.data.data);
         } catch (error: any) {
             const errorMessage = error.response?.data?.message || error.message;

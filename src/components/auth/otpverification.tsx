@@ -56,50 +56,50 @@ const OTPVerificationComponent = () => {
     }
   };
 
-   const handleVerifyOtp = async (e: any) => {
-        e.preventDefault();
-        const toastId = toast.loading("Processing...")
+  const handleVerifyOtp = async (e: any) => {
+      e.preventDefault();
+      const toastId = toast.loading("Processing...")
 
-        if(otp == ''){
-            toast.error("Please fill in otp");
-            toast.dismiss(toastId)
-            return;
-        }
-        try {
-          const otpVerificationRequest = await fetch(`${baseUrl}/user/verifyOtp`, {
-              method: "POST",
-              headers: {
-              "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                otp,
-                email: sessionStorage.getItem("signupEmail") || sessionStorage.getItem("otpEmail")
-              }),
-          });
-
-          const otpVerificationResponse = await otpVerificationRequest.json();
-          console.log(otpVerificationResponse);
-
-          if (otpVerificationRequest.ok) {
-              toast.success("User verified successfully");
-              navigate('/auth/signin')
-          } else {
-              toast.error(otpVerificationResponse.message || "otp verification failed");
-          }
-        } catch (error) {
-          console.error("Error during signIn:", error);
-          toast.error("Something went wrong, please try again.");
-        } finally {
+      if(otp == ''){
+          toast.error("Please fill in otp");
           toast.dismiss(toastId)
+          return;
+      }
+      try {
+        const otpVerificationRequest = await fetch(`${baseUrl}/user/verifyOtp`, {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              otp,
+              email: sessionStorage.getItem("signupEmail") || sessionStorage.getItem("otpEmail")
+            }),
+        });
+
+        const otpVerificationResponse = await otpVerificationRequest.json();
+        console.log(otpVerificationResponse);
+
+        if (otpVerificationRequest.ok) {
+            toast.success("User verified successfully");
+            navigate('/auth/signin')
+        } else {
+            toast.error(otpVerificationResponse.message || "otp verification failed");
         }
-    };
+      } catch (error) {
+        console.error("Error during signIn:", error);
+        toast.error("Something went wrong, please try again.");
+      } finally {
+        toast.dismiss(toastId)
+      }
+  };
 
   return (
         <div className="md:h-screen md:flex bg-white shadow-lg rounded-2xl overflow-hidden w-full ">          
         
             <div className="md:w-1/2 p-8 flex flex-col items-center justify-center text-center">
                 {/* <img src="/assets/logo/logo4.jpg" alt="Company Logo" className="max-w-[50%] mx-auto mb-1" />   */}
-                <img src="/assets/logo/npf_logo.svg" alt="Company Logo" className="max-w-[80%] mx-auto mb-1" />
+                <img src="/assets/logo/npf_logo.svg" alt="Company Logo" className="max-w-[80%] mx-auto mb-1 cursor-pointer" onClick={() => navigate("/")} />
                 <div className="text-center">
                     <img src={otpImg} alt="otp key" className="max-w-16 lg:max-w-20 mx-auto mb-4" />
                     <h2 className="text-xl font-semibold mb-2">OTP Verification</h2>

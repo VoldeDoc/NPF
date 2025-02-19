@@ -293,7 +293,7 @@ const Checkout = ({
               amount.toLocaleString("en-NG", {
                 style: "currency",
                 currency: "NGN",
-              })
+              }) + ""
             ) : (
               "Not available"
             )}

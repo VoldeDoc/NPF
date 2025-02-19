@@ -7,10 +7,10 @@ import { format } from "date-fns";
 import StatsCard from "@/components/StatsCard";
 import TransactionTable from "@/components/TransactionTable"; */
 
-const OverviewCard = ({ title, policies, color, textColor, buttonDesc, onClick }: {title: any, policies:any, color:any, textColor?:any, buttonDesc?:string, onClick?:any}) => (
+const OverviewCard = ({ title, policies, color, textColor, buttonDesc, onClick, icon }: {title: any, policies:any, color:any, textColor?:any, buttonDesc?:string, onClick?:any, icon:any}) => (
     <div className={`relative p-4 text-white ${color}`}>
         <div className="flex items-center justify-between">
-            <img src="/assets/images/fire-02.svg" alt="fire and special perils" className="w-10 h-10" />
+            <img src={icon} alt="fire and special perils" className="w-14 h-14" />
             <div className={`text-center w-fit font-semibold`}>
                 <h2 className="leading-3">{policies}</h2>
                 <p className="" >Plan(s)</p>
@@ -34,10 +34,11 @@ const OverviewCard = ({ title, policies, color, textColor, buttonDesc, onClick }
     </div>
 );
 
-const StatsCard = ({ title, value, icon }: {title:any,value:any,icon:any}) => (
+const StatsCard = ({ title, value, icon, bgColor }: {title:any,value:any,icon:any, bgColor:any}) => (
   <div className="p-4 bg-white border border-[#D6DDEB] flex items-center space-x-4">
-        {/* <span className="text-2xl">{icon}</span> */}
-        <img src={icon} alt="" className="w-[80px] h-[80px]" />
+    <div className={`${bgColor} w-[80px] h-[80px] flex items-center justify-center rounded `} >
+      <img src={icon} alt="" className="" />
+    </div>
     <div>
       <h4 className="font-semibold text-[#7C8493]">{title}</h4>
       <p className="">{value}</p>
@@ -175,52 +176,76 @@ export default function DashboardHomePage() {
     }
     return (
         <DashboardLayout>
-            <div className="p-6 space-y-6">
-                <div className="">
-                    <h2 className="text-2xl font-semibold text-[#374557]">Overview</h2>
-                    <p className="text-[#374557] " >Find all your updates here</p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <OverviewCard
-                        title="Motor Insurance"
-                        //Currently using all transaction history because we only have motor insurance policy but request dashboard detail from backend later
-                        policies={transactionHistory.length > 0 ? transactionHistory.length : 0} 
-                        color="bg-[#AFB50F]"
-                        textColor={"text-[#000000]"}
-                        buttonDesc="Motor Insurance"
-                        onClick={handleBuyMotorInsurance}
-                    />
-                                        
-                    <OverviewCard
-                        title="Fire & Special Perils"
-                        policies={0}
-                        color="bg-[#095A39]"
-                        buttonDesc="Fire & Special Policy"
-                    />                    
-                    
-                    <OverviewCard
-                        title="Occupiers Liability"
-                        policies={0}
-                        color="bg-[#3C8725]"
-                        buttonDesc="Occupiers Liability Policy"
-                    />
-                    <OverviewCard
-                        title="Burglary/Theft"
-                        policies={0}
-                        color="bg-[#141B34]"
-                        buttonDesc="Burglary/Theft Policy"
-                    />
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-5">
-                    <StatsCard title="Upcoming Renewal" value={transactionHistory.length > 0 ? transactionHistory.length : 0} /* icon="📅" */ icon="/assets/images/rectangle.svg" />
-                    <StatsCard title="Total Insurance" value={transactionHistory.length > 0 ? transactionHistory.length : 0} /* icon="📊" */ icon="/assets/images/rectangle-2.svg" />
-                    <StatsCard title="Expiry Date" value={356} /* icon="⏳" */ icon="/assets/images/rectangle.svg" />
-                    <StatsCard title="Total Passed" value={1} /* icon="✅" */ icon="/assets/images/rectangle-2.svg" />
-                </div>
-
-                <TransactionTable transactions={transactionHistory} />
+          <div className="p-6 space-y-6">
+            <div className="">
+                <h2 className="text-2xl font-semibold text-[#374557]">Overview</h2>
+                <p className="text-[#374557] " >Find all your updates here</p>
             </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <OverviewCard
+                    title="Motor Insurance"
+                    icon={"/assets/images/car-02.svg"}
+                    //Currently using all transaction history because we only have motor insurance policy but request dashboard detail from backend later
+                    policies={transactionHistory.length > 0 ? transactionHistory.length : 0} 
+                    color="bg-[#AFB50F]"
+                    textColor={"text-[#000000]"}
+                    buttonDesc="Motor Insurance"
+                    onClick={handleBuyMotorInsurance}
+                />
+                                    
+                <OverviewCard
+                    title="Fire & Special Perils"
+                    icon={"/assets/images/fire-02.svg"}
+                    policies={0}
+                    color="bg-[#095A39]"
+                    buttonDesc="Fire & Special Policy"
+                />                    
+                
+                <OverviewCard
+                    title="Occupiers Liability"
+                    icon={"/assets/images/traffic-02.svg"}
+                    policies={0}
+                    color="bg-[#3C8725]"
+                    buttonDesc="Occupiers Liability Policy"
+                />
+                <OverviewCard
+                    title="Burglary/Theft"
+                    icon={"/assets/images/gun-02.svg"}
+                    policies={0}
+                    color="bg-[#141B34]"
+                    buttonDesc="Burglary/Theft Policy"
+                />
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-5">
+              <StatsCard 
+                title="Upcoming Renewal" 
+                value={transactionHistory.length > 0 ? transactionHistory.length : 0} /* icon="📅" */
+                icon="/assets/images/material-symbols_quiz.svg" 
+                bgColor={"bg-[#687AE8]"}
+              />
+              <StatsCard 
+                title="Total Insurance" 
+                value={transactionHistory.length > 0 ? transactionHistory.length : 0} /* icon="📊" */ 
+                icon="/assets/images/codicon_vm-active.svg" 
+                bgColor={"bg-[#F3A746]"}
+              />
+              <StatsCard 
+                title="Expiry Date" 
+                value={356} /* icon="⏳" */ 
+                icon="/assets/images/hugeicons_student-card.svg" 
+                bgColor={"bg-[#5FB9EF]"}
+              />
+              <StatsCard 
+                title="Total Passed" 
+                value={1} /* icon="✅" */
+                icon="/assets/images/covid_social-distancing-correct-4.svg" 
+                bgColor={"bg-[#47AA49]"}
+              />
+            </div>
+
+            <TransactionTable transactions={transactionHistory} />
+          </div>
         </DashboardLayout>
     );
 }

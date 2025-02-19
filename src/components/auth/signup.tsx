@@ -1,6 +1,6 @@
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import bgImg from "../../assets/auth/bgImg.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { baseUrl } from "@/services/axios-client";
 import { useNavigate } from "react-router-dom";
@@ -27,13 +27,6 @@ export default function SignupComponent() {
     setUserFormData({...userFormData, [e.target.name]: e.target.value });
   };
 
-  /* useEffect(() => {
-    // Check if the user came from the motor insurance page
-    const cameFromMotorInsurance = sessionStorage.getItem("cameFromMotorInsurance");
-    if (cameFromMotorInsurance) {
-      sessionStorage.removeItem("cameFromMotorInsurance"); // Remove after detecting it
-    }
-  }, []); */
 
   const handleSignUp = async (e: any) => {
     e.preventDefault();
@@ -94,6 +87,14 @@ export default function SignupComponent() {
     }
   };
 
+  // Redirect to dasboard if authenticated
+  useEffect(() => { 
+      const userData = JSON.parse(sessionStorage.getItem("userData") || "{}");
+      const isAuthenticated = !!userData.id;
+      if (isAuthenticated) {
+          navigate("/dashboard/home");
+      }
+  },[])
 
   return (
     <div className="md:h-screen md:flex bg-white shadow-lg rounded-2xl overflow-hidden w-full">
@@ -101,7 +102,7 @@ export default function SignupComponent() {
       <div className="md:w-1/2 p-8 lg:py-3 flex flex-col items-center justify-center text-center">
         <div className="mb-6 lg:mb-3">
           {/* <img src="/assets/logo/logo4.jpg" alt="Company Logo" className="max-w-[50%] mx-auto" /> */}
-          <img src="/assets/logo/npf_logo.svg" alt="Company Logo" className="max-w-[80%] mx-auto" />
+          <img src="/assets/logo/npf_logo.svg" alt="Company Logo" className="max-w-[80%] mx-auto cursor-pointer" onClick={() => navigate("/")} />
           <h2 className="text-2xl md:text-3xl font-semibold mb-2">Welcome Onboard!</h2>
           <p className="text-[#4D4E50] md:text-lg">Please enter your details</p>
         </div>

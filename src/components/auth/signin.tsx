@@ -3,7 +3,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import bgImg from "../../assets/auth/bgImg.png";
 //import googleImg from "../../assets/auth/google.svg";
 //import linkedinImg from "../../assets/auth/linkedin.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { baseUrl } from "@/services/axios-client";
@@ -89,11 +89,20 @@ export default function SigninComponent() {
         }
     };
 
+    // Redirect to dasboard if authenticated
+    useEffect(() => { 
+        const userData = JSON.parse(sessionStorage.getItem("userData") || "{}");
+        const isAuthenticated = !!userData.id;
+        if (isAuthenticated) {
+            navigate("/dashboard/home");
+        }
+    },[])
+
     return (
         <div className="md:h-screen md:flex bg-white shadow-lg rounded-2xl overflow-hidden w-full ">        
             <div className="md:w-1/2 p-8 flex flex-col items-center justify-center text-center">
                 <div className="mb-6">
-                    <img src="/assets/logo/npf_logo.svg" alt="Company Logo" className="max-w-[80%] mx-auto" />
+                    <img src="/assets/logo/npf_logo.svg" alt="Company Logo" className="max-w-[80%] mx-auto cursor-pointer" onClick={() => navigate("/")} />
                     <h2 className="text-2xl md:text-3xl font-semibold mb-2">Welcome back!</h2>
                     <p className="text-[#4D4E50] md:text-lg">Please enter your details</p>
                 </div>
@@ -128,7 +137,7 @@ export default function SigninComponent() {
                         <label className="flex items-center">
                         <input type="checkbox" className="mr-2" /> Remember me
                         </label>
-                        <a href="#" className="text-[#009345] font-bold text-sm">Forgot your password?</a>
+                        <a href="/auth/forgot-password" className="text-[#009345] font-bold text-sm">Forgot your password?</a>
                     </div>
 
                     <button
