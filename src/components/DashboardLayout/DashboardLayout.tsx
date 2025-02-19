@@ -64,7 +64,7 @@ const Sidebar = ({ isOpen, toggleSidebar }: { isOpen: boolean, toggleSidebar: ()
       >
         <div className="flex justify-between items-center">
           {/* <img src="/assets/logo/logo4.jpg" alt="Company Logo" className="max-w-[50%] mx-auto mb-1" /> */}
-          <img src="/assets/logo/npf_logo.svg" alt="Company Logo" className="max-w-[80%] mx-auto" />
+          <img src="/assets/logo/npf_logo.svg" alt="Company Logo" className="max-w-[80%] md:max-w-[100%] mx-auto" />
           <button className="md:hidden text-gray-700" onClick={toggleSidebar}>
             <MdClose size={24} />
           </button>
@@ -109,7 +109,7 @@ const Sidebar = ({ isOpen, toggleSidebar }: { isOpen: boolean, toggleSidebar: ()
 
 
 const Header = ({ isOpen, toggleSidebar }: { isOpen: boolean, toggleSidebar: () => void }) => {
-  const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+  const userData = JSON.parse(sessionStorage.getItem("userData") || "{}");
   return (
     <header className="fixed top-0 left-0 md:left-64 w-full md:w-[calc(100vw-256px)] bg-white text-black px-6 md:px-16 
       flex justify-between items-center z-10 shadow h-16"

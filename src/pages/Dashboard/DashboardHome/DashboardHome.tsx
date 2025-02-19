@@ -16,7 +16,7 @@ const OverviewCard = ({ title, policies, color, textColor, buttonDesc, onClick }
                 <p className="" >Plan(s)</p>
             </div>
         </div>
-        <p className="text-[#D3CDCD] text-xs mb-0.5" >3154770389</p>
+        {/* <p className="text-[#D3CDCD] text-xs mb-0.5" >3154770389</p> */}
         <h3 className={`text-lg font-semibold mb-1.5 ${textColor}`}>{title}</h3>
         <div className="mb-5">
             <button
@@ -182,35 +182,21 @@ export default function DashboardHomePage() {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     <OverviewCard
-                        title="No Motor Insurance"
-                        policies={0}
+                        title="Motor Insurance"
+                        //Currently using all transaction history because we only have motor insurance policy but request dashboard detail from backend later
+                        policies={transactionHistory.length > 0 ? transactionHistory.length : 0} 
                         color="bg-[#AFB50F]"
                         textColor={"text-[#000000]"}
                         buttonDesc="Motor Insurance"
                         onClick={handleBuyMotorInsurance}
                     />
-
-                    {/* Fire and specials with a different structure */}
-                    <div className={`relative p-4 text-white bg-[#095A39]`}>
-                        <div className="flex items-center justify-between">
-                            <img src="/assets/images/fire-02.svg" alt="fire and special perils" className="w-10 h-10" />
-                            <div className="text-center w-fit font-semibold">
-                                <h2 className="leading-3">2</h2>
-                                <p className="" >Policies</p>
-                            </div>
-                        </div>
-                        <p className="text-[#D3CDCD] text-xs mb-0.5" >3154770389</p>
-                        <h3 className="text-lg font-semibold mb-1.5">Fire & Special Perils</h3>
-                        <div className="mb-5">
-                            <p className="text-xs">Quick Access</p>
-                        </div>
-
-                        <div className="py-2.5 px-3 border-t border-t-[#D3CDCD] -mx-4" >
-                            <button className="text-sm">
-                                {`View more details here >>>>>`}
-                            </button>
-                        </div>
-                    </div>
+                                        
+                    <OverviewCard
+                        title="Fire & Special Perils"
+                        policies={0}
+                        color="bg-[#095A39]"
+                        buttonDesc="Fire & Special Policy"
+                    />                    
                     
                     <OverviewCard
                         title="Occupiers Liability"
@@ -227,8 +213,8 @@ export default function DashboardHomePage() {
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-5">
-                    <StatsCard title="Upcoming Renewal" value={1} /* icon="📅" */ icon="/assets/images/rectangle.svg" />
-                    <StatsCard title="Total Insurance" value={1} /* icon="📊" */ icon="/assets/images/rectangle-2.svg" />
+                    <StatsCard title="Upcoming Renewal" value={transactionHistory.length > 0 ? transactionHistory.length : 0} /* icon="📅" */ icon="/assets/images/rectangle.svg" />
+                    <StatsCard title="Total Insurance" value={transactionHistory.length > 0 ? transactionHistory.length : 0} /* icon="📊" */ icon="/assets/images/rectangle-2.svg" />
                     <StatsCard title="Expiry Date" value={356} /* icon="⏳" */ icon="/assets/images/rectangle.svg" />
                     <StatsCard title="Total Passed" value={1} /* icon="✅" */ icon="/assets/images/rectangle-2.svg" />
                 </div>

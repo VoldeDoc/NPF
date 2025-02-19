@@ -166,11 +166,13 @@ export default function SigninComponent() {
             </div>
 
             {/* Right Section - Image */}
-            <div className="w-1/2 bg-gray-100 hidden md:block">
+            <div className="w-1/2 bg-gray-100 hidden md:flex">
+                <div className="h-full w-6 bg-[#EFEB05] mr-1" ></div>
+                <div className="h-full w-6 bg-[#009345]" ></div>
                 <img
-                src={bgImg}
-                alt="Placeholder"
-                className="w-full max-h-screen object-cover"
+                    src={bgImg}
+                    alt="Placeholder"
+                    className="w-full max-h-screen object-cover"
                 />
             </div>
         </div>

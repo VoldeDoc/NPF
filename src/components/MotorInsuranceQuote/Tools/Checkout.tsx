@@ -151,9 +151,11 @@ const Checkout = ({
       <ProgressBar currentStep={currentStep} totalSteps={4} />
 
       { !isSubmitted &&
-        <div className="mt-8 lg:mt-14 py-5 space-y-6 md:space-y-12 text-[#00000080] font-medium text-sm md:text-base">
+        <div className="mt-8 lg:mt-14 py-5 space-y-6 md:space-y-12 text-[#000000] font-medium text-sm md:text-base">
           <div>
-            <h3 className="font-semibold text-lg">Personal Details</h3>
+            <div className="text-white p-1 bg-green-600 max-w-[50%] mb-5">
+              <h3 className="font-semibold text-lg">Personal Details</h3>
+            </div>
             <p className="text-base">
               <span className="font-semibold">Insurance Type:</span>{" "}
               {vehicleData.insurance_package === "third_party"
@@ -161,7 +163,7 @@ const Checkout = ({
                 : "premium"}
             </p>
             <p className="text-base">
-              <span className="font-semibold">Use Type:</span> {userData.use_type}
+              <span className="font-semibold">User Type:</span> {userData.use_type}
             </p>
             <p className="text-base">
               <span className="font-semibold">Category:</span> {vehicleData.category}
@@ -192,7 +194,9 @@ const Checkout = ({
           </div>
 
           <div>
-            <h3 className="font-semibold text-lg">Vehicle Details</h3>
+            <div className="text-white p-1 bg-green-600 max-w-[50%] mb-3">
+              <h3 className="font-semibold text-lg">Vehicle Details</h3>
+            </div>
             <p className="text-base">
               <span className="font-semibold">Registration Number:</span>{" "}
               {vehicleData.vehicle_registration_number}
@@ -235,7 +239,9 @@ const Checkout = ({
           </div>
 
           <div>
-            <h3 className="font-semibold text-lg">Uploaded Documents</h3>
+            <div className="text-white p-1 bg-green-600 max-w-[50%] mb-3">
+              <h3 className="font-semibold text-lg">Uploaded Documents</h3>
+            </div>
             {uploadData.nin?.name && (
               <div className="text-base">
                 <span className="font-semibold">NIN:</span>{" "}
@@ -278,7 +284,9 @@ const Checkout = ({
             Based on the details you have provided, The amount to pay below:
           </p>
           <p className="font-semibold text-sm md:text-xl text-[#000000CC]">
-            {vehicleData.insurance_package} -{" "}
+             {vehicleData.insurance_package === "third_party"
+                ? "Third Party"
+                : "Premium"} -{" "}
             {loadingAmount ? (
               "Loading..."
             ) : amount ? (

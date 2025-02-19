@@ -1,4 +1,4 @@
-import { Route, Routes} from "react-router-dom";
+import { Route, Routes, Navigate} from "react-router-dom";
 import "./App.css";
 import ButtonT from "@/pages/Ui/button";
 import ExampleForm from "./pages/Ui/textinput";
@@ -85,6 +85,12 @@ function App() {
               <Route path="/dashboard/home" element={<DashboardHomePage />} />
               <Route path="/dashboard/certificates" element={<DashboardCertificatesPage />} />
               <Route path="/dashboard/claims" element={<DashboardClaimsPage />} />
+              
+          
+              {/* Fallback Redirects */}
+              <Route path="/dashboard/*" element={<Navigate to="/dashboard/home" replace />} />
+              <Route path="/auth/*" element={<Navigate to="/auth/signin" replace />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </>
       </main>
