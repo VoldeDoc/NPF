@@ -20,7 +20,7 @@ export default function Header() {
           <NavLinks />
         </div>
         <div className="hidden md:flex md:flex-col lg:flex-row gap-1">
-          <Link /* to={'#'} */ to={'/services/motor-insurance'}>
+          <Link /* to={'#'} */ to={'https://www.niip.ng/Home/SelectInsurance?id=531&chassis=&registration=&purpose=3&StateCode=&InvoiceRef=&invID='}>
             <button className="bg-green-900 text-white px-2 py-1 xl:px-4 xl:py-2 rounded-lg md:rounded-full text-sm xl:text-base w-fit">
               Get a Quote
             </button>
