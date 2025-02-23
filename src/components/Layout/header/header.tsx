@@ -25,7 +25,7 @@ export default function Header() {
               Get a Quote
             </button>
           </Link>
-          <Link to={'auth/signin'} /* to={'/motor-insurance-quote'} */>
+          <Link to={'#'} /* to={'/motor-insurance-quote'} */>
             <button className="bg-inherit text-green-900 border border-[#000000] px-2 py-1 xl:px-4 xl:py-2 rounded-lg md:rounded-full text-sm xl:text-base w-fit">
               Login/Register
             </button>
@@ -51,7 +51,7 @@ export default function Header() {
               Get a Quote
             </button>
           </Link>
-          <Link to={'/auth/signin'} /* to={'/motor-insurance-quote'} */>
+          <Link to={'#'} /* to={'/motor-insurance-quote'} */>
             <button className="bg-green-900 text-white w-full px-2 py-2 rounded">
               Login/Register
             </button>
