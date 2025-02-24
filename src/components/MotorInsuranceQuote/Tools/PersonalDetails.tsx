@@ -1,4 +1,4 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Resolver } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import ProgressBar from "./ProgressBar";
@@ -52,7 +52,7 @@ const PersonalDetails = ({
     handleSubmit,
     formState: { errors },
   } = useForm<UserFormValues>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema) as Resolver<UserFormValues>,
     defaultValues: initialValues,
   });
 
@@ -92,6 +92,7 @@ const PersonalDetails = ({
   const onSubmit: SubmitHandler<UserFormValues> = (data) => {
     setUserData({ ...data, selectedIdType });
     setCurrentStep(currentStep + 1);
+    //localStorage.setItem('userData', JSON.stringify({...data, selectedIdType}));
   };
 
 

@@ -8,7 +8,7 @@ export interface UserFormValues{
     last_name:string;
     email:string;
     phone_number:string;
-    driver_license:string;
+    driver_license?:string;
     license_expire_year:number;
     year_of_driving:number;
 }
@@ -21,18 +21,26 @@ export interface VehicleFormValues{
     motor_type:string;
     model:string;
     body_color:string;
-    year:string;
+    year:string | number;
     car_type:string;
     chassis_number:string;
     engine_number:string;
-    with_effect_from:string;
+    with_effect_from: string;
+    
+    //New additions from personal details
+    insurance_package: "premium" | "third_party";
+    category:string;
+    sub_category: string;
+    driver_license?:string;
+    license_expire_year: Date; // Now a Date object
+    year_of_driving:number | string;
 }
 
 export interface DocumentFormValues{
     user_id:number;
-    validId:File;
+    nin:File;
     vehicleLicense:File;
-    utility_bill:File;
+    utilityBill:File;
 }
 
 export interface DocumentUploadProps{

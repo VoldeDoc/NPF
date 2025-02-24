@@ -43,7 +43,7 @@ export default function NavLinks() {
   return (
     <>
       {/* Desktop Links */}
-      <div className="hidden md:flex lg:space-x-4">
+      <div className="hidden md:flex xl:space-x-4">
         {links.map((link, index) => (
           <div
             key={index}
@@ -54,7 +54,7 @@ export default function NavLinks() {
             <NavLink
               to={link.url}
               className={({ isActive }) =>
-                `px-4 py-2 font-bold text-black text-xs xl:text-base ${isActive && link.url !== "#" ? "text-green-500" : ""} 
+                `px-3 xl:px-4 py-2 font-bold text-black text-xs xl:text-base ${isActive && link.url !== "#" ? "text-green-500" : ""} 
                 ${link.submenu? "" :""}
                 `
               }

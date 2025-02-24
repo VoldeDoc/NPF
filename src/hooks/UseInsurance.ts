@@ -1,6 +1,8 @@
 import axiosClient from "@/services/axios-client";
+import { getFirstErrorMessage } from "@/services/utils";
 import { DocumentFormValues, DocumentUploadProps, UserFormValues, VehicleFormValues } from "@/types";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function useInsurance() {
     const client = axiosClient();
@@ -8,12 +10,17 @@ export default function useInsurance() {
 
     const submitUserDetails = async (data: UserFormValues) => {
         try {
+            //data.driver_license;
             const response = await client.post('/users', data);
+            sessionStorage.setItem('userData', JSON.stringify(response.data));
             return response.data;
+            //console.log("This is the response", response.data);
+            
         } catch (error: any) {
+            console.log('user error')
             const resError = error.response?.data;
             const errorMessage = resError?.message || resError?.data;
-            console.log(errorMessage);
+            toast.error(errorMessage);            
             throw new Error(errorMessage);
         }
     };
@@ -32,16 +39,28 @@ export default function useInsurance() {
         }
     };
 
-    const submitVehicleDetails = async (data: VehicleFormValues) => {
+    const submitVehicleDetails = async (data: VehicleFormValues,) => {
         try {
-            const response = await client.post('/vehicles', data);
+            //const response = await client.post('/vehicles', data);
+            const token = sessionStorage.getItem("authToken");
+            const response = await client.post('/vehicles', data, {
+                headers: token ? { Authorization: `Bearer ${token}` } : {},
+            });
             console.log("This is the response", response.data);
-            return response.data;
+            sessionStorage.setItem('vehicleData', JSON.stringify(response.data.vehicle));
+            return response.data.vehicle;
         } catch (error: any) {
             console.log(error);
             const resError = error.response?.data;
             const errorMessage = resError?.message || resError?.data;
-            console.log(errorMessage);
+            //toast.error(errorMessage);
+            //console.log(errorMessage);
+            if (resError.message === 'validation error') {
+                const firstError = getFirstErrorMessage(resError.errors);
+                toast.error(firstError || "Validation error occurred."); // Display first error or generic message
+            } else {
+                toast.error(resError.message || "Vehicle details not submitted successfully");
+            }
             throw new Error(errorMessage);
         }
     };
@@ -59,12 +78,15 @@ export default function useInsurance() {
                 formData.append('file', data.file);
             }
     
+            const token = sessionStorage.getItem("authToken");
             const response = await client.post('/documents/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
+                    ...(token ? { Authorization: `Bearer ${token}` } : {}), // Add token only if it exists
                 },
             });
             console.log("This is the response", response.data);
+            sessionStorage.setItem('documentData', JSON.stringify(response.data.data));
             return response.data;
         } catch (error: any) {
             const resError = error.response?.data;
@@ -74,17 +96,40 @@ export default function useInsurance() {
         }
     };
 
-    const submitInsuranceDetails = async (userData: UserFormValues, vehicleData: VehicleFormValues, uploadData: DocumentFormValues) => {
+    const submitInsuranceDetails = async (/* userData: UserFormValues, */ vehicleData: VehicleFormValues, uploadData: DocumentFormValues) => {
         try {
             setLoading(true);
+            /* //console.log('I am in insurance')
             const userResponse = await submitUserDetails(userData);
+            //console.log('I am in insurance')
             console.log(userResponse);
+            
             if (!userResponse.message.includes("successfully")) {
+                console.log('didnt work')
                 throw new Error("User details not submitted successfully");
+            } */
+            const userData = JSON.parse(sessionStorage.getItem("userData") ?? '');
+            vehicleData.user_id = userData.id;
+            
+                    
+            /* const vehicleResponse = await submitVehicleDetails(vehicleData);
+            console.log(vehicleResponse); */
+
+            let vehicleResponse;
+
+            // Check if vehicle data already exists in sessionStorage
+            const storedVehicleData = sessionStorage.getItem("vehicleData");
+            if (storedVehicleData) {
+                console.log("Skipping vehicle submission, using stored data...");
+                vehicleResponse = JSON.parse(storedVehicleData);
+            } else {
+                // Submit vehicle details if not found in sessionStorage
+                vehicleResponse = await submitVehicleDetails(vehicleData);
+                console.log(vehicleResponse);
+
+                // Store vehicle data in sessionStorage for future use
+                //sessionStorage.setItem("vehicleData", JSON.stringify(vehicleResponse));
             }
-            vehicleData.user_id = userResponse.data.id;
-            const vehicleResponse = await submitVehicleDetails(vehicleData);
-            console.log(vehicleResponse);
     
             let document: DocumentUploadProps | undefined = undefined;
             const validTypes = ["application/pdf", "image/jpeg", "image/png", "image/jpg"];
@@ -100,27 +145,27 @@ export default function useInsurance() {
             };
     
             switch (true) {
-                case !!uploadData.utility_bill?.name:
-                    validateFile(uploadData.utility_bill);
+                case !!uploadData.utilityBill?.name:
+                    validateFile(uploadData.utilityBill);
                     document = {
-                        user_id: vehicleResponse.vehicle.user_id,
+                        user_id: vehicleResponse.user_id,
                         type: "utility_bill",
-                        file: uploadData.utility_bill as File & { type: "application/pdf" | "image/jpeg" | "image/png" }
+                        file: uploadData.utilityBill as File & { type: "application/pdf" | "image/jpeg" | "image/png" }
                     };
                     break;
-                case !!uploadData.validId?.name:
-                    validateFile(uploadData.validId);
+                case !!uploadData.nin?.name:
+                    validateFile(uploadData.nin);
                     document = {
-                        user_id: vehicleResponse.vehicle.user_id,
+                        user_id: vehicleResponse.user_id,
                         type: "government_id",
                         document_type: "international_passport",
-                        file: uploadData.validId as File & { type: "image/jpeg" | "image/png" | "application/pdf" }
+                        file: uploadData.nin as File & { type: "image/jpeg" | "image/png" | "application/pdf" }
                     };
                     break;
                 case !!uploadData.vehicleLicense?.name:
                     validateFile(uploadData.vehicleLicense);
                     document = {
-                        user_id: vehicleResponse.vehicle.user_id,
+                        user_id: vehicleResponse.user_id,
                         type: "vehicle_license",
                         document_type: "driver_license",
                         file: uploadData.vehicleLicense as File & { type: "application/pdf" | "image/jpeg" | "image/png" }
@@ -143,20 +188,28 @@ export default function useInsurance() {
     
             const errorMessage = resError?.message || resError?.data || error.message;
             console.log(errorMessage);
+            toast.error(errorMessage);
+
             setLoading(false);
-            return { message: errorMessage };
+            return null;
+            //return { message: errorMessage };
         }
     };
 
-    const initializePayment = async (userId: number | string) => {
+    const initializePayment = async (userId: number | string, vehicleId: number | string) => {
         try {
             setLoading(true);
+            
             console.log(userId)
             console.log(`${window.location.origin}/payments/callback`);
-            
+            const token = sessionStorage.getItem("authToken");
             const response = await client.post('/payments/initialize', {
                 user_id: userId,
-                callbackurl: `${window.location.origin}/payments/callback`
+                //callbackurl: `${window.location.origin}/payments/callback`
+                callbackurl: `${window.location.origin}/motor-insurance-quote-form`,
+                vehicle_id: vehicleId,
+            },{
+                headers: token ? { Authorization: `Bearer ${token}` } : {},
             });             
             setLoading(false);
             return response.data;

@@ -9,9 +9,9 @@ import { BackButton } from "./NextButton";
 interface UploadDetailsProps {
   currentStep: number;
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
-  setUploadData: (data: { validId: File | null; vehicleLicense: File | null; utilityBill: File | null }) => void;
+  setUploadData: (data: { nin: File | null; vehicleLicense: File | null; utilityBill: File | null }) => void;
   initialValues: {
-    validId: File | null;
+    nin: File | null;
     vehicleLicense: File | null;
     utilityBill: File | null;
   };
@@ -27,35 +27,35 @@ const UploadDetails = ({
 }: UploadDetailsProps) => {
   const [display] = useState("uploadDocuments");
   const [error, setError] = useState("");
-  const [validId, setValidId] = useState<File | null>(initialValues?.validId || null);
+  const [nin, setnin] = useState<File | null>(initialValues?.nin || null);
   const [vehicleLicense, setVehicleLicense] = useState<File | null>(initialValues?.vehicleLicense || null);
   const [utilityBill, setUtilityBill] = useState<File | null>(initialValues?.utilityBill || null);
   const [selectedDocument, setSelectedDocument] = useState<string | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    setValidId(initialValues?.validId || null);
+    setnin(initialValues?.nin || null);
     setVehicleLicense(initialValues?.vehicleLicense || null);
     setUtilityBill(initialValues?.utilityBill || null);
   }, [initialValues]);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, type: "validId" | "vehicleLicense" | "utilityBill") => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, type: "nin" | "vehicleLicense" | "utilityBill") => {
     const file = e.target.files ? e.target.files[0] : null;
 
     if (file) {
       setSelectedDocument(type);
       setPreviewUrl(URL.createObjectURL(file));
-      if (type === "validId") {
-        setValidId(file);
+      if (type === "nin") {
+        setnin(file);
         setVehicleLicense(null);
         setUtilityBill(null);
       } else if (type === "vehicleLicense") {
         setVehicleLicense(file);
-        setValidId(null);
+        setnin(null);
         setUtilityBill(null);
       } else if (type === "utilityBill") {
         setUtilityBill(file);
-        setValidId(null);
+        setnin(null);
         setVehicleLicense(null);
       }
     }
@@ -63,13 +63,13 @@ const UploadDetails = ({
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!validId && !vehicleLicense && !utilityBill) {
+    if (!nin && !vehicleLicense && !utilityBill) {
       setError("At least one document is required");
     } else {
       setError("");
       setCurrentStep(currentStep + 1);
       window.scrollTo(0, 600);
-      setUploadData({ validId, vehicleLicense, utilityBill });
+      setUploadData({ nin, vehicleLicense, utilityBill });
     }
   };
 
@@ -99,26 +99,26 @@ const UploadDetails = ({
       >
         {display === "uploadDocuments" && (
           <div className="flex flex-col md:flex-row gap-6 justify-center items-center p-3 md:p-6">
-            {selectedIdType === "validId" && (
+            {selectedIdType === "nin" && (
               <div>
-                <label htmlFor="validId">
+                <label htmlFor="nin">
                   <DocumentCard
-                    title="VALID ID"
+                    title="NIN"
                     description="Official documents issued by government, Driver licence, NIN, Voters Card, and International Passport"
                     icon={trafficIcon}
                     className={`${
-                      selectedDocument === "validId" ? "bg-green-200 border-green-500" : ""
+                      selectedDocument === "nin" ? "bg-green-200 border-green-500" : ""
                     }`}
                   />
                 </label>
                 <input
                   type="file"
-                  id="validId"
-                  name="validId"
+                  id="nin"
+                  name="nin"
                   className="hidden"
                   accept="image/*"
-                  onChange={(e) => handleFileChange(e, "validId")}
-                  disabled={!!selectedDocument && selectedDocument !== "validId"}
+                  onChange={(e) => handleFileChange(e, "nin")}
+                  disabled={!!selectedDocument && selectedDocument !== "nin"}
                 />
               </div>
             )}
