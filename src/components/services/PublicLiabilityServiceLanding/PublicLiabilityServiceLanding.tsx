@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import heroImg from "../../../assets/services/publicHero.png"
 
 
@@ -39,12 +40,14 @@ export default function PublicLiabilityServiceLanding() {
                         <br />
                         It is for such eventualities that the public liability insurance was designed. Apart from liability arising from the occupation or operation of an organization on their premises, the policy may be extended to include product liability, which implies reimbursement for liability attaching from goods sold.
                     </p>
-                    <button className="mt-7 md:mt-14 relative px-4 py-1.5 text-white text-sm font-bold rounded-full bg-[#093618] border-[5px] border-white shadow-lg">
-                        Buy Now
-                        <span className="absolute inset-0 rounded-full border-2 border-[#000000] -m-1.5"></span>
-                        <span className="absolute -left-1.5 top-0 h-full w-1 bg-[#1F834008] rounded-full"></span>
-                        <span className="absolute -right-1.5 top-0 h-full w-1 bg-[#1F834008] rounded-full"></span>
-                    </button>
+                    <Link to={'https://www.niip.ng/Home/SelectInsurance?id=531&chassis=&registration=&purpose=3&StateCode=&InvoiceRef=&invID='}>
+                        <button className="mt-7 md:mt-14 relative px-4 py-1.5 text-white text-sm font-bold rounded-full bg-[#093618] border-[5px] border-white shadow-lg">
+                            Buy Now
+                            <span className="absolute inset-0 rounded-full border-2 border-[#000000] -m-1.5"></span>
+                            <span className="absolute -left-1.5 top-0 h-full w-1 bg-[#1F834008] rounded-full"></span>
+                            <span className="absolute -right-1.5 top-0 h-full w-1 bg-[#1F834008] rounded-full"></span>
+                        </button>
+                    </Link>
                 </div>
                 <div className="rounded-xl md:rounded-2xl p-5 lg:p-10 w-full h-fit bg-white shadow-lg " > 
                     <h4 className="font-semibold mb-6 text-[#000000] pl-4" >

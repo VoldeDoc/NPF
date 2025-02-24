@@ -1,5 +1,7 @@
 //import heroImg from "../../../assets/services/machineryHero.png"
 
+import { Link } from "react-router-dom";
+
 
 export default function ClaimsManagementServiceLanding() {    
     return (
@@ -33,12 +35,14 @@ export default function ClaimsManagementServiceLanding() {
                     <p className="font-medium text-[#00000080] text-sm leading-7 md:text-base md:leading-8 text-justify" >
                         Our claims processes are tailored towards achieving zero outstanding claims at the close of work each day. Cheque will be released within 48 hours once Discharge Voucher is signed.
                     </p>
-                    <button className="mt-7 md:mt-14 relative px-4 py-1.5 text-white text-sm font-bold rounded-full bg-[#093618] border-[5px] border-white shadow-lg">
-                        Buy Now
-                        <span className="absolute inset-0 rounded-full border-2 border-[#000000] -m-1.5"></span>
-                        <span className="absolute -left-1.5 top-0 h-full w-1 bg-[#1F834008] rounded-full"></span>
-                        <span className="absolute -right-1.5 top-0 h-full w-1 bg-[#1F834008] rounded-full"></span>
-                    </button>
+                    <Link to={'https://www.niip.ng/Home/SelectInsurance?id=531&chassis=&registration=&purpose=3&StateCode=&InvoiceRef=&invID='}>
+                        <button className="mt-7 md:mt-14 relative px-4 py-1.5 text-white text-sm font-bold rounded-full bg-[#093618] border-[5px] border-white shadow-lg">
+                            Buy Now
+                            <span className="absolute inset-0 rounded-full border-2 border-[#000000] -m-1.5"></span>
+                            <span className="absolute -left-1.5 top-0 h-full w-1 bg-[#1F834008] rounded-full"></span>
+                            <span className="absolute -right-1.5 top-0 h-full w-1 bg-[#1F834008] rounded-full"></span>
+                        </button>
+                    </Link>
 
                 </div>
                 <div className="rounded-xl md:rounded-2xl p-5 lg:p-10 w-full h-fit bg-white shadow-lg" > 
