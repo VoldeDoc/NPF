@@ -20,12 +20,12 @@ export default function Header() {
           <NavLinks />
         </div>
         <div className="hidden md:flex md:flex-col lg:flex-row gap-1">
-          <Link /* to={'#'} */ to={'/services/motor-insurance'}>
+          <Link /* to={'#'} */ to={'https://www.niip.ng/Home/SelectInsurance?id=531&chassis=&registration=&purpose=3&StateCode=&InvoiceRef=&invID='}>
             <button className="bg-green-900 text-white px-2 py-1 xl:px-4 xl:py-2 rounded-lg md:rounded-full text-sm xl:text-base w-fit">
               Get a Quote
             </button>
           </Link>
-          <Link to={'auth/signin'} /* to={'/motor-insurance-quote'} */>
+          <Link to={'#'} /* to={'/motor-insurance-quote'} */>
             <button className="bg-inherit text-green-900 border border-[#000000] px-2 py-1 xl:px-4 xl:py-2 rounded-lg md:rounded-full text-sm xl:text-base w-fit">
               Login/Register
             </button>
@@ -46,12 +46,12 @@ export default function Header() {
           </nav>
         </div>
         <div className="absolute bottom-2 left-0 w-full px-4">
-          <Link to={'/services/motor-insurance'} /* to={'/motor-insurance-quote'} */>
+          <Link to={'https://www.niip.ng/Home/SelectInsurance?id=531&chassis=&registration=&purpose=3&StateCode=&InvoiceRef=&invID='} /* to={'/motor-insurance-quote'} */>
             <button className="bg-green-900 text-white w-full px-2 py-2 rounded mb-3">
               Get a Quote
             </button>
           </Link>
-          <Link to={'/auth/signin'} /* to={'/motor-insurance-quote'} */>
+          <Link to={'#'} /* to={'/motor-insurance-quote'} */>
             <button className="bg-green-900 text-white w-full px-2 py-2 rounded">
               Login/Register
             </button>
