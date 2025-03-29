@@ -2,9 +2,8 @@ import { Carousel } from 'flowbite-react';
 import { MdArrowOutward } from "react-icons/md";
 
 const images = [
-    '/assets/images/help.jpg',
-    //'/assets/images/family.png',
-    '/assets/images/emergency-stop-sign.png'
+    '/assets/images/emergency.png',
+    '/assets/images/slider.png'
 ];
 
 export default function CarouselComponent() {
